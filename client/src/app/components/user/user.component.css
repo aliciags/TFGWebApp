@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.row {
+    margin-top: 2%;
+    
+}
+
+.label {
+    font-size: x-large;
+}
+
+.input {
+    color:slategrey;
+    margin-left: 5%;
+    font-size: large;
+}

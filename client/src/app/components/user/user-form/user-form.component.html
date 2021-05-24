@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>Get started</h1>
+    <br>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <!--We associate each input field to the formControl object using the formControlName directive-->
+            <input id="firstname" type="text" class="form-control" formControlName="firstname">
+            <!--Implementing validation-->
+            <div *ngIf="userForm.controls.firstname.touched && !userForm.controls.firstname.valid" class="alert alert-danger">
+                Firstname is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input id="lastname" type="text" class="form-control" formControlName="lastname">
+            <div *ngIf="userForm.controls.lastname.touched && !userForm.controls.lastname.valid" class="alert alert-danger">
+                Lastname is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="birthyear">Birth year</label>
+            <input id="birthyear" type="number" class="form-control" formControlName="birthyear" maxlength="4">
+            <div *ngIf="userForm.controls.birthyear.touched && userForm.controls.birthyear.errors">
+                <div *ngIf="userForm.controls.birthyear.errors.required" class="alert alert-danger">
+                    Birth year is required
+                </div>
+                <div *ngIf="userForm.controls.birthyear.errors.invalidYear" class="alert alert-danger">
+                    Invalid year must be less than {{year}}
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Next</button>
+        <router-outlet></router-outlet>
+    </form>
+</div>

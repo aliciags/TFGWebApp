@@ -1,0 +1,76 @@
+<br>
+<div class="container">
+    <h1>Profile</h1>
+    <div class="row">
+        <div class="col">
+            <div class="label">Name:</div>
+            <div class="input">{{ user.firstname }}</div>
+        </div>
+        <div class="col">
+            <div class="label">Number of daily meals:</div>
+            <div class="input">{{ user.numberMeals }}</div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col">
+            <div class="label">Lastname:</div>
+            <div class="input">{{ user.lastname }}</div>
+        </div>
+        <div class="col">
+            <div class="label">Diet:</div>
+                <div class="input" *ngIf="user.diet == 'Omnivorous'">
+                    <i class="fas fa-drumstick-bite"><br>Omnivorous</i>
+                </div>
+                <div class="input" *ngIf="user.diet == 'Vegetarian'">
+                    <i class="fas fa-egg"><br>Vegetarian</i>
+                </div>
+                <div class="input" *ngIf="user.diet == 'Vegan'">
+                    <i class="fas fa-seedling"><br>Vegan</i>
+                </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col">
+            <div class="label">Email:</div>
+            <div class="input">{{ user.email }}</div>
+        </div>
+        <div class="col">
+            <div class="label">Meals:</div> 
+            <div class="meal" *ngFor="let m of user.meals">
+                    {{m}}
+            </div>  
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col">
+            <div class="label">Birth year:</div>
+            <div class="input">{{ user.birthyear }}</div>
+        </div>
+    </div> 
+    <!--<div class="col">
+        <div class="row">Name: <br>  {{ user.firstname }}</div>
+        <div class="row">Lastname: <br>  {{ user.lastname }}</div>
+        <div class="row">Email: <br>  {{ user.email }}</div>
+        <div class="row">Birth year: <br>  {{ user.birthyear }}</div>
+    </div>
+    <div class="col">
+        <div class="row">Number of daily meals: <br>  {{ user.nmeals }}</div>
+        <div class="row">Timing: <br>  {{ user.timing }}</div>
+        <div class="row">Diet:
+            <div *ngIf="user.diet == 'Omnivour'">
+                <i class="fas fa-drumstick-bite"></i>
+            </div>
+            <div *ngIf="user.diet == 'Vegetarian'">
+                <i class="fas fa-cheese"></i>
+            </div>
+            <div *ngIf="user.diet == 'Vegan'">
+                <i class="fas fa-seedling"></i>
+            </div>
+        </div>
+        <div class="row">Meals: 
+            <div *ngFor="let m of user.meal">
+                {{m}}
+            </div>
+        </div>
+    </div>-->
+</div>

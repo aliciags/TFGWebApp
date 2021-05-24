@@ -1,0 +1,52 @@
+<div class="container">
+    <h1>Groceries List</h1>
+    <!--<br>-->
+    <!-- Trigger the modal with a button -->
+    <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+
+    <!-- Modal -->
+    <!--<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">-->
+
+            <!-- Modal content-->
+            <!--<div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+
+    <div class="row">
+        <div class="col">
+            <i class="fas fa-plus-circle"  data-bs-toggle="modal" data-bs-target="#Modal"></i>
+            Add an item
+        </div>
+        <div class="col">
+            <i class="fas fa-check-circle"></i>
+            Shopping done
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body border-light">
+            <div class="list-group list-group-flush">
+                <div *ngFor="let ingredient of ingredientsList">
+                    <label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
+                        <input class="form-check-input me-1" type="checkbox" value="{{ingredient}}">
+                            {{ingredient}}
+                      </label>
+                </div>
+            </div>
+        </div>
+    </div>  
+   
+</div>

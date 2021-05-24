@@ -1,0 +1,49 @@
+<div *ngIf="!loggedIn" class="container">
+    <h1>Login</h1>
+    <br>
+    <form [formGroup]="loginForm" (ngSubmit)="onSumbit()"> 
+        <div class="form-group">
+            <label for="email">Email</label>
+            <!--We associate each input field to the formControl object using the formControlName directive-->
+            <input id="email" type="text" class="form-control" formControlName="email">
+            <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
+                <div *ngIf="loginForm.controls.email.errors.required" class="alert alert-danger">
+                    Email is required
+                </div>
+                <div *ngIf="loginForm.controls.email.errors.pattern" class="alert alert-danger">
+                    Invalid email
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control"
+                formControlName="password">
+            <!--Multiple validations-->
+            <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors">
+                <div *ngIf="loginForm.controls.password.errors.required" class="alert alert-danger">
+                    Password is required
+                </div>
+                <div *ngIf="loginForm.controls.password.errors.invalidLogin" class="alert alert-danger">
+                    Invalid user or password
+                </div>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <br>Not registred?    
+        <a routerLink="signin"> Sign In</a>
+        <router-outlet></router-outlet>
+    </form>
+</div>
+<div *ngIf="loggedIn">
+    <h1>Are you sure you want to leave?</h1>
+    <button class="btn btn-primary" (click)="logout()" routerLink="/"> 
+        Log out
+    </button>
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<!--<button *ngIf="authService.isLoggedIn" class="btn btn-danger" (click)="logout()">Logout</button>-->

@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Expenses tracker</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Date</h3>
+            </div>
+            <div class="col">
+                <h3>Groceries list</h3>
+            </div>
+            <div class="col">
+                <h3>Expense</h3>
+            </div>
+        </div>
+        <div *ngFor="let expense of expenses">
+            <div class="row">
+                <div class="col">
+                    {{expense.date}}
+                </div>
+                <div class="col">
+                    {{expense.ingredientsList}}
+                </div>
+                <div class="col">
+                    {{expense.expense}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

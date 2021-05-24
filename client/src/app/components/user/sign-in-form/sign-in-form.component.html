@@ -1,0 +1,53 @@
+<div class="container" >
+    <h1>Welcome to foodie planner</h1>
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="text" class="form-control" formControlName="email">
+            <div *ngIf="signInForm.controls.email.touched && signInForm.controls.email.errors">
+                <div *ngIf="signInForm.controls.email.errors.required" class="alert alert-danger">
+                    Email is required
+                </div>
+                <div *ngIf="signInForm.controls.email.errors.pattern" class="alert alert-danger">
+                    Invalid email
+                </div>
+                <div *ngIf="signInForm.controls.email.errors.alreadyExists" class="alert alert-danger">
+                    User already exists
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" formControlName="password">
+            <div *ngIf="signInForm.controls.password.touched && signInForm.controls.password.errors">
+                <div *ngIf="signInForm.controls.password.errors.required" class="alert alert-danger">
+                    Password is required
+                </div>
+                <div *ngIf="signInForm.controls.password.errors.pattern" class="alert alert-danger">
+                    Password must be at least contain:
+                    8 characters,
+                    a number,
+                    a upper and lower case character,
+                    a special character
+                </div>
+            </div> 
+        </div>
+        <div class="form-group">
+            <label for="passwordConf">Confirm password</label>
+            <input id="passwordConf" type="password" class="form-control" formControlName="passwordConf">
+            <div *ngIf="signInForm.controls.passwordConf.touched && signInForm.controls.passwordConf.errors">
+                <div *ngIf="signInForm.controls.passwordConf.errors.required" class="alert alert-danger">
+                    Password confirmations is required
+                </div>
+                <div *ngIf="signInForm.controls.passwordConf.errors.invalidSignIn" class="alert alert-danger">
+                    The confirmation password does not match
+                </div>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-primary"  type="submit">Next</button>
+        <router-outlet></router-outlet>
+    </form>
+</div>
+
+

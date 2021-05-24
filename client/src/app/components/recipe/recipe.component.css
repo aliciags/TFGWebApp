@@ -1,0 +1,36 @@
+h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+img {
+    margin-left: 2%;
+    margin-top: 2%;
+    height: 90%;
+    width: 90%;
+    align-content: center; 
+}
+
+.row {
+    margin-top: 2%;
+    
+}
+
+.label {
+    margin-left: 1%;
+    font-size: x-large;
+}
+
+.input {
+    color:slategrey;
+    margin-left: 5%;
+    font-size: large;
+}
+
+.fa-plus-circle{
+    margin-left: 5%;
+}
+
+.ingredient{
+    font: bold;
+}

@@ -1,0 +1,60 @@
+h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.grid-container {
+    height: 100%;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+}
+
+.col {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.badge-dark {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.dashboard-card {
+    height: 90%;
+    width: 95%;
+}
+
+.badge-primary {
+    position: absolute;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: small;
+    top: 5px;
+    left:10px
+}
+
+.more-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+
+#useless 
+.card {
+    text-align: left;
+    
+}
+
+.container-fluid {
+
+    display: grid;
+    margin-bottom: 5%;
+    grid-template-columns: max-content;
+    grid-template-rows: max-content;
+
+}
