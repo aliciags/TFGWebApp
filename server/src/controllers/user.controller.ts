@@ -113,14 +113,15 @@ export const addUser = async (req: Request, res: Response) => {
 export const editUser = async (req: Request, res: Response ) => {
 
     const email = req.params.uid;
-    const {firstname, lastname, birthyear, numberMeals, meals, diet}  = req.body;
+    const {firstname, lastname, birthyear, numberMeals, meals, diet, groceries}  = req.body;
     const userFields = {
         firstname, 
         lastname,
         birthyear,
         numberMeals, 
         meals, 
-        diet
+        diet,
+        groceries
     };
     try {
         let user: IUser = await User.findOne({email: email });
