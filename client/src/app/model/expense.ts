@@ -1,9 +1,14 @@
-export class Expense {
+export interface Expense {
     
-    constructor(   
-        public date: string,
-        public ingredientsList: string[],
-        public expense: number
-    ){ }
+    /**
+     * Interface to model the Expense
+     * @param date: string 
+     * @param ingredientsList: string[]
+     * @param expense: number
+     */
+      
+    date: string;
+    ingredientsList: string[];
+    expense: number;
 
 }
