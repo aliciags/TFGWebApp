@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogActions, MatDialogModule } from '@angular/material/dialog';
 
 import { ApiService } from './service/api.service';
 import { UserModule } from './components/user/user.module';
@@ -30,6 +31,8 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { GroceriesListComponent } from './components/groceries-list/groceries-list.component';
 import { ExpensesTrackerComponent } from './components/expenses-tracker/expenses-tracker.component';
 import { LocalStorageService } from './service/local-storage.service';
+import { MealFormComponent } from './components/planner/meal-form/meal-form.component';
+import { IngredientComponent } from './components/recipe/ingredient/ingredient.component';
 
 
 
@@ -59,6 +62,7 @@ import { LocalStorageService } from './service/local-storage.service';
     MatListModule,
     MatGridListModule,
     MatCardModule,
+    MatDialogModule,
 
     UserModule,
     UserFormModule,
@@ -67,6 +71,7 @@ import { LocalStorageService } from './service/local-storage.service';
     WildcardRoutingModule //always last module to check first other child routes
   ],
   providers: [ApiService, LocalStorageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MealFormComponent, IngredientComponent]
 })
 export class AppModule { }
