@@ -2,7 +2,8 @@ export interface User {
 
     /**
      * Interafce to model the User Schema
-     * @param email:string
+     * @param email: string
+     * @param password: string
      * @param firstname: string
      * @param lastname: string
      * @param birthyear: number 
@@ -16,6 +17,7 @@ export interface User {
     firstname: string;
     lastname: string;
     email: string;
+    password?: string;
     meals: string[];
     diet: string;
     numberMeals: number;

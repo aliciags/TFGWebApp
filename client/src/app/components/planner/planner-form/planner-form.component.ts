@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 
@@ -34,12 +35,12 @@ export class PlannerFormComponent implements OnInit {
     })
   }
 
-  public ngOnInit(): void {  }
+  ngOnInit(): void {  }
 
-  public async onSubmit(){
+  async onSubmit(){
     if(this.plannerForm.valid){
       console.log(this.plannerForm.value["diet"]);
-      let body = {
+      let user: User = {
         email: history.state.email,
         password: history.state.password,
         firstname: history.state.user.firstname,
@@ -47,19 +48,19 @@ export class PlannerFormComponent implements OnInit {
         birthyear: history.state.user.birthyear,
         numberMeals: this.plannerForm.value["nMeals"],
         meals: this.plannerForm.value["meal"],
-        diet: "Omnivorous"
+        diet: "Omnivorous",
+        recipes: [],
+        groceries: []
       }
       
-      this.apiService.post("/user", body).subscribe(response => {
+      this.apiService.post("/user", user).subscribe(response => {
         this.localStorage.set("token", response.token);
-        this.localStorage.set("email", body.email);
+        this.localStorage.set("email", user.email);
         this.router.navigateByUrl("/");
       },
       error => {
-        console.log(error)
+        console.log(error);
       });
     }
-    
   }
-
 }

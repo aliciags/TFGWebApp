@@ -14,10 +14,10 @@ export class ApiService {
     this.http = http;
   }
 
-  post(request: string, body: any): Observable<any> {
+  post(request: string, body: any, options?: Object): Observable<any> {
     let url = this.baseUri + request;
     console.log(url);
-    return this.http.post(url, body);
+    return this.http.post(url, body, options);
   }
 
   get(request: string, options?: Object): Observable<any> {

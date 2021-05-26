@@ -31,7 +31,7 @@ export class RecipeComponent implements OnInit {
         diet: '',
         ingredients: [],
         steps: [],
-        imageURL: ''
+        image: ''
       }
   }
 

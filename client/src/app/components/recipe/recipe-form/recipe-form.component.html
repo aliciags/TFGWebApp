@@ -1,6 +1,6 @@
 <div class="container">
     <h1>{{title}}</h1>
-    <form [formGroup]="recipeForm">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name</label>
             <!--We associate each input field to the formControl object using the formControlName directive-->
@@ -12,14 +12,14 @@
         </div>
         <div class="form-group">
             <label for="timing">Timing</label>
-            <input id="timing" type="text" class="form-control" formControlName="timing" placeholder="How long does the recipe takes">
+            <input id="timing" type="number" class="form-control" formControlName="timing" placeholder="How long does the recipe takes">
             <div *ngIf="recipeForm.controls.timing.touched && !recipeForm.controls.timing.valid" class="alert alert-danger">
                 Timing is required
             </div>
         </div>
         <div class="form-group">
             <label for="dinnerGuest">Dinner</label>
-            <input id="dinnerGuest" type="text" class="form-control" formControlName="dinnerGuest" placeholder="Number of dinner guest">
+            <input id="dinnerGuest" type="number" class="form-control" formControlName="dinnerGuest" placeholder="Number of dinner guest">
             <div *ngIf="recipeForm.controls.dinnerGuest.touched && !recipeForm.controls.dinnerGuest.valid" class="alert alert-danger">
                 Introduce the number of guests
             </div>

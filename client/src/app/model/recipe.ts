@@ -7,6 +7,7 @@ export interface Recipe {
     diet: string;
     ingredients: string[];
     steps: string[];
-    imageURL: string;
-
+    image: string;
+    videoRecipe?: string;
+    creator?: string;
 }
