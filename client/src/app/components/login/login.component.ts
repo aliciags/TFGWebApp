@@ -16,65 +16,69 @@ export class LoginComponent implements OnInit {
   public loggedIn: boolean;
   private token: string;
 
-  public constructor(private fb: FormBuilder, 
-    private router: Router, 
-    private apiService: ApiService, 
-    private localStorageService: LocalStorageService){
+  public constructor(private fb: FormBuilder,
+                     private router: Router,
+                     private apiService: ApiService,
+                     private localStorageService: LocalStorageService){
       this.token = '';
       this.loggedIn = false;
       this.loginForm = this.fb.group({
-          //The first parameter in a FormControl is optional, is the default value we give to the control
-          //The second parameter provides a set of validators such as required, minlength, maxlength ...
+          // The first parameter in a FormControl is optional, is the default value we give to the control
+          // The second parameter provides a set of validators such as required, minlength, maxlength ...
           email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-          password: ['', [Validators.required /*, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')*/]]
+          password: ['', [Validators.required ]]
       });
-      
+
   }
 
   ngOnInit(): void {
-    this.localStorageService.get("token") != null ? this.loggedIn = true : this.loggedIn = false;
+    this.localStorageService.get('token') != null ? this.loggedIn = true : this.loggedIn = false;
   }
 
-  async onSumbit(){
+  onSumbit(): void{
     this.login().then(response => {
-      //console.log(response);
+      // console.log(response);
+      const email = 'email';
       this.token = response.token;
-      if(this.loginForm.valid){
-        this.localStorageService.set("token", this.token);
-        this.localStorageService.set("email", this.loginForm.value["email"]);
-        this.router.navigateByUrl("/", {state: response});
+      if (this.loginForm.valid){
+        this.localStorageService.set('token', this.token);
+        this.localStorageService.set('email', this.loginForm.value[email]);
+        this.router.navigateByUrl('/', {state: response});
       }
     },
     error => {
-      if(error.error.msg === "Invalid Credentials"){
-        //console.log(error)
-        this.loginForm.controls['password'].setErrors({
+      if (error.error.msg === 'Invalid Credentials'){
+        // console.log(error)
+        const password = 'password';
+        this.loginForm.controls[password].setErrors({
           invalidLogin: true
-        })
+        });
       }
     });
-    //console.log(this.loginForm.valid);
+    // console.log(this.loginForm.valid);
     /*if(this.loginForm.valid){
       this.router.navigateByUrl("/"/*, {state: response});
-    }*/ 
+    }*/
   }
 
-  public login(): Promise<any>{
-    //set an error if the user and password not match
-    let body = {
-      email: this.loginForm.value['email'],
-      password: this.loginForm.value['password']
-    }
-    return this.apiService.post("/auth", body).toPromise()
+  login(): Promise<any>{
+    // set an error if the user and password not match
+    const email = 'email';
+    const password = 'password';
+    const body = {
+      email: this.loginForm.value[email],
+      password: this.loginForm.value[password]
+    };
+    return this.apiService.post('/auth', body).toPromise();
   }
 
-  public logout(){
-    this.localStorageService.remove("token");
-    this.localStorageService.remove("email");
+  logout(): void{
+    this.localStorageService.remove('token');
+    this.localStorageService.remove('email');
   }
 
   /*async login(){
-    let result = null; 
+    let result = null;
     let body = {
       email: this.loginForm.value['email'],
       password: this.loginForm.value['password']

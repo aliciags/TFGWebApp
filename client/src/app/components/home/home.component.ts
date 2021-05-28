@@ -10,7 +10,7 @@ import { Recipe } from 'src/app/model/recipe';
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   public recipes: Recipe[];
   /** Based on the screen size, switch from standard to one column per row */
@@ -38,19 +38,19 @@ export class HomeComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, 
-    private apiService: ApiService) {
-      this.recipes = [];     
+  constructor(private breakpointObserver: BreakpointObserver,
+              private apiService: ApiService) {
+      this.recipes = [];
   }
 
-  ngOnInit(){
-    this.apiService.get("/").subscribe(response => {
+  ngOnInit(): void{
+    this.apiService.get('/').subscribe(response => {
       this.recipes = response;
       console.log(this.recipes);
     },
     err => {
-      //internal server error
-      console.log(err);  
+      // internal server error
+      console.log(err);
     });
   }
 }

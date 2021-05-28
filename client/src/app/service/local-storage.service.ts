@@ -13,11 +13,9 @@ export class LocalStorageService {
 
   get(key: string): any {
     if (this.isLocalStorageSupported ) {
-      let localStorageData = this.localStorage.getItem(key);
-      if(localStorageData != null){
+      const localStorageData = this.localStorage.getItem(key);
+      if (localStorageData != null){
         return JSON.parse(localStorageData);
-      } else {
-        console.log("no such element in local storage");
       }
     }
     return null;

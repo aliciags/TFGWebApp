@@ -9,19 +9,19 @@ import { RecipeRoutingModule } from './recipe.routing';
 
 
 @NgModule({
-    declarations:[
-        RecipeComponent, 
+    declarations: [
+        RecipeComponent,
         RecipeFormComponent
     ],
-    exports:[],
-    imports:[
+    exports: [],
+    imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
         RecipeRoutingModule
     ],
-    providers:[]
+    providers: []
 })
 
 export class RecipeModule { }

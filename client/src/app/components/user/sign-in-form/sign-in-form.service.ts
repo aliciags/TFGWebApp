@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-//import { FormGroup } from '@angular/forms';
+// import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class SignInService {
@@ -8,11 +8,10 @@ export class SignInService {
 
     }*/
 
-    public signIn(password:string, passwordConfirmation: string){
+    public signIn(password: string, passwordConfirmation: string): boolean{
 
-        if(password === passwordConfirmation) return true;
-        
-        return false;
+        if (password === passwordConfirmation) { return true; }
+        else { return false; }
     }
 
     /*public setData(signIn : FormGroup){

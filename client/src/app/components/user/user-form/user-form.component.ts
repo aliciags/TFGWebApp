@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../model/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserFormService } from './user-form.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { UserFormService } from './user-form.service';
 
 export class UserFormComponent implements OnInit {
 
-  //model firstname, lastname, email    
+  // model firstname, lastname, email
   public userForm: FormGroup;
   public submitted: boolean = false;
   public year: number = new Date().getFullYear();
@@ -21,37 +20,36 @@ export class UserFormComponent implements OnInit {
       private fb: FormBuilder,
       private router: Router,
       private usrFormService: UserFormService
-    ) { 
+    ) {
       this.userForm = this.fb.group({
-        //validate if firstname and lastname does not contain special chars
+        // validate if firstname and lastname does not contain special chars
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
-        birthyear: ['', [Validators.required]] 
+        birthyear: ['', [Validators.required]]
       });
     }
 
-  public ngOnInit(): void {  }
+  ngOnInit(): void {  }
 
-  public onSubmit(){
+  onSubmit(): void{
     this.checkBirthYear();
-    if(this.userForm.valid){
-      let data = {
+    if (this.userForm.valid){
+      const data = {
         email: history.state.email,
         password: history.state.password,
         user: this.userForm.value
-      }
+      };
       this.router.navigateByUrl('login/signin/user/planner', {state: data});
     }
   }
 
-  public checkBirthYear(){
-    var result = this.usrFormService.checkValidYear(this.userForm.controls['birthyear'].value);
-    if(!result){
+  public checkBirthYear(): void{
+    const result = this.usrFormService.checkValidYear(this.userForm.controls['birthyear'].value);
+    if (!result){
       this.userForm.controls['birthyear'].setErrors({
         invalidYear: true
       });
     }
-    
   }
 
 }

@@ -18,12 +18,12 @@ export class MealFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     this.mealForm = this.fb.group({
       day: ['', [Validators.required]],
       meal: ['', [Validators.required]],
       recipe: ['', [Validators.required]]
-    })
+    });
   }
 
   ngOnInit(): void {

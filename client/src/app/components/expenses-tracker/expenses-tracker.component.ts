@@ -21,30 +21,30 @@ export class ExpensesTrackerComponent implements OnInit {
   public expenses: Expense[];
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token' 
+      'x-auth-token': 'token'
     })
   };
-  
+
   constructor(private router: Router,
-    private apiService: ApiService,
-    private localStorage: LocalStorageService) {
+              private apiService: ApiService,
+              private localStorage: LocalStorageService) {
       this.expenses = [];
   }
 
   ngOnInit(): void {
-    if(this.localStorage.get("token") == null){
-      this.router.navigate(["/login"]);
-    }else {
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get("token"));
-      this.apiService.get("/expense/user/"+this.localStorage.get("email"), this.httpOptions)
+    if (this.localStorage.get('token') == null){
+      this.router.navigate(['/login']);
+    } else {
+      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
+      this.apiService.get('/expense/user/' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
         this.expenses = response;
       },
       error => {
-        if(error.error.msg === "There are no expenses for such user"){ 
-          this.router.navigate(["/notfound"]);
+        if (error.error.msg === 'There are no expenses for such user'){
+          this.router.navigate(['/notfound']);
         } else {
-          console.log("Internal server error");
+          console.log('Internal server error');
         }
       });
     }

@@ -21,42 +21,41 @@ export class PlannerFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private apiService: ApiService, 
+    private apiService: ApiService,
     private localStorage: LocalStorageService
-  ) { 
+  ) {
     this.plannerForm = this.fb.group({
       nMeals: ['', [Validators.required]],
       meal: ['', [Validators.required]],
       diet: this.fb.group({
-        omnivorous: [''], 
+        omnivorous: [''],
         vegetarian: [''],
         vegan: ['']
       })
-    })
+    });
   }
 
   ngOnInit(): void {  }
 
-  async onSubmit(){
-    if(this.plannerForm.valid){
-      console.log(this.plannerForm.value["diet"]);
-      let user: User = {
+  onSubmit(): void{
+    if (this.plannerForm.valid){
+      console.log(this.plannerForm.value['diet']);
+      const user: User = {
         email: history.state.email,
         password: history.state.password,
         firstname: history.state.user.firstname,
         lastname: history.state.user.lastname,
         birthyear: history.state.user.birthyear,
-        numberMeals: this.plannerForm.value["nMeals"],
-        meals: this.plannerForm.value["meal"],
-        diet: "Omnivorous",
+        numberMeals: this.plannerForm.value['nMeals'],
+        meals: this.plannerForm.value['meal'],
+        diet: 'Omnivorous',
         recipes: [],
         groceries: []
-      }
-      
-      this.apiService.post("/user", user).subscribe(response => {
-        this.localStorage.set("token", response.token);
-        this.localStorage.set("email", user.email);
-        this.router.navigateByUrl("/");
+      };
+      this.apiService.post('/user', user).subscribe(response => {
+        this.localStorage.set('token', response.token);
+        this.localStorage.set('email', user.email);
+        this.router.navigateByUrl('/');
       },
       error => {
         console.log(error);

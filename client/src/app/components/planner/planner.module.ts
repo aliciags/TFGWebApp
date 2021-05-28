@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 
 import { PlannerComponent } from './planner.component';
-//import { PlannerFormComponent } from './planner-form/planner-form.component';
+// import { PlannerFormComponent } from './planner-form/planner-form.component';
 import { PlannerRoutingModule } from './planner.routing';
 import { MealFormComponent } from './meal-form/meal-form.component';
 import { MatListModule } from '@angular/material/list';
@@ -15,24 +15,24 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 
 @NgModule({
-    declarations:[
+    declarations: [
         PlannerComponent,
-        MealFormComponent, 
-        //PlannerFormComponent
+        MealFormComponent,
+        // PlannerFormComponent
     ],
-    exports:[],
-    imports:[
+    exports: [],
+    imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         PlannerRoutingModule,
         MatCardModule,
-        MatListModule, 
+        MatListModule,
         MatGridListModule,
         MatMenuModule,
         MatIconModule
     ],
-    providers:[ LocalStorageService ]
+    providers: [ LocalStorageService ]
 })
 
 export class PlannerModule { }

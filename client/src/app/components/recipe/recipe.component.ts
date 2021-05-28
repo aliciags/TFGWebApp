@@ -17,12 +17,12 @@ export class RecipeComponent implements OnInit {
   public recipe: Recipe;
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token' 
+      'x-auth-token': 'token'
     })
   };
 
-  constructor(private router: Router, 
-    private localStorage: LocalStorageService, private apiService: ApiService) { 
+  constructor(private router: Router,
+              private localStorage: LocalStorageService, private apiService: ApiService) {
       this.recipe = {
         name: '',
         timing: 1,
@@ -32,26 +32,25 @@ export class RecipeComponent implements OnInit {
         ingredients: [],
         steps: [],
         image: ''
-      }
+      };
   }
 
   ngOnInit(): void {
-    if(this.localStorage.get("token") == null){
-      this.router.navigate(["/login"]);
-    }else {
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get("token"));
-      this.apiService.get("/recipe/60abe2524293963bd0141cde", this.httpOptions)
-      .subscribe(response => { 
+    if (this.localStorage.get('token') == null){
+      this.router.navigate(['/login']);
+    } else {
+      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
+      this.apiService.get('/recipe/60abe2524293963bd0141cde', this.httpOptions)
+      .subscribe(response => {
         this.recipe = response;
-      }, 
+      },
       error => {
-        if(error.error.msg === "recipe not found"){ 
-          this.router.navigate(["/notfound"]);
+        if (error.error.msg === 'recipe not found'){
+          this.router.navigate(['/notfound']);
         } else {
-          console.log("Internal server error");
+          console.log('Internal server error');
         }
       });
     }
   }
-
 }

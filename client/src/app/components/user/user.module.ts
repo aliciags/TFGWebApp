@@ -11,17 +11,17 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 
 @NgModule({
-    declarations:[
+    declarations: [
         UserComponent
     ],
-    exports:[],
-    imports:[
+    exports: [],
+    imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         UserRoutingModule
     ],
-    providers:[ SignInService, ApiService, LocalStorageService ]
+    providers: [ SignInService, ApiService, LocalStorageService ]
 })
 
 export class UserModule { }

@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css'], 
+  styleUrls: ['./planner.component.css'],
   providers: [ LocalStorageService ]
 })
 export class PlannerComponent implements OnInit {
@@ -19,8 +19,9 @@ export class PlannerComponent implements OnInit {
 
   public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      var i = 0, j=0;
-      var c : RecipeCard;
+      let i = 0;
+      let j = 0;
+      let c: RecipeCard;
 
       /*if (matches) {
         var i = 0, j=0;
@@ -38,8 +39,8 @@ export class PlannerComponent implements OnInit {
         return this.card;
       }*/
 
-      for(i=0; i<this.meals.length; i++){
-        for(j=0; j<this.days.length; j++){
+      for (i = 0; i < this.meals.length; i++){
+        for (j = 0; j < this.days.length; j++){
           c = {
             recipe: 'Empty',
             day: this.days[j],
@@ -54,15 +55,15 @@ export class PlannerComponent implements OnInit {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, 
-    private router: Router,
-    private localStorage: LocalStorageService) {
+  constructor(private breakpointObserver: BreakpointObserver,
+              private router: Router,
+              private localStorage: LocalStorageService) {
       this.card = [];
   }
 
   ngOnInit(): void {
-    if(this.localStorage.get("token") == null){
-      this.router.navigate(["/login"]);
+    if (this.localStorage.get('token') == null){
+      this.router.navigate(['/login']);
     }
   }
 

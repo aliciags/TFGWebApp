@@ -6,14 +6,14 @@ export interface User {
      * @param password: string
      * @param firstname: string
      * @param lastname: string
-     * @param birthyear: number 
-     * @param numberMeals: number 
+     * @param birthyear: number
+     * @param numberMeals: number
      * @param meals: string[]
      * @param diet: string
      * @param recipes: ref => Recipe._id[]
      * @param groceries: ref => Ingredient.name[]
      */
-       
+
     firstname: string;
     lastname: string;
     email: string;

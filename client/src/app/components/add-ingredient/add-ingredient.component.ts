@@ -12,18 +12,16 @@ export class AddIngredientComponent implements OnInit {
   public addForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    public dialogRef: MatDialogRef<any>) {
+              public dialogRef: MatDialogRef<any>) {
     this.addForm = this.fb.group({
       ingredient: ['', [Validators.required]]
-    })
+    });
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
   onSubmit(): void{
-    if(this.addForm.valid) {
+    if (this.addForm.valid) {
       this.onClose();
     }
   }

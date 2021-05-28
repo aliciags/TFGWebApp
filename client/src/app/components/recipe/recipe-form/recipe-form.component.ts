@@ -16,12 +16,12 @@ export class RecipeFormComponent implements OnInit {
 
   public recipeForm: FormGroup;
   public submitted: boolean = false;
-  public title: string = 'New recipe'
+  public title: string = 'New recipe';
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token' 
+      'x-auth-token': 'token'
     })
   };
 
@@ -34,22 +34,22 @@ export class RecipeFormComponent implements OnInit {
     this.recipeForm = this.fb.group({
       name: ['', [Validators.required]],
       timing: ['', [Validators.required]],
-      dinnerGuest: ['', [Validators.required]],  //number of portions, eaters
-      meal: ['', [Validators.required]],    //breakfast, lunch, diner, snack
-      diet: ['', [Validators.required]],    //omnivor, vegetrian, vegan
+      dinnerGuest: ['', [Validators.required]],   // number of portions, eaters
+      meal: ['', [Validators.required]],          // breakfast, lunch, diner, snack
+      diet: ['', [Validators.required]],          // omnivor, vegetrian, vegan
       ingredients: ['', [Validators.required]],
       steps: ['', [Validators.required]],
       image: ['', ],
       videoRecipe: ['', ]
-    })
+    });
   }
 
   ngOnInit(): void {
   }
 
-  async onSubmit(){
-    if(this.recipeForm.valid){
-      let recipe: Recipe = {
+  onSubmit(): void{
+    if (this.recipeForm.valid){
+      const recipe: Recipe = {
         name: this.recipeForm.value["name"],
         timing: this.recipeForm.value["timing"],
         guest: this.recipeForm.value["dinnerGuest"],
@@ -59,18 +59,18 @@ export class RecipeFormComponent implements OnInit {
         steps: this.recipeForm.value["steps"],
         image: this.recipeForm.value["image"],
         videoRecipe: this.recipeForm.value["videoRecipe"],
-        creator: this.localStorage.get("email")
-      }
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get("token"));
-      this.apiService.post("/recipe", recipe, this.httpOptions).subscribe(response => {
+        creator: this.localStorage.get('email')
+      };
+      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
+      this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(response => {
         console.log(response);
-        this.router.navigate(["/"]);
-      }, 
+        this.router.navigate(['/']);
+      },
       error => {
         console.log(error);
-      });   
+      });
     }else{
-      console.log("there is an error")
+      console.log('there is an error');
     }
   }
 }

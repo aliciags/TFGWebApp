@@ -14,7 +14,7 @@ export class CheckListComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //request shopping done
+    // request shopping done
     this.onClose();
   }
 

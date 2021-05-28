@@ -5,12 +5,12 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeComponent } from './recipe.component';
 
 const recipeRoutes: Routes = [
-    {path:'recipe', component: RecipeComponent},
-    {path:'recipe/recipe-form', component: RecipeFormComponent}
-]
+    {path: 'recipe', component: RecipeComponent},
+    {path: 'recipe/recipe-form', component: RecipeFormComponent}
+];
 
 @NgModule({
-    imports:[
+    imports: [
         RouterModule.forChild(recipeRoutes)
     ],
     exports: [RouterModule]

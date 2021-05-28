@@ -16,33 +16,33 @@ export class UserComponent implements OnInit {
   public user: User;
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token' 
+      'x-auth-token': 'token'
     })
   };
 
-  constructor( private apiService: ApiService, 
-    private router: Router, 
-    private localStorage: LocalStorageService) {
+  constructor( private apiService: ApiService,
+               private router: Router,
+               private localStorage: LocalStorageService) {
     this.user = {
-      firstname: '', lastname: '', email:'', birthyear: 1, diet: '',
+      firstname: '', lastname: '', email: '', birthyear: 1, diet: '',
       numberMeals: 1, meals: [], recipes: [], groceries: []
-    }
+    };
   }
 
   ngOnInit(): void {
-    if(this.localStorage.get("token") == null){
-      this.router.navigate(["/login"]);
+    if (this.localStorage.get('token') == null){
+      this.router.navigate(['/login']);
     }else {
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get("token"));
-      this.apiService.get("/user/"+this.localStorage.get("email"), this.httpOptions)
-      .subscribe(response => { 
+      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
+      this.apiService.get('/user/' + this.localStorage.get('email'), this.httpOptions)
+      .subscribe(response => {
         this.user = response;
-      }, 
+      },
       error => {
-        if(error.error.msg === "user not found"){ 
-          this.router.navigate(["/notfound"]);
+        if (error.error.msg === 'user not found'){
+          this.router.navigate(['/notfound']);
         } else {
-          console.log("Internal server error");
+          console.log('Internal server error');
         }
       });
     }

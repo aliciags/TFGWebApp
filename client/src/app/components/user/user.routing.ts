@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
-import { UserFormComponent } from './user-form/user-form.component'
+import { UserFormComponent } from './user-form/user-form.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 const userRoutes: Routes =  [
     {path: 'user', component: UserComponent },
-    //{path: 'signin', component: UserFormComponent},
-    //{path:'**', component: NotFoundComponent}
+    // {path: 'signin', component: UserFormComponent},
+    // {path:'**', component: NotFoundComponent}
+];
 
-]
-
-//const userRouting = RouterModule.forChild(userRoutes);
+// const userRouting = RouterModule.forChild(userRoutes);
 
 @NgModule({
     imports: [
@@ -20,4 +19,4 @@ const userRoutes: Routes =  [
     exports: [RouterModule]
 })
 
-export class UserRoutingModule {}
+export class UserRoutingModule { }

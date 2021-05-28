@@ -52,7 +52,7 @@ import { CheckListComponent } from './components/check-list/check-list.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -72,7 +72,7 @@ import { CheckListComponent } from './components/check-list/check-list.component
     UserFormModule,
     RecipeModule,
     PlannerModule,
-    WildcardRoutingModule //always last module to check first other child routes
+    WildcardRoutingModule // always last module to check first other child routes
   ],
   providers: [ApiService, LocalStorageService],
   bootstrap: [AppComponent],

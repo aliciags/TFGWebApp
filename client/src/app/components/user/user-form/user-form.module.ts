@@ -10,19 +10,19 @@ import { UserFormService } from './user-form.service';
 import { ApiService } from 'src/app/service/api.service';
 
 @NgModule({
-    declarations:[
+    declarations: [
         UserFormComponent,
         SignInFormComponent,
         PlannerFormComponent
     ],
-    exports:[],
-    imports:[
+    exports: [],
+    imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         UserFormRoutingModule
     ],
-    providers:[ UserFormService, ApiService ]
+    providers: [ UserFormService, ApiService ]
 })
 
 export class UserFormModule { }
