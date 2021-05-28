@@ -5,8 +5,7 @@ export class UserFormService {
 
     public actualYear: number = new Date().getFullYear();
 
-    public checkValidYear(birthYear: number): boolean{
-
+    public checkValidYear(birthYear: number): boolean {
         if (birthYear > this.actualYear ){
             // console.log('year greather than 2021');
             return false;
