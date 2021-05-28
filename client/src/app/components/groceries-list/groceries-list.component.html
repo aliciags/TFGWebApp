@@ -6,9 +6,9 @@
 
     <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-primary" (click)="addIngredient()">
+            <input type="text" #ingredient placeholder="Introduce an ingredient"> 
+            <button type="button" class="btn btn-primary" (click)="addIngredient(ingredient.value)">
                 <i class="fas fa-plus-circle"></i>
-                Add an item
             </button>
         </div>
         <div class="col">

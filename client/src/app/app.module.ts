@@ -33,6 +33,8 @@ import { ExpensesTrackerComponent } from './components/expenses-tracker/expenses
 import { LocalStorageService } from './service/local-storage.service';
 import { MealFormComponent } from './components/planner/meal-form/meal-form.component';
 import { IngredientComponent } from './components/recipe/ingredient/ingredient.component';
+import { AddIngredientComponent } from './components/add-ingredient/add-ingredient.component';
+import { CheckListComponent } from './components/check-list/check-list.component';
 
 
 
@@ -43,7 +45,9 @@ import { IngredientComponent } from './components/recipe/ingredient/ingredient.c
     LoginComponent,
     MainNavComponent,
     GroceriesListComponent,
-    ExpensesTrackerComponent
+    ExpensesTrackerComponent,
+    AddIngredientComponent,
+    CheckListComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,6 @@ import { IngredientComponent } from './components/recipe/ingredient/ingredient.c
   ],
   providers: [ApiService, LocalStorageService],
   bootstrap: [AppComponent],
-  entryComponents: [MealFormComponent, IngredientComponent]
+  entryComponents: [AddIngredientComponent, CheckListComponent]
 })
 export class AppModule { }

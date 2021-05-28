@@ -26,6 +26,12 @@ export class ApiService {
     return this.http.get(url, options);
   }
 
+  put(request: string, body?: any, options?: Object): Observable<any> {
+    let url = this.baseUri + request;
+    console.log(url);
+    return this.http.put(url, body, options);
+  }
+
   //error handling
   /*errorUser(error: HttpErrorResponse){
     var errorMessage: string = '';

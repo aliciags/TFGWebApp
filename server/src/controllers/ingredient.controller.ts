@@ -47,7 +47,7 @@ export const addIngredient = async (req: Request, res: Response) => {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
     }
 
-    const { name, diet, averagePrice } = req.body;
+    const { name, diet, avgPrice } = req.body;
     try {
         let ingredient: IIngredient = await Ingredient.findOne({name: name});
         if(ingredient){
@@ -57,7 +57,7 @@ export const addIngredient = async (req: Request, res: Response) => {
         const ingredientFields = {
             name, 
             diet, 
-            averagePrice
+            avgPrice
         };
 
         ingredient = new Ingredient(ingredientFields);

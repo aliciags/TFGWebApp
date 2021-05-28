@@ -9,6 +9,7 @@ import jwt from "jsonwebtoken";
 import Payload from "../types/Payload";
 import Request from "../types/Request";
 import User, { IUser } from "../models/User";
+import Ingredient, { IIngredient } from "../models/Ingredient";
 //import Mealtime, { IMealtime } from "../models/Day";
 
 
@@ -131,7 +132,7 @@ export const editUser = async (req: Request, res: Response ) => {
 
         user = await User.findOneAndUpdate(
             { email: email },
-            { $set: userFields},
+            { $set: userFields },
             { new: true, runValidators: true }   // without it it does not update
         );
         res.json(user);
@@ -141,7 +142,44 @@ export const editUser = async (req: Request, res: Response ) => {
     }
 }
 
-export const deleteUser = async (req: Request, res: Response ) => {
+export const addIngredient = async (req: Request, res:Response) => {
+
+    const email: string = req.params.uid,
+      ingredient: string = req.params.iid;
+    console.log("in add ingredient")
+    try {
+        let user: IUser = await User.findOne({email: email});
+        if(!user){
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "user not found"});
+        }
+        let ing: IIngredient = await Ingredient.findOne({name: ingredient});
+        if(!ing){
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "ingredient not found"});
+        }
+        user.groceries.push(ingredient);
+        /*const userFields = {
+            firstname: user.firstname, 
+            lastname: user.lastname,
+            birthyear: user.birthyear ,
+            numberMeals: user.numberMeals, 
+            meals: user.meals, 
+            diet: user.diet,
+            groceries: user.groceries
+        };*/
+        user = await User.findOneAndUpdate(
+            { email: email },
+            { $set: user },
+            { new: true, runValidators: true}
+        );
+        res.json(user);
+    } catch(err) {
+        console.error("another one",err.message);
+        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+    }
+
+}
+
+export const deleteUser = async (req: Request, res: Response) => {
 
     try {
         let user: IUser = await User.findOneAndDelete({ email: req.params.uid });

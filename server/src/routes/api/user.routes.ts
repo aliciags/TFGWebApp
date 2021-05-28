@@ -36,11 +36,18 @@ userRouter.get("/exists/:uid", UserController.exists);
 userRouter.post("/", UserController.addUser);
 
 /**
- * update a user by user id
+ * update a user by user email
  * PUT /api/user/:uid
  * access Private
  */
 userRouter.put("/:uid", auth, UserController.editUser);
+
+/**
+ * add an ingredient to the groceries list
+ * PUT /api/user/ingredient/:uid&:iid
+ * access Private
+ */
+userRouter.put("/ingredient/:uid&:iid", auth, UserController.addIngredient);
 
 /**
  * remove a user by user id

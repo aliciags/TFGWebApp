@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MealFormComponent } from '../planner/meal-form/meal-form.component';
-import { IngredientComponent } from '../recipe/ingredient/ingredient.component';
+import { AddIngredientComponent } from '../add-ingredient/add-ingredient.component';
+import { CheckListComponent } from '../check-list/check-list.component';
 
 @Component({
   selector: 'app-groceries-list',
@@ -49,15 +49,28 @@ export class GroceriesListComponent implements OnInit {
     }
   }
 
-  addIngredient(): void{
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(MealFormComponent, dialogConfig);
+  addIngredient(ingredient: string): void {
+    let body = {};
+    this.apiService.put("/user/ingredient/"+this.localStorage.get("email")+"&"+ingredient, body, this.httpOptions)
+      .subscribe(response => {
+        this.ingredientsList = response.groceries;
+      },
+      error => {
+        if(error.error.msg === "user not found"){ 
+          this.router.navigate(["/notfound"]);
+        } else if(error.error.msg === "ingredient not found"){
+          this.router.navigate(["/notfound"]);      
+        }else {
+          console.log("Internal server error");
+        }
+      });
   }
 
   shoppingDone(): void{
-    this.dialog.open(IngredientComponent)
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CheckListComponent, dialogConfig);
   }
 
 }
