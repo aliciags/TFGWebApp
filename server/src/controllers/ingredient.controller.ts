@@ -10,69 +10,68 @@ import Ingredient, { IIngredient } from "../models/Ingredient";
 export const getAllIngredients = async( req: Request, res: Response) => {
 
     const role: string = req.role;
-    if(role !== 'admin') {
+    if (role !== "admin") {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
     }
 
     try {
         const ingredients: IIngredient[] = await Ingredient.find();
         res.json(ingredients);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const getIngredient = async (req: Request, res: Response) => {
 
     try {
         const ingredient: IIngredient = await Ingredient.findOne({name: req.params.iid});
-        if(ingredient){
+        if (ingredient) {
             return res.json(ingredient);
         }
         res.status(HttpStatusCodes.NOT_FOUND).json({msg: "Ingredient not found"});
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
-        /**if( err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not an ingredient object id"});
-        }*/
+        // if( err.kind === "ObjectId") {
+        // return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not an ingredient object id"});}
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const addIngredient = async (req: Request, res: Response) => {
 
     const role: string = req.role;
-    if(role !== 'admin') {
+    if (role !== "admin") {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
     }
 
     const { name, diet, avgPrice } = req.body;
     try {
         let ingredient: IIngredient = await Ingredient.findOne({name: name});
-        if(ingredient){
+        if (ingredient) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Ingredient already exists"});
         }
 
         const ingredientFields = {
-            name, 
-            diet, 
+            name,
+            diet,
             avgPrice
         };
 
         ingredient = new Ingredient(ingredientFields);
         await ingredient.save();
         res.json(ingredient);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const editIngredient = async (req: Request, res: Response) => {
 
     const role: string = req.role;
-    if(role !== 'admin') {
+    if (role !== "admin") {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
     }
 
@@ -80,39 +79,39 @@ export const editIngredient = async (req: Request, res: Response) => {
     const { diet, averagePrice } = req.body;
     try {
         let ingredient: IIngredient = await Ingredient.findOne({name: name});
-        if(!ingredient){
+        if (!ingredient) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Ingredient does not exist"});
         }
 
         const ingredientFields = {
-            diet, 
+            diet,
             averagePrice
         };
 
         ingredient = await Ingredient.findOneAndUpdate(
-            {name: name}, 
-            {$set: ingredientFields}, 
+            {name: name},
+            {$set: ingredientFields},
             {new: true, runValidators: true}
         );
         res.json(ingredient);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const deleteIngredient = async (req: Request, res: Response) => {
 
     const role: string = req.role;
-    if(role !== 'admin') {
+    if (role !== "admin") {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
     }
 
-    try{
+    try {
         const ingredient: IIngredient = await Ingredient.findOneAndDelete({name: req.params.iid});
         res.json({msg: "ingredient removed", ing: ingredient});
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};

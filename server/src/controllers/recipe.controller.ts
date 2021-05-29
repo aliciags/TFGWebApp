@@ -11,14 +11,14 @@ import { Schema } from "mongoose";
 
 export const getAllRecipes = async (req: Request, res: Response) => {
 
-    try{
+    try {
         const recipes: IRecipe[] = await Recipe.find();
         res.json(recipes);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const getFilteredRecipes = async (req: Request, res: Response) => {
 
@@ -26,152 +26,152 @@ export const getFilteredRecipes = async (req: Request, res: Response) => {
     let recipes: IRecipe[];
 
     try {
-        if(diet || meals){
+        if (diet || meals) {
             recipes = await Recipe.find({diet: diet, meal: meals});
             return res.json(recipes);
-        } 
-        if( ingredients ){
+        }
+        if ( ingredients ) {
             recipes = await Recipe.find({ingredients: ingredients});
             return res.json(recipes);
         }
-    } catch(err) {
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const getRecipe = async (req: Request, res: Response) => {
 
-    try{
+    try {
         const recipe: IRecipe = await Recipe.findById({_id: req.params.rid});
-        if(recipe){
+        if (recipe) {
             return res.json(recipe);
         }
         res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
-        if(err.kind === "ObjectId"){
+        if (err.kind === "ObjectId") {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const addRecipe = async (req: Request, res: Response) => {
 
     const {name, timing, guest, meal, diet, image, ingredients, steps, videoRecipe} = req.body;
     const userID = req.userId;
-    try{
-        let user: IUser = await User.findById(userID);
-        if(!user){
+    try {
+        const user: IUser = await User.findById(userID);
+        if (!user) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user not found"});
         }
-        let creator: string = user.email;
+        const creator: string = user.email;
         const recipeFields = {
-            name, 
-            timing, 
-            guest, 
-            meal, 
-            diet, 
-            image, 
-            ingredients, 
+            name,
+            timing,
+            guest,
+            meal,
+            diet,
+            image,
+            ingredients,
             steps,
             videoRecipe,
             creator
         };
-       //maybe look for similar recipes and suggest them
-       let recipe: IRecipe = new Recipe(recipeFields);
+       // maybe look for similar recipes and suggest them
+       const recipe: IRecipe = new Recipe(recipeFields);
        await recipe.save();
        res.json(recipe);
-    }catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const getUserRecipes = async (req: Request, res: Response) => {
 
-    let i=0;
-    try{
-        let user: IUser = await User.findOne({email: req.params.uid});
-        if(!user){
+    let i = 0;
+    try {
+        const user: IUser = await User.findOne({email: req.params.uid});
+        if (!user) {
             res.status(HttpStatusCodes.NOT_FOUND).json({msg: "user not found"});
         }
-        let recipes: IRecipe[]; 
-        for(i=0; i<user.recipes.length; i++){
+        const recipes: IRecipe[] = [];
+        for (i = 0; i < user.recipes.length; i++) {
             recipes.push( await Recipe.findById({_id: user.recipes[i]._id}));
         }
         res.json(recipes);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const editRecipe = async (req: Request, res: Response) => {
 
     const {name, timing, guest, meal, diet, image, ingredients, steps, videoRecipe} = req.body;
     const recipeFields = {
-        name, 
-        timing, 
-        guest, 
-        meal, 
-        diet, 
-        image, 
-        ingredients, 
-        steps, 
+        name,
+        timing,
+        guest,
+        meal,
+        diet,
+        image,
+        ingredients,
+        steps,
         videoRecipe
     };
     try {
-        let user: IUser = await User.findById(req.userId);
-        if(!user){
+        const user: IUser = await User.findById(req.userId);
+        if (!user) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "user not found"});
         }
         let recipe: IRecipe = await Recipe.findById({_id: req.params.rid });
-        if(!recipe){
+        if (!recipe) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
         }
-        if(recipe.creator != user.email){
+        if (recipe.creator != user.email) {
             return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "not allowed to edit the recipe"});
         }
         recipe = await Recipe.findByIdAndUpdate(
-            {_id: req.params.rid}, 
-            {$set: recipeFields}, 
+            {_id: req.params.rid},
+            {$set: recipeFields},
             {new: true, runValidators: true}
         );
         res.json(recipe);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
-        if(err.kind === "ObjectId"){
+        if (err.kind === "ObjectId") {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
 
 export const deleteRecipe = async (req: Request, res: Response) => {
 
     try {
         let recipe: IRecipe = await Recipe.findById({_id: req.params.rid});
         let user: IUser = await User.findOne({email: req.params.uid});
-        if(!recipe){
+        if (!recipe) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
         }
 
-        if(recipe.creator == user.email && recipe.saved.length > 0){
-            let c = recipe.saved.pop();
+        if (recipe.creator == user.email && recipe.saved.length > 0) {
+            const c = recipe.saved.pop();
             recipe = await Recipe.findByIdAndUpdate(
                 {_id: recipe._id},
                 {update: {creator: c, saved: recipe.saved}},
                 {new: true}
             );
-        } else if(recipe.creator == user.email) {
+        } else if (recipe.creator == user.email) {
             recipe = await Recipe.findByIdAndDelete({_id: req.params.rid});
-        } else if(recipe.saved.length > 0 ){
-            let updatedUsers: IUser["email"][] = [];
+        } else if (recipe.saved.length > 0 ) {
+            const updatedUsers: IUser["email"][] = [];
             let i = 0;
-            for(i=0; i<recipe.saved.length; i++){
-                if(recipe.saved[i] != req.params.uid){ 
+            for (i = 0; i < recipe.saved.length; i++) {
+                if (recipe.saved[i] != req.params.uid) {
                     updatedUsers.push(recipe.saved[i]);
                 }
             }
@@ -184,10 +184,10 @@ export const deleteRecipe = async (req: Request, res: Response) => {
             return res.json({msg: "recipe not removed"});
         }
 
-        let j=0;
-        let updatedRecipes: Schema.Types.ObjectId[] = [];
-        for(j=0; j<user.recipes.length; j++){
-            if(user.recipes[j] != recipe._id){
+        let j = 0;
+        const updatedRecipes: Schema.Types.ObjectId[] = [];
+        for (j = 0; j < user.recipes.length; j++) {
+            if (user.recipes[j] != recipe._id) {
                 updatedRecipes.push(user.recipes[j]);
             }
         }
@@ -197,11 +197,11 @@ export const deleteRecipe = async (req: Request, res: Response) => {
             {new: true}
         );
         res.json({msg: "recipe removed", r: recipe, u: user});
-    } catch(err) {
+    } catch (err) {
         console.error(err.message);
-        if(err.kind === "ObjectId"){
+        if (err.kind === "ObjectId") {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
-}
+};
