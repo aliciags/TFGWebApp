@@ -32,6 +32,12 @@ export class ApiService {
     return this.http.put(url, body, options);
   }
 
+  delete(request: string, options?: object): Observable<any> {
+    const url = this.baseUri + request;
+    console.log(url);
+    return this.http.delete(url, options);
+  }
+
   // error handling
   /*errorUser(error: HttpErrorResponse){
     var errorMessage: string = '';

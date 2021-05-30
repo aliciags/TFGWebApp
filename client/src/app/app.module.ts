@@ -34,6 +34,7 @@ import { LocalStorageService } from './service/local-storage.service';
 import { MealFormComponent } from './components/planner/meal-form/meal-form.component';
 import { IngredientComponent } from './components/recipe/ingredient/ingredient.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -72,7 +73,7 @@ import { CheckListComponent } from './components/check-list/check-list.component
     PlannerModule,
     WildcardRoutingModule // always last module to check first other child routes
   ],
-  providers: [ApiService, LocalStorageService],
+  providers: [ApiService, LocalStorageService, DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [CheckListComponent]
 })

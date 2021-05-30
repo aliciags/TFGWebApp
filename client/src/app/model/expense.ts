@@ -7,6 +7,7 @@ export interface Expense {
      * @param expense: number
      */
 
+    _id?: string;
     date: string;
     ingredients: string[];
     expense: number;

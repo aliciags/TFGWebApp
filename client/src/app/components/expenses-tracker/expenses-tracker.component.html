@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Expenses tracker</h1>
     <div class="container">
-        <div class="row">
+        <div class="row headers">
             <div class="col">
                 <h3>Date</h3>
             </div>
@@ -11,8 +11,11 @@
             <div class="col">
                 <h3>Expense</h3>
             </div>
+            <div>
+                <h3>Remove expense</h3>
+            </div>
         </div>
-        <div *ngFor="let expense of expenses">
+        <div *ngFor="let expense of expenses" class="expenses">
             <div class="row">
                 <div class="col">
                     {{expense.date}}
@@ -24,6 +27,9 @@
                 </div>
                 <div class="col">
                     {{expense.expense}}
+                </div>
+                <div>
+                    <button class="btn btn-secondary btn-circle" (click)="onDelete(expense._id)"><i class="fas fa-times-circle"></i></button>
                 </div>
             </div>
         </div>

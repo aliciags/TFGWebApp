@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { Expense } from '../../model/expense';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-expenses-tracker',
   templateUrl: './expenses-tracker.component.html',
   styleUrls: ['./expenses-tracker.component.css'],
-  providers: [ LocalStorageService, ApiService ]
+  providers: [ LocalStorageService, ApiService, DatePipe ]
 })
 export class ExpensesTrackerComponent implements OnInit {
 
@@ -27,7 +28,8 @@ export class ExpensesTrackerComponent implements OnInit {
 
   constructor(private router: Router,
               private apiService: ApiService,
-              private localStorage: LocalStorageService) {
+              private localStorage: LocalStorageService,
+              public datepipe: DatePipe) {
       this.expenses = [];
   }
 
@@ -39,6 +41,7 @@ export class ExpensesTrackerComponent implements OnInit {
       this.apiService.get('/expense/user/' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
         this.expenses = response;
+        this.expenses = this.transformDate(this.expenses);
       },
       error => {
         if (error.error.msg === 'There are no expenses for such user'){
@@ -48,6 +51,33 @@ export class ExpensesTrackerComponent implements OnInit {
         }
       });
     }
+  }
+
+  onDelete(id: string | undefined): void{
+    if (id){
+      this.apiService.delete('/expense/' + id, this.httpOptions)
+      .subscribe(response => {
+        if (response.msg === 'expense removed'){
+          this.ngOnInit();
+        }
+      },
+      error => {
+        if (error.error.msg === 'Expense does not exist'){
+          this.router.navigate(['/notfound']);
+        } else {
+          console.log('Internal server error');
+        }
+      });
+    }
+  }
+
+  transformDate(expenses: Expense[]): Expense[]{
+    expenses.forEach(e => {
+      // this.datepipe.transform(e.date, 'dd-MM-yyyy');
+      const date = this.datepipe.transform(e.date, 'dd-MM-yyyy');
+      if (date != null) { e.date = date; }
+    });
+    return expenses;
   }
 
 }

@@ -1,0 +1,18 @@
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+
+.expenses > div {
+    margin-bottom: 5px;
+}
+
+.headers {
+    text-align: center;
+}

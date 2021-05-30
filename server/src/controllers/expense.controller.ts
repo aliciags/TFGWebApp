@@ -106,6 +106,9 @@ export const deleteExpense = async ( req: Request, res: Response ) => {
 
     try {
         const expense: IExpense = await Expense.findByIdAndDelete({_id: req.params.eid});
+        if (!expense) {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Expense does not exist"});
+        }
         res.json({msg: "expense removed", e: expense});
     } catch (err) {
         console.error(err.message);
