@@ -101,6 +101,18 @@ export class GroceriesListComponent implements OnInit {
     this.onDelete(ingredient);
   }
 
+  onNotBought(ingredient: string): void{
+    // look for the ingredient in the list
+    const ing = this.ingredientsBought.filter(x => x === ingredient)[0];
+    // then looks for the index of that element
+    const index = this.ingredientsBought.indexOf(ing, 0);
+    if ( index > -1){
+      // removes an element from the position index
+      this.ingredientsBought.splice(index, 1);
+    }
+    this.onAdd(ingredient);
+  }
+
   onDelete(ingredient: string): void {
     const body = {
       action: 'delete'
