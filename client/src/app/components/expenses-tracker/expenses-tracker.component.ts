@@ -14,11 +14,6 @@ import { DatePipe } from '@angular/common';
 })
 export class ExpensesTrackerComponent implements OnInit {
 
-  /*public expense: Expense = {
-    date: new Date().toUTCString(),
-    ingredientsList: ['ingredient 1', 'ingredient 2', 'ingredient 3'],
-    expense: 50
-  };*/
   public expenses: Expense[];
   public httpOptions = {
     headers: new HttpHeaders({
@@ -73,7 +68,6 @@ export class ExpensesTrackerComponent implements OnInit {
 
   transformDate(expenses: Expense[]): Expense[]{
     expenses.forEach(e => {
-      // this.datepipe.transform(e.date, 'dd-MM-yyyy');
       const date = this.datepipe.transform(e.date, 'dd-MM-yyyy');
       if (date != null) { e.date = date; }
     });

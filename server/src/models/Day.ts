@@ -25,27 +25,27 @@ const daySchema: Schema = new Schema (
             type: String,
             require: true,
             enum: {
-                values: ["Monday", 
-                    "Tuesday", 
-                    "Wednesday", 
-                    "Thursday", 
-                    "Friday", 
-                    "Saturday", 
+                values: ["Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
                     "Sunday"
                 ],
-                message: '{VALUE} is not a day of the week'
+                message: "{VALUE} is not a day of the week"
             }
         },
         meals: [{
             meal: {
-                type: String, 
+                type: String,
                 trim: true,
                 enum: {
                     values: ["Breakfast",
                         "Lunch",
                         "Snack",
                         "Dinner"],
-                    message: '{VALUE} is not a valid meal'
+                    message: "{VALUE} is not a valid meal"
                 },
                 required: true
             },

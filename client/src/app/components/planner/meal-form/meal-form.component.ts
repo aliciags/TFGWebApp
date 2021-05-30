@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 export class MealFormComponent implements OnInit {
 
   public mealForm: FormGroup;
-  public submitted: boolean = false;
-  public title: string = 'Add a meal';
+  public title = 'Add a meal';
   public days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public meals: string[] = ['Breakfast', 'Lunch', 'Diner', 'Snack'];
 

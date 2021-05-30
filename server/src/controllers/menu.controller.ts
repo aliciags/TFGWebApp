@@ -27,8 +27,11 @@ export const getAllMenus = async (req: Request, res: Response ) => {
 export const getAllUserMenus = async (req: Request, res: Response ) => {
 
     try {
-        const menus: IMenu[] = await Menu.find({_user: req.params.uid});
-        // control if the user exist??
+        const user: IUser = await User.findOne({email: req.params.uid});
+        if (!user) {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user does not exist"});
+        }
+        const menus: IMenu[] = await Menu.find({_user: user._id});
         if (!menus) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "There are no menus for such user"});
         }
@@ -58,35 +61,35 @@ export const getMenu = async ( req: Request, res: Response ) => {
 
 export const addMenu = async ( req: Request, res: Response ) =>  {
 
-    const { user, title, description } = req.body;
-    const menuFields = {
-        user,
-        title,
-        description
-    };
+    const { _user, title, description } = req.body;
     try {
-        const u: IUser = await User.findOne({email: user});
-        if (!u) {
+        const user: IUser = await User.findOne({email: _user});
+        if (!user) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user does not exist"});
         }
-        const m: IMenu = new Menu(menuFields);
-        await m.save();
+        const menuFields = {
+            _user: user._id,
+            title,
+            description
+        };
+        let m: IMenu = new Menu(menuFields);
+        m = await m.save();
         let i = 0;
-        const menu = m._id;
+        const _menu = m._id;
         const wdays = ["Monday", "Tuesday", "Wednesday",
                         "Thursday", "Friday", "Saturday", "Sunday"];
         wdays.forEach(async day => {
             const meals: Mealtime[] = [];
-            for (i = 0; i < u.meals.length; i++) {
+            for (i = 0; i < user.meals.length; i++) {
                 const meal: Mealtime = {
-                    meal: u.meals[i],
+                    meal: user.meals[i],
                     recipe: []
                 };
                 meals.push(meal);
             }
 
             const dayFields = {
-                menu,
+                _menu,
                 day,
                 meals
             };

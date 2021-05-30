@@ -25,6 +25,8 @@ h1 {
 .badge-dark {
     padding-left: 5%;
     padding-right: 5%;
+    margin-top: 5px;
+    margin-left: 5%;
 }
 
 .dashboard-card {
@@ -44,9 +46,8 @@ h1 {
 .more-button {
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 1px;
 }
-
 
 #useless 
 .card {

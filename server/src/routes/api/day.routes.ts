@@ -6,8 +6,8 @@ import * as DayController from "../../controllers/day.controller";
 
 const dayRouter: Router = Router();
 
-//did is the day id
-//mid is the menu id
+// did is the day id
+// mid is the menu id
 
 /**
  * get all days
@@ -24,10 +24,10 @@ dayRouter.get("/", auth, DayController.getAllDays);
  dayRouter.get("/menu/:mid", auth, DayController.getMenuDays);
 
  /**
- * get a day
- * GET api/day/:did
- * access Private
- */
+  * get a day
+  * GET api/day/:did
+  * access Private
+  */
 dayRouter.get("/:did", auth, DayController.getDay);
 
 /**
@@ -38,10 +38,10 @@ dayRouter.get("/:did", auth, DayController.getDay);
  dayRouter.post("/", auth, DayController.addDay);
 
  /**
- * edit a day
- * PUT api/day/:did
- * access Private
- */
+  * edit a day
+  * PUT api/day/:did
+  * access Private
+  */
 dayRouter.put("/:did", auth, DayController.editDay);
 
 /**

@@ -5,8 +5,8 @@ import * as MenuController from "../../controllers/menu.controller";
 
 const menuRouter: Router = Router();
 
-//mid is the menu id
-//uid is the user email
+// mid is the menu id
+// uid is the user email
 
 /**
  * get all menus
