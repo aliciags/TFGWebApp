@@ -24,3 +24,14 @@ h1 {
 .dashboard-card-content {
   text-align: center;
 }
+
+.filter-input {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-group {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+

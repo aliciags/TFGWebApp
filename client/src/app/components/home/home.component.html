@@ -1,5 +1,44 @@
 <div class="grid-container">
   <h1 class="mat-h1">Recipes</h1>
+  <div class="filter-input">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Recipe's name" aria-label="recipe" aria-describedby="basic-addon1">
+      <div class="input-group-append">
+        <button class="btn btn-outline-dark" type="button"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+    <div *ngIf="!filters">
+      <button class="btn btn-primary" (click)="onFilter()">Filters</button>
+    </div>
+    <div *ngIf="filters" class="input-group">
+      <select class="custom-select" id="diet">
+        <option selected>Diet...</option>
+        <option value="Omnivorous">Omnivorous</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Vegan">Vegan</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button"><i class="fas fa-seedling"></i></button>
+      </div>
+    </div>
+    <div *ngIf="filters" class="input-group">
+      <select class="custom-select" id="meal">
+        <option selected>Meal...</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Snack">Snack</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button"><i class="fas fa-utensils"></i></button>
+      </div>
+    </div>
+    <div>
+      <button *ngIf="filters" class="btn btn-outline-dark" (click)="onFilter()"><i class="fas fa-times"></i></button>
+    </div>
+    
+  </div>
+
   <mat-grid-list cols="3" rowHeight="250px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
