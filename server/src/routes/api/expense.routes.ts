@@ -5,8 +5,8 @@ import * as ExpenseController from "../../controllers/expense.controller";
 
 const expenseRouter: Router = Router();
 
-//eid is the expense id
-//uid is the user email
+// eid is the expense id
+// uid is the user email
 
 /**
  * get all expenses

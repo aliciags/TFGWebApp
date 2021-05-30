@@ -40,8 +40,7 @@ const expenseSchema: Schema = new Schema (
             require: true
         },
         estExpense: {
-            type: Number, 
-            required: true
+            type: Number,
         }
     },
     { timestamps: true }

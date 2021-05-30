@@ -13,15 +13,15 @@ const ingredientRouter: Router = Router();
 ingredientRouter.get("/", auth,  IngredientController.getAllIngredients);
 
 /**
- * get single ingredient by ingredient id 
+ * get single ingredient by ingredient id
  * GET /api/ingredient/:iid
  * access Private
  */
 ingredientRouter.get("/:iid", auth,  IngredientController.getIngredient);
 
 
-/** 
- * add ingredient 
+/**
+ * add ingredient
  * POST /api/ingredient
  * access admin
  */

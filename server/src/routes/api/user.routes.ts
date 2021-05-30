@@ -5,7 +5,7 @@ import * as UserController from "../../controllers/user.controller";
 
 const userRouter: Router = Router();
 
-//uid is the user email
+// uid is the user email
 
 /**
  * get all users
@@ -15,7 +15,7 @@ const userRouter: Router = Router();
 userRouter.get("/", auth, UserController.getAllUsers);
 
 /**
- * get single user by user id 
+ * get single user by user id
  * GET /api/user/:uid
  * access private
  */
@@ -28,7 +28,7 @@ userRouter.get("/:uid", auth, UserController.getUser);
  */
 userRouter.get("/exists/:uid", UserController.exists);
 
-/** 
+/**
  * add user ()
  * POST /api/user
  * access Public
@@ -47,7 +47,7 @@ userRouter.put("/:uid", auth, UserController.editUser);
  * PUT /api/user/ingredient/:uid&:iid
  * access Private
  */
-userRouter.put("/ingredient/:uid&:iid", auth, UserController.addIngredient);
+userRouter.put("/ingredient/:uid&:iid", auth, UserController.editGroceries);
 
 /**
  * remove a user by user id

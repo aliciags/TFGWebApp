@@ -1,0 +1,54 @@
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid grey;
+    width: 65%;
+}
+
+.btn-circle-md{
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+
+.ingredient > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ingredientList > div >div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ingredientList > div {
+    margin-bottom: 3px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    margin: 5px;
+}

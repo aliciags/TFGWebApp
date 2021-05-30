@@ -40,8 +40,8 @@ export class SignInFormComponent implements OnInit {
         console.log('user already exists');
         this.signInForm.controls['email'].setErrors({
         alreadyExists: true
-      });
-      }else {
+        });
+      } else {
         if (this.signInForm.valid){
           this.router.navigateByUrl('login/signin/user', {state: this.signInForm.value});
         }

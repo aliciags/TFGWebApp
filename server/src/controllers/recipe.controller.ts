@@ -157,8 +157,7 @@ export const deleteRecipe = async (req: Request, res: Response) => {
         if (!recipe) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
         }
-
-        if (recipe.creator == user.email && recipe.saved.length > 0) {
+        if (recipe.creator === user.email && recipe.saved.length > 0) {
             const c = recipe.saved.pop();
             recipe = await Recipe.findByIdAndUpdate(
                 {_id: recipe._id},
@@ -168,32 +167,42 @@ export const deleteRecipe = async (req: Request, res: Response) => {
         } else if (recipe.creator == user.email) {
             recipe = await Recipe.findByIdAndDelete({_id: req.params.rid});
         } else if (recipe.saved.length > 0 ) {
-            const updatedUsers: IUser["email"][] = [];
+            const userDeleting = recipe.saved.filter(x => x ===  req.params.uid)[0];
+            const index = recipe.saved.indexOf(userDeleting, 0);
+            if ( index > -1) {
+                 recipe.saved.splice(index, 1);
+            }
+            /*const updatedUsers: IUser["email"][] = [];
             let i = 0;
             for (i = 0; i < recipe.saved.length; i++) {
                 if (recipe.saved[i] != req.params.uid) {
                     updatedUsers.push(recipe.saved[i]);
                 }
-            }
+            }*/
             recipe = await Recipe.findByIdAndUpdate(
                 {_id: recipe._id},
-                {update: {saved: updatedUsers}},
+                {update: recipe},
                 {new: true}
             );
         } else {
             return res.json({msg: "recipe not removed"});
         }
 
-        let j = 0;
+        /*let j = 0;
         const updatedRecipes: Schema.Types.ObjectId[] = [];
         for (j = 0; j < user.recipes.length; j++) {
             if (user.recipes[j] != recipe._id) {
                 updatedRecipes.push(user.recipes[j]);
             }
+        }*/
+        const recipeDeleting = user.recipes.filter(x => x ===  req.params.rid)[0];
+        const index = recipe.saved.indexOf(recipeDeleting, 0);
+        if ( index > -1) {
+            user.recipes.splice(index, 1);
         }
         user = await User.findOneAndUpdate(
             {_id: req.params.uid},
-            {$set: {recipes: updatedRecipes}},
+            {$set: user},
             {new: true}
         );
         res.json({msg: "recipe removed", r: recipe, u: user});

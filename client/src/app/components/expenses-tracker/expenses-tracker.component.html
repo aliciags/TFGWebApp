@@ -18,7 +18,9 @@
                     {{expense.date}}
                 </div>
                 <div class="col">
-                    {{expense.ingredientsList}}
+                    <i *ngFor="let i of expense.ingredients">
+                        {{i}}
+                    </i>
                 </div>
                 <div class="col">
                     {{expense.expense}}

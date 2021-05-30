@@ -1,32 +1,87 @@
 <div class="container">
     <h1>Groceries List</h1>
     <br>
-    <div class="row">
-        <div class="col">
-            <input type="text" #ingredient placeholder="Introduce an ingredient"> 
-            <button type="button" class="btn btn-primary" (click)="addIngredient(ingredient.value)">
-                <i class="fas fa-plus-circle"></i>
-            </button>
+    <form [formGroup]="ingredientForm" class="ingredient">
+        <div>
+            <div>
+                <input type="text" #ingredient placeholder="Introduce an ingredient" form-control=""> 
+                <button type="button" class="btn btn-primary btn-circle-md" (click)="onAdd(ingredient.value)">
+                    <i class="fas fa-plus-circle"></i>
+                </button>
+                <button type="sumbmit" class="btn btn-primary" (click)="onSubmit()">
+                    <i class="fas fa-check-circle"></i>
+                    Shopping done
+                </button>
+            </div>
+            <div>
+                <div *ngIf="ingredientForm.controls.ingredient.touched && ingredientForm.controls.ingredient.errors">
+                    <div *ngIf="ingredientForm.controls.ingredient.errors.required" class="alert alert-danger">
+                        Please introduce an ingredient
+                    </div>
+                    <div *ngIf="ingredientForm.controls.ingredient.errors.alreadyinList" class="alert alert-danger">
+                        Ingredient already in the list
+                    </div>
+                    <div *ngIf="ingredientForm.controls.ingredient.errors.notExists" class="alert alert-danger">
+                        That is not an ingredient
+                    </div>
+                </div>   
+            </div>
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary" (click)="shoppingDone()">
-                <i class="fas fa-check-circle"></i>
-                Shopping done
-            </button>
-        </div>
-    </div>
+    </form>
     <br>
-    <div class="card">
-        <div class="card-body border-light">
-            <div class="list-group list-group-flush">
-                <div *ngFor="let ingredient of ingredientsList">
-                    <label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
-                        <input class="form-check-input me-1" type="checkbox" value="{{ingredient}}">
-                            {{ingredient}}
-                      </label>
+    <div class="list">
+        <div class="card">
+            <div class="card-body border-light">
+                <div class="list-group list-group-flush">
+                    <h2 class="card-title">To Buy</h2>
+                    <div class="ingredientList">
+                        <div *ngFor="let ingredient of ingredientsList">
+                            <div>
+                                <div>{{ingredient}}</div>
+                                <div>
+                                    <button  class="btn btn-primary btn-circle" (click)="onBought(ingredient)"><i class="fas fa-check-circle"></i></button>
+                                    <button  class="btn btn-secondary btn-circle" (click)="onDelete(ingredient)"><i class="fas fa-times-circle"></i></button>
+                                </div>
+                                <!--<label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
+                                    <input class="form-check-input me-1" formControlName="ingredients" type="checkbox" value="{{ingredient}}">
+                                        {{ingredient}}
+                                </label>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="card">
+            <div class="card-body border-light">
+                <div class="list-group list-group-flush">
+                    <h2 class="card-title">Bought</h2>
+                    <div class="ingredientList">
+                        <div *ngFor="let ingredient of ingredientsBought">
+                            <div>
+                                <div>{{ingredient}}</div>
+                                <div>
+                                    <button  class="btn btn-primary btn-circle" (click)="onBought(ingredient)"><i class="fas fa-check-circle"></i></button>
+                                    <button  class="btn btn-secondary btn-circle" (click)="onDelete(ingredient)"><i class="fas fa-times-circle"></i></button>
+                                </div>
+                                <!--<label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
+                                    <input class="form-check-input me-1" formControlName="ingredients" type="checkbox" value="{{ingredient}}">
+                                        {{ingredient}}
+                                </label>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>  
-   
+    </div> 
 </div>
+
+<!--.btn-warning {
+    border-radius: 50px;
+    margin-left: 2%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+}-->
