@@ -4,7 +4,7 @@
     <form [formGroup]="ingredientForm" class="ingredient">
         <div>
             <div>
-                <input type="text" #ingredient placeholder="Introduce an ingredient" form-control=""> 
+                <input type="text" #ingredient class="form-control" formControlName="ingredient" placeholder="Introduce an ingredient"> 
                 <button type="button" class="btn btn-primary btn-circle-md" (click)="onAdd(ingredient.value)">
                     <i class="fas fa-plus-circle"></i>
                 </button>
@@ -18,7 +18,7 @@
                     <div *ngIf="ingredientForm.controls.ingredient.errors.required" class="alert alert-danger">
                         Please introduce an ingredient
                     </div>
-                    <div *ngIf="ingredientForm.controls.ingredient.errors.alreadyinList" class="alert alert-danger">
+                    <div *ngIf="ingredientForm.controls.ingredient.errors.alreadyInList" class="alert alert-danger">
                         Ingredient already in the list
                     </div>
                     <div *ngIf="ingredientForm.controls.ingredient.errors.notExists" class="alert alert-danger">

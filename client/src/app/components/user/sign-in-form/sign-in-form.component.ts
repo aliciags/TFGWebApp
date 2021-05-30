@@ -37,7 +37,6 @@ export class SignInFormComponent implements OnInit {
   onSubmit(): void{
     this.signIn().then(response => {
       if (response.msg){
-        console.log('user already exists');
         this.signInForm.controls['email'].setErrors({
         alreadyExists: true
         });

@@ -16,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class GroceriesListComponent implements OnInit {
 
   // sera un arry de ingredientes
+  public ing = 'ingredient';
   public ingredientsList: string[];
   public ingredientsBought: string[];
   public ingredientForm: FormGroup;
@@ -35,7 +36,7 @@ export class GroceriesListComponent implements OnInit {
       this.ingredientForm = this.fb.group({
         ingredient: ['', [Validators.required]]
       });
-      this.ingredientForm.controls['ingredient'].setErrors({
+      this.ingredientForm.controls[this.ing].setErrors({
         alreadyInList: false,
         notExists: false
       });
@@ -65,25 +66,27 @@ export class GroceriesListComponent implements OnInit {
       action: 'add'
     };
     this.apiService.put('/user/ingredient/' + this.localStorage.get('email') + '&' + ingredient, body, this.httpOptions)
-      .subscribe(response => {
+    .subscribe(response => {
         this.ingredientsList = response.groceries;
       },
       error => {
         if (error.error.msg === 'user not found'){
           this.router.navigate(['/notfound']);
         } else if (error.error.msg === 'ingredient not found'){
-          this.ingredientForm.controls['ingredient'].setErrors({
+          console.log('no such ingredient');
+          this.ingredientForm.controls[this.ing].setErrors({
             notExists: true
           });
         } else if (error.error.msg === 'ingredient already in the list'){
-          this.ingredientForm.controls['ingredient'].setErrors({
+          console.log('already in the list');
+          this.ingredientForm.controls[this.ing].setErrors({
             alreadyInList: true
           });
         } else {
           console.log('Internal server error');
         }
       });
-  }
+    }
 
   onBought(ingredient: string): void {
     // look for the ingredient in the list
