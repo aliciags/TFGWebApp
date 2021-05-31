@@ -29,7 +29,7 @@ h1 {
     margin-left: 5%;
 }
 
-.dashboard-card {
+.card {
     height: 90%;
     width: 95%;
 }
@@ -47,6 +47,20 @@ h1 {
     position: absolute;
     top: 5px;
     right: 1px;
+}
+
+.menu {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    height: 135px;
+    width: 94%;
+    margin-bottom: 10px;
+    margin-left: 5px;
 }
 
 #useless 

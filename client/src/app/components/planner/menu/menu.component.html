@@ -1,12 +1,13 @@
 <div class="grid-container">
-    <h1>Title</h1>
+    <h1 *ngIf="menu.title != ''">{{menu.title}}</h1>
+    <h3 *ngIf="menu.description != ''">Description: {{menu.description}}</h3>
     <div class="row">
         <div class="col" *ngFor="let d of daysWeek" id="{{d}}">
             <h4 class="badge badge-dark">{{d}}</h4>
         </div>
     </div>
-    <mat-grid-list cols="7" rowHeight="150px">
-        <!--<mat-grid-tile-header *ngFor="let d of days">{{d}}</mat-grid-tile-header>-->
+    <!--<mat-grid-list cols="7" rowHeight="150px">
+        <!--<mat-grid-tile-header *ngFor="let d of days">{{d}}</mat-grid-tile-header>
         <mat-grid-tile *ngFor="let c of cards | async"  [colspan]="c.cols" [rowspan]="c.rows">
             <mat-card class="dashboard-card">
                 <mat-card-header>
@@ -24,9 +25,35 @@
                 </mat-card-header> 
                 <mat-card-content class="dashboard-card-content">
                     <br>
-                    <h1>{{c.recipe}}</h1>
+                    <h1>{{c.recipes}}</h1>
             </mat-card-content>
             </mat-card>
         </mat-grid-tile>
-    </mat-grid-list>
+    </mat-grid-list>-->
+
+    <div class="grid-container menu">
+        <div *ngFor="let c of card">
+            <mat-card class="dashboard-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h5 class="badge badge-primary">{{c.meal}}</h5>
+                        <span class="spacer"></span>
+                        <i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </i>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                            <button mat-menu-item>Add recipe</button>
+                            <button mat-menu-item>Expand</button>
+                        </mat-menu>
+                    </mat-card-title>
+                </mat-card-header> 
+                <mat-card-content class="dashboard-card-content">
+                    <br>
+                    <h1>{{c.recipes}}</h1>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+
 </div>

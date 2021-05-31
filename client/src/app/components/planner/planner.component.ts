@@ -22,7 +22,8 @@ export class PlannerComponent implements OnInit {
   // public meals: string[] = ['Breakfast', 'Lunch', 'Diner'];
   // public card: RecipeCard[];
   public menus: Menu[];
-  public days: Day[];
+  // public days: Day[];
+  public menu: Menu;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
@@ -73,7 +74,12 @@ export class PlannerComponent implements OnInit {
               private apiService: ApiService) {
       // this.card = [];
       this.menus = [];
-      this.days = [];
+      // this.days = [];
+      this.menu = {
+        _id: '',
+        _user: '',
+        title: ''
+      };
   }
 
   ngOnInit(): void {
@@ -85,7 +91,8 @@ export class PlannerComponent implements OnInit {
         .subscribe( response => {
           this.menus = response;
           if (this.menus.length > 0){
-            this.getMenu(this.menus[0]._user, this.httpOptions);
+            this.menu = this.menus[0];
+            // this.getMenu(this.menus[0]._user, this.httpOptions);
           }
         },
         error => {
@@ -96,7 +103,7 @@ export class PlannerComponent implements OnInit {
     }
   }
 
-  getMenu(id: string, options: object): void{
+  /*getMenu(id: string, options: object): void{
     this.apiService.get('/menu/' + id, options)
     .subscribe(response => {
       this.days = response;
@@ -105,6 +112,10 @@ export class PlannerComponent implements OnInit {
         console.log(error);
       }
     });
+  }*/
+
+  activeMenu(title: string): void{
+    this.menu = this.menus.filter(m => m.title === title)[0];
   }
 
   addMenu(): void{

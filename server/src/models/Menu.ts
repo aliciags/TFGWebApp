@@ -20,7 +20,8 @@ const menuSchema: Schema = new Schema (
             required: true
         },
         title: {
-            type: String
+            type: String,
+            required: true
         },
         description: {
             type: String

@@ -7,6 +7,6 @@ export interface Mealtime {
      */
 
     meal: string;
-    recipes: string;
+    recipes: string[];
 
 }
