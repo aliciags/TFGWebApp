@@ -2,17 +2,15 @@ export interface RecipeCard {
 
     /**
      * Interface to model the Recipe Card
-     * @param _id: string - day id
-     * @param _idMeal: string - meal id
-     * @param recipes: string[] - id of the recipes
-     * @param day: string - week day
-     * @param meal: string - meal of the day
+     * @param _id: string - recipe id
+     * @param name: string - name of the recipe
+     * @param meals[]: string[] - meals of the recipe
+     * @param diet: string - diet of the recipe
      */
 
     _id: string;
-    _idMeal: string;
-    recipes: string[];
-    day: string;
-    meal: string;
+    name: string;
+    meals: string[];
+    diet: string;
 
 }

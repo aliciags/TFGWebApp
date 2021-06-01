@@ -6,7 +6,7 @@ import { RecipeComponent } from './recipe.component';
 
 const recipeRoutes: Routes = [
     {path: 'recipe', component: RecipeComponent},
-    {path: 'recipe/recipe-form', component: RecipeFormComponent}
+    // {path: 'recipe/recipe-form', component: RecipeFormComponent}
 ];
 
 @NgModule({

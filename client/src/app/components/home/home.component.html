@@ -39,7 +39,11 @@
     
   </div>
 
-  <mat-grid-list cols="3" rowHeight="250px">
+  <app-display-recipes [recipes]="recipes"></app-display-recipes>
+</div>
+
+
+  <!--<mat-grid-list cols="3" rowHeight="250px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
@@ -59,6 +63,6 @@
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-  </mat-grid-list>
-</div>
+  </mat-grid-list>-->
+
 

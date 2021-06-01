@@ -138,6 +138,7 @@ export const editUser = async (req: Request, res: Response) => {
     meals,
     diet,
     groceries,
+    recipes
   } = req.body;
   const userFields = {
     firstname,
@@ -147,6 +148,7 @@ export const editUser = async (req: Request, res: Response) => {
     meals,
     diet,
     groceries,
+    recipes
   };
   try {
     let user: IUser = await User.findOne({ email: email });

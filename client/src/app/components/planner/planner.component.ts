@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { RecipeCard } from 'src/app/model/recipe-card';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { ApiService } from 'src/app/service/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Menu } from 'src/app/model/menu';
-import { Day } from 'src/app/model/day';
 
 @Component({
   selector: 'app-planner',

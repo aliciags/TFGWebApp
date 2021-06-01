@@ -82,6 +82,12 @@ export const addRecipe = async (req: Request, res: Response) => {
        // maybe look for similar recipes and suggest them
        const recipe: IRecipe = new Recipe(recipeFields);
        await recipe.save();
+       user.recipes.push(recipe._id);
+       await User.findOneAndUpdate(
+           {_id: user._id},
+           {$set: user},
+           {new: true, runValidators: true}
+       );
        res.json(recipe);
     } catch (err) {
         console.error(err.message);

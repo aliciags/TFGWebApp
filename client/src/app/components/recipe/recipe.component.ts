@@ -24,6 +24,7 @@ export class RecipeComponent implements OnInit {
   constructor(private router: Router,
               private localStorage: LocalStorageService, private apiService: ApiService) {
       this.recipe = {
+        _id: '',
         name: '',
         timing: 1,
         guest: 1,
@@ -40,7 +41,7 @@ export class RecipeComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
-      this.apiService.get('/recipe/60abe2524293963bd0141cde', this.httpOptions)
+      this.apiService.get('/recipe/' + history.state.id, this.httpOptions)
       .subscribe(response => {
         this.recipe = response;
       },
@@ -52,5 +53,9 @@ export class RecipeComponent implements OnInit {
         }
       });
     }
+  }
+
+  addIngredient(id: string): void {
+
   }
 }

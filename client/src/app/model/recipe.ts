@@ -1,6 +1,6 @@
 export interface Recipe {
 
-    // id: string;
+    _id: string;
     name: string;
     timing: number;
     guest: number;

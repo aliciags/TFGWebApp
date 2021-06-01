@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.filter-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.input-group {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+  
+
+  

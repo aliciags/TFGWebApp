@@ -1,0 +1,24 @@
+<div class="container">
+    <mat-card *ngFor="let r of recipes" class="container-box">
+          <mat-card-header>
+              <mat-card-title>
+                  <div class="header">
+                    <h5 class="badge badge-primary">{{r.diet}}</h5>
+                    <h5 *ngFor="let m of r.meal" class="badge badge-warning">{{m}}</h5>
+                  </div>
+                  <i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                      <mat-icon>more_vert</mat-icon>
+                  </i>
+                  <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item>Save recipe</button>
+                      <button *ngIf="environment === 'myrecipes'" mat-menu-item>Delete</button>
+                  </mat-menu>
+              </mat-card-title>
+          </mat-card-header> 
+          <mat-card-content class="dashboard-card-content">
+              <br> 
+              <h2 (click)="expandRecipe(r._id)">{{r.name}}</h2>
+          </mat-card-content>
+    </mat-card>
+</div>
+<router-outlet></router-outlet>

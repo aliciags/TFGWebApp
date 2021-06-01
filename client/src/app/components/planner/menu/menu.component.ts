@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { RecipeCard } from 'src/app/model/recipe-card';
-import { Input } from '@angular/core';
+import { MenuCard } from 'src/app/model/menu-card';
 import { Menu } from 'src/app/model/menu';
 import { ApiService } from 'src/app/service/api.service';
 import { Day } from 'src/app/model/day';
@@ -18,43 +17,11 @@ export class MenuComponent implements OnInit, OnChanges {
 
   public daysWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public meals: string[] = ['Breakfast', 'Lunch', 'Diner'];
-  public card: RecipeCard[];
+  public card: MenuCard[];
   public days: Day[];
 
   public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      // let i = 0;
-      // let j = 0;
-      // let c: RecipeCard;
-
-      /*if (matches) {
-        var i = 0, j=0;
-        for(i=0; i<this.days.length; i++){
-          for(j=0; j<this.meals.length; j++){
-            let c = {
-              day: this.days[i],
-              meal: this.meals[j],
-              cols: 1,
-              rows: 1
-            }
-            this.card.push(c);
-          }
-        }
-        return this.card;
-      }*/
-
-      /*for (i = 0; i < this.meals.length; i++){
-        for (j = 0; j < this.daysWeek.length; j++){
-          c = {
-            recipes: [],
-            day: this.daysWeek[j],
-            meal: this.meals[i],
-            cols: 1,
-            rows: 1
-          };
-          this.card.push(c);
-        }
-      }*/
       return this.card;
     })
   );
@@ -102,7 +69,7 @@ export class MenuComponent implements OnInit, OnChanges {
     this.card.splice(0, this.card.length);
     days.forEach( d => {
       d.meals.forEach( meal => {
-        let c: RecipeCard;
+        let c: MenuCard;
         c = {
           _id: d._id,
           _idMeal: meal._id,

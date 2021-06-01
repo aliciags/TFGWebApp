@@ -50,6 +50,7 @@ export class RecipeFormComponent implements OnInit {
   onSubmit(): void{
     if (this.recipeForm.valid){
       const recipe: Recipe = {
+        _id: '',
         name: this.recipeForm.value["name"],
         timing: this.recipeForm.value["timing"],
         guest: this.recipeForm.value["dinnerGuest"],

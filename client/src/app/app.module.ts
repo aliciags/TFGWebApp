@@ -35,6 +35,8 @@ import { MealFormComponent } from './components/planner/meal-form/meal-form.comp
 import { IngredientComponent } from './components/recipe/ingredient/ingredient.component';
 import { CheckListComponent } from './components/check-list/check-list.component';
 import { DatePipe } from '@angular/common';
+import { DisplayRecipesComponent } from './components/home/display-recipes/display-recipes.component';
+import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
 
 
 
@@ -46,7 +48,9 @@ import { DatePipe } from '@angular/common';
     MainNavComponent,
     GroceriesListComponent,
     ExpensesTrackerComponent,
-    CheckListComponent
+    CheckListComponent,
+    DisplayRecipesComponent,
+    MyRecipesComponent
   ],
   imports: [
     BrowserModule,

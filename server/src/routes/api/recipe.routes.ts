@@ -13,14 +13,14 @@ const recipeRouter: Router = Router();
 recipeRouter.get("/", RecipeController.getAllRecipes);
 
 /**
- * get single recipe by recipe id 
+ * get single recipe by recipe id
  * GET /api/:rid
  * access Public
  */
 recipeRouter.get("/recipe/:rid", RecipeController.getRecipe);
 
-/** 
- * add recipe 
+/**
+ * add recipe
  * POST /api
  * access Private
  */
@@ -28,21 +28,21 @@ recipeRouter.post("/recipe/", auth, RecipeController.addRecipe);
 
 /**
  * update a recipe by recipe id
- * PUT /api/:rid
+ * PUT /api/recipe/:rid
  * access Private
  */
 recipeRouter.put("/recipe/:rid", auth, RecipeController.editRecipe);
 
 /**
  * get saved or own recipes by user id
- * GET /api/book/:uid
+ * GET /api/recipe/book/:uid
  * access Private
  */
 recipeRouter.get("/recipe/book/:uid", auth, RecipeController.getUserRecipes);
 
 /**
  * remove a recipe by  recipe id
- * DELETE /api/:rid&:uid
+ * DELETE /api/recipe/:rid&:uid
  * access Private
  */
 recipeRouter.delete("/recipe/:rid&:uid", auth, RecipeController.deleteRecipe);

@@ -5,9 +5,13 @@ import { GroceriesListComponent } from './components/groceries-list/groceries-li
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'my-recipes', component: MyRecipesComponent},
+  {path: 'my-recipes/recipe-form', component: RecipeFormComponent},
   {path: 'login', component: LoginComponent},
   {path: 'groceries', component: GroceriesListComponent},
   {path: 'expenses', component: ExpensesTrackerComponent}

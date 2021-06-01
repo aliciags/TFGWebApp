@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { ApiService } from 'src/app/service/api.service';
 import { Recipe } from 'src/app/model/recipe';
+import { RecipeCard } from 'src/app/model/recipe-card';
 
 @Component({
   selector: 'app-home',
@@ -14,40 +15,19 @@ export class HomeComponent implements OnInit {
 
   public recipes: Recipe[];
   public filters: boolean;
-  /** Based on the screen size, switch from standard to one column per row */
-  public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      // if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 },
-          { title: 'Card 5', cols: 1, rows: 1 },
-          { title: 'Card 6', cols: 1, rows: 1 }
-        ];
-      // }
-
-      /*return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 },
-        { title: 'Card 5', cols: 1, rows: 1 },
-        { title: 'Card 6', cols: 2, rows: 1 }
-      ];*/
-    })
-  );
+  // public card: RecipeCard[];
 
   constructor(private breakpointObserver: BreakpointObserver,
               private apiService: ApiService) {
       this.recipes = [];
+      // this.card = [];
       this.filters = false;
   }
 
   ngOnInit(): void{
     this.apiService.get('/').subscribe(response => {
       this.recipes = response;
+      // this.setRecipes(this.recipes);
       console.log(this.recipes);
     },
     err => {
@@ -59,4 +39,18 @@ export class HomeComponent implements OnInit {
   onFilter(): void{
     this.filters ? this.filters = false : this.filters = true;
   }
+
+  /*setRecipes(recipes: Recipe[]): void{
+    this.recipes.splice(0, this.card.length);
+    recipes.forEach( r => {
+      let c: RecipeCard;
+      c = {
+        _id: r._id,
+        name: r.name,
+        diet: r.diet,
+        meals: r.meal
+      };
+      this.card.push(c);
+    });
+  }*/
 }
