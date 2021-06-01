@@ -29,11 +29,6 @@ h1 {
     margin-left: 5%;
 }
 
-.card {
-    height: 90%;
-    width: 95%;
-}
-
 .badge-primary {
     position: absolute;
     padding-left: 5%;
@@ -49,8 +44,22 @@ h1 {
     right: 1px;
 }
 
-.menu {
+.menu1 {
+    height: 440px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.menu2 {
     height: 600px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.menu3 {
+    height: 730px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -61,6 +70,26 @@ h1 {
     width: 94%;
     margin-bottom: 10px;
     margin-left: 5px;
+}
+
+.dashboard-card-content {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.btn-circle-md {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+
+.btn-outline-dark {
+    border: 0px;
 }
 
 #useless 

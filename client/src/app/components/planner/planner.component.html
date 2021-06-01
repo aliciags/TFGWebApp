@@ -4,6 +4,10 @@
             <a class="nav-link" routerLink="menu-form">
                 <i class="fas fa-plus-circle"></i> Add menu</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="deleteMenu(menu._id)">
+                <i class="fas fa-minus-circle"></i> Delete menu</a>
+        </li>
         <li *ngIf="menus.length > 0" class="nav-item">
             <a class="nav-link" routerLink="meal-form">
                 <i class="fas fa-pen"></i> Edit</a>
@@ -14,56 +18,11 @@
             </a>
         </li>
     </ul>
-    <!--<button class="btn btn-primary" (click)="addMenu()">
-        <i class="fas fa-plus-circle"></i>
-        Add menu
-    </button>
-    <button *ngIf="menus.length > 0" class="btn btn-primary" (click)="editMenu()">
-        <i class="fas fa-pen"></i>
-        Edit
-    </button>-->
+    
     <div *ngIf="menus.length > 0">
         <app-menu [menu]="menu"
             [httpOptions]="httpOptions"></app-menu>
-
-    <!--<div class="container-fluid">
-        <div class="row flex-row flex-nowrap">
-            <div *ngFor="let d of days">
-                <div class="col" id="{{d}}">{{d}}</div>
-            </div>
-        </div>
-        <div *ngFor="let m of meals">
-            <div class="row flex-row flex-nowrap" id="{{m}}">
-                <div *ngFor="let d of days">
-                    <div class="col" id="{{d}}{{m}}">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h3 class="card-title">Empty</h3>
-                                <a class="button btn-secondary">menu</a>
-                                <p class="card-text">{{m}}</p>
-                            </div>
-                               <h5 class="card-title">Empty</h5>
-                                   Recipe
-                                   <i class="more-button" xPosition="right" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                                    <mat-icon>more_vert</mat-icon>
-                                   </i>
-                                  <mat-menu #menu="matMenu" xPosition="before">
-                                    <button mat-menu-item>Add recipe</button>
-                                    <button mat-menu-item>Expand</button>
-                                  </mat-menu>
-                               </mat-card-title>
-                           </mat-card-header> 
-                           <mat-card-content class="dashboard-card-content">
-                            <div>Card Content Here</div>
-                          </mat-card-content>
-                        </mat-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
     </div>
-    <!--<button class="btn btn-primary"  type="button" routerLink="meal-form">Add a meal</button>-->
+    
     <router-outlet></router-outlet>
 </div>

@@ -119,6 +119,26 @@ export const editDay = async (req: Request, res: Response) => {
   }
 };
 
+export const addRecipe = async (req: Request, res: Response) => {
+
+  const { recipe } = req.body;
+
+  try {
+    const day: IDay = await Day.findOne({"meals._id": req.params.mealid});
+    const meal = day.meals.filter(m => m._id == req.params.mealid)[0];
+    const index = day.meals.indexOf(meal, 0);
+    meal.recipes.push(recipe);
+    console.log(meal, index);
+    await Day.findOneAndUpdate(
+      { _id: day._id },
+      { $set: {"meals.index": meal}},
+      { new: true, runValidators: true }
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 // add a recipe to a day
 // delete a recipe to a day
 

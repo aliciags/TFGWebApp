@@ -83,7 +83,7 @@ export const addMenu = async ( req: Request, res: Response ) =>  {
             for (i = 0; i < user.meals.length; i++) {
                 const meal: Mealtime = {
                     meal: user.meals[i],
-                    recipe: []
+                    recipes: []
                 };
                 meals.push(meal);
             }
@@ -141,7 +141,7 @@ export const deleteMenu = async ( req: Request, res: Response ) => {
     let i = 0;
     try {
         const delDays: IDay[] = [];
-        const days: IDay[] = await Day.find({menu: req.params.mid});
+        const days: IDay[] = await Day.find({_menu: req.params.mid});
         for (i = 0; i < days.length; i++) {
             delDays.push(await Day.findByIdAndDelete({_id: days[i]._id}));
         }

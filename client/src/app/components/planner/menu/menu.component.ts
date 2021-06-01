@@ -23,9 +23,9 @@ export class MenuComponent implements OnInit, OnChanges {
 
   public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      let i = 0;
-      let j = 0;
-      let c: RecipeCard;
+      // let i = 0;
+      // let j = 0;
+      // let c: RecipeCard;
 
       /*if (matches) {
         var i = 0, j=0;
@@ -99,37 +99,30 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   setDays(days: Day[]): void{
-    /*let i = 0;
-    let j = 0;
-
-    for (i = 0; i < days.length; i++){
-      for (j = 0; j < this.daysWeek.length; j++){
-        let c: RecipeCard;
-        c = {
-          recipes: ,
-          day: this.daysWeek[j],
-          meal: this.meals[i],
-          cols: 1,
-          rows: 1
-        };
-        this.card.push(c);
-      }
-    }*/
     this.card.splice(0, this.card.length);
     days.forEach( d => {
       d.meals.forEach( meal => {
         let c: RecipeCard;
         c = {
+          _id: d._id,
+          _idMeal: meal._id,
           recipes: meal.recipes,
           day: d.day,
-          meal: meal.meal,
-          cols: 1,
-          rows: 1
+          meal: meal.meal
         };
         this.card.push(c);
       });
     });
   }
 
+  addRecipe(mealid: string): void{
+    const body = {
+      recipe: '60abe2524293963bd0141cde'
+    };
+    this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
 
 }

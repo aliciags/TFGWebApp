@@ -51,4 +51,11 @@ dayRouter.put("/:did", auth, DayController.editDay);
  */
 dayRouter.delete("/:did", auth, DayController.deleteDay);
 
+/**
+ * add a recipe
+ * PUT api/day/meal/:mealid
+ * access Private
+ */
+dayRouter.put("/meal/:mealid", auth, DayController.addRecipe);
+
 export default dayRouter;

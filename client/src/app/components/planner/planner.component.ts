@@ -17,56 +17,13 @@ import { Day } from 'src/app/model/day';
 })
 export class PlannerComponent implements OnInit {
 
-
-  // public daysWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  // public meals: string[] = ['Breakfast', 'Lunch', 'Diner'];
-  // public card: RecipeCard[];
   public menus: Menu[];
-  // public days: Day[];
   public menu: Menu;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
     })
   };
-
-  /*public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      let i = 0;
-      let j = 0;
-      let c: RecipeCard;
-
-      /*if (matches) {
-        var i = 0, j=0;
-        for(i=0; i<this.days.length; i++){
-          for(j=0; j<this.meals.length; j++){
-            let c = {
-              day: this.days[i],
-              meal: this.meals[j],
-              cols: 1,
-              rows: 1
-            }
-            this.card.push(c);
-          }
-        }
-        return this.card;
-      }
-
-      for (i = 0; i < this.meals.length; i++){
-        for (j = 0; j < this.daysWeek.length; j++){
-          c = {
-            recipe: 'Empty',
-            day: this.daysWeek[j],
-            meal: this.meals[i],
-            cols: 1,
-            rows: 1
-          };
-          this.card.push(c);
-        }
-      }
-      return this.card;
-    })
-  );*/
 
   constructor(private breakpointObserver: BreakpointObserver,
               private router: Router,
@@ -103,17 +60,6 @@ export class PlannerComponent implements OnInit {
     }
   }
 
-  /*getMenu(id: string, options: object): void{
-    this.apiService.get('/menu/' + id, options)
-    .subscribe(response => {
-      this.days = response;
-    }, error => {
-      if (error.error.msg === 'There is no such menu'){
-        console.log(error);
-      }
-    });
-  }*/
-
   activeMenu(title: string): void{
     this.menu = this.menus.filter(m => m.title === title)[0];
   }
@@ -124,6 +70,18 @@ export class PlannerComponent implements OnInit {
 
   editMenu(): void{
     this.router.navigate(['planner/meal-form']);
+  }
+
+  deleteMenu(mid: string): void{
+
+    this.apiService.delete('/menu/' + mid, this.httpOptions)
+      .subscribe(response => {
+        if (response.msg === 'menu removed'){
+          this.ngOnInit();
+        }
+      }, error => {
+        console.log(error);
+      });
   }
 
 }

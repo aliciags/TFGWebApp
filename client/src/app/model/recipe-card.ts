@@ -2,17 +2,17 @@ export interface RecipeCard {
 
     /**
      * Interface to model the Recipe Card
+     * @param _id: string - day id
+     * @param _idMeal: string - meal id
      * @param recipes: string[] - id of the recipes
      * @param day: string - week day
      * @param meal: string - meal of the day
-     * @param cols: number - col position of the card
-     * @param rows: number - row position of the card
      */
 
+    _id: string;
+    _idMeal: string;
     recipes: string[];
     day: string;
     meal: string;
-    cols: number;
-    rows: number;
 
 }
