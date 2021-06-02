@@ -43,6 +43,18 @@ export class MyRecipesComponent implements OnInit {
     }
   }
 
+  onDelete(rid: string): void{
+    this.apiService.delete('/recipe/' + rid + '&' + this.localStorage.get('email'), this.httpOptions)
+      .subscribe(response => {
+        console.log(response);
+        if (response.msg === 'recipe removed'){
+          this.ngOnInit();
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
   onFilter(): void {
     this.filters ? this.filters = false : this.filters = true;
   }

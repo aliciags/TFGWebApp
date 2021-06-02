@@ -65,7 +65,7 @@ export class RecipeFormComponent implements OnInit {
       this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
       this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(response => {
         console.log(response);
-        this.router.navigate(['/']);
+        this.router.navigate(['/my-recipes']);
       },
       error => {
         console.log(error);

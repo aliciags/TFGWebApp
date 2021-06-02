@@ -20,23 +20,3 @@ h1 {
   margin-right: 5px;
 }
 
-.recipes {
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.container {
-  margin-top: 3%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.box {
-  border: 2px solid black;
-  width: 45%;
-  height: 250px;
-}
-

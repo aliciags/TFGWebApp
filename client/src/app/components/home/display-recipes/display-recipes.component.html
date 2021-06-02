@@ -11,7 +11,7 @@
                   </i>
                   <mat-menu #menu="matMenu" xPosition="before">
                       <button mat-menu-item>Save recipe</button>
-                      <button *ngIf="environment === 'myrecipes'" mat-menu-item>Delete</button>
+                      <button *ngIf="environment === 'myrecipes'" mat-menu-item (click)="onDelete(r._id)">Delete</button>
                   </mat-menu>
               </mat-card-title>
           </mat-card-header> 

@@ -7,10 +7,13 @@
           <button class="btn btn-outline-dark" type="button"><i class="fas fa-search"></i></button>
         </div>
       </div>
-      <div *ngIf="!filters">
+    <div>
+        <button class="btn btn-primary"  type="button" routerLink="recipe-form">Add recipe</button>
+    </div>
+    <div *ngIf="!filters">
         <button class="btn btn-primary" (click)="onFilter()">Filters</button>
-      </div>
-      <div *ngIf="filters" class="input-group">
+    </div>
+      <div *ngIf="filters" class="input-group small">
         <select class="custom-select" id="diet">
           <option selected>Diet...</option>
           <option value="Omnivorous">Omnivorous</option>
@@ -21,7 +24,7 @@
           <button class="btn btn-outline-primary" type="button"><i class="fas fa-seedling"></i></button>
         </div>
       </div>
-      <div *ngIf="filters" class="input-group">
+      <div *ngIf="filters" class="input-group small">
         <select class="custom-select" id="meal">
           <option selected>Meal...</option>
           <option value="Breakfast">Breakfast</option>
@@ -32,16 +35,14 @@
         <div class="input-group-append">
           <button class="btn btn-outline-primary" type="button"><i class="fas fa-utensils"></i></button>
         </div>
-      </div>
-      <div>
-        <button *ngIf="filters" class="btn btn-outline-dark" (click)="onFilter()"><i class="fas fa-times"></i></button>
-      </div>
-    </div>
-    <div>
-        <button class="btn btn-primary"  type="button" routerLink="recipe-form">Add recipe</button>
+        <div>
+            <button *ngIf="filters" class="btn btn-outline-dark" (click)="onFilter()"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
     </div>
     
     <app-display-recipes [recipes]="recipes"
                          [environment]="environment"
-    ></app-display-recipes>
+                         (deleteRecipe)="onDelete($event)">
+    </app-display-recipes>
   </div>
