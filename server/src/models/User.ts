@@ -1,7 +1,7 @@
-import { Document, Model, Schema, model } from "mongoose";
-import Diet from "../types/Diet";
-import { IIngredient } from "./Ingredient";
-import { IRecipe } from "./Recipe";
+import { Document, Model, Schema, model } from 'mongoose';
+import Diet from '../types/Diet';
+import { IIngredient } from './Ingredient';
+import { IRecipe } from './Recipe';
 
 /**
  * Interafce to model the User Schema
@@ -10,8 +10,8 @@ import { IRecipe } from "./Recipe";
  * @param password: string
  * @param firstname: string
  * @param lastname: string
- * @param birthyear: number 
- * @param numberMeals: number 
+ * @param birthyear: number
+ * @param numberMeals: number
  * @param meals: string[]
  * @param diet: string
  * @param private: boolean
@@ -22,15 +22,15 @@ export interface IUser extends Document {
     role: string;
     email: string;
     password: string;
-    firstname: string;  //useless
-    lastname: string;   //useless
-    birthyear: number;  //useless
+    firstname: string;  // useless
+    lastname: string;   // useless
+    birthyear: number;  // useless
     numberMeals: number;
     meals: string[];
     diet: Diet;
     private: boolean;
-    recipes: IRecipe["_id"][];   
-    groceries: IIngredient["name"][];
+    recipes: IRecipe['_id'][];
+    groceries: IIngredient['name'][];
 }
 
 const userSchema: Schema = new Schema(
@@ -39,10 +39,10 @@ const userSchema: Schema = new Schema(
             type: String,
             require: true,
             enum: [
-                "admin",
-                "user"
+                'admin',
+                'user'
             ],
-            default: "user"
+            default: 'user'
         },
         email: {
             type: String,
@@ -54,9 +54,9 @@ const userSchema: Schema = new Schema(
                 },
                 message: (props: any) => `${props.value} is not a valid email`
             }
-        }, 
+        },
         password: {
-            type: String, 
+            type: String,
             required: true,
             /*validate: {
                 validator: function(p: string) {
@@ -64,22 +64,22 @@ const userSchema: Schema = new Schema(
                 },
                 message: (props: any) => `${props.value} is not a valid password, 8 chars, min, mayus, numer, special char`
             }*/
-        }, 
+        },
         firstname: {
-            type: String, 
-            required: true, 
+            type: String,
+            required: true,
         },
         lastname: {
             type: String
-        }, 
+        },
         birthyear: {
-            type: Number, 
+            type: Number,
             required: true,
             min: 1900,
             max: 2021
         },
         numberMeals: {
-            type: Number, 
+            type: Number,
             required: true,
             min: 2,
             max: 5
@@ -88,19 +88,19 @@ const userSchema: Schema = new Schema(
             type: String,
             required: true,
             enum: {
-                values: ["Breakfast",
-                    "Lunch",
-                    "Snack",
-                    "Dinner"],
+                values: ['Breakfast',
+                    'Lunch',
+                    'Snack',
+                    'Dinner'],
                 message: '{VALUE} is not a valid meal'
         }
         }],
         diet: {
             type: String,
             enum: {
-                values: ["Omnivorous",
-                    "Vegetarian",
-                    "Vegan"],
+                values: ['Omnivorous',
+                    'Vegetarian',
+                    'Vegan'],
                 message: '{VALUE} is not a valid diet'
             },
             required: true
@@ -112,16 +112,16 @@ const userSchema: Schema = new Schema(
         },
         recipes: [{
             type: Schema.Types.ObjectId,
-            ref: "Recipe"
+            ref: 'Recipe'
         }],
         groceries: [{
             type: String,
-            ref: "Ingredient"
+            ref: 'Ingredient'
         }],
     },
     { timestamps: true }
 );
 
-const User : Model<IUser> = model("User", userSchema);
+const User: Model<IUser> = model('User', userSchema);
 
 export default User;

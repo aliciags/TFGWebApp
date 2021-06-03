@@ -3,13 +3,13 @@
  * is either Omnivorous, Vegetarian or Vegan
  */
 enum WeekDays {
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday"
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
 }
 
 export default WeekDays;

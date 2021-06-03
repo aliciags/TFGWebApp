@@ -1,20 +1,20 @@
-import { Document, Model, Schema, model } from "mongoose";
-import { IIngredient } from "./Ingredient";
-import { IUser } from "./User";
+import { Document, Model, Schema, model } from 'mongoose';
+import { IIngredient } from './Ingredient';
+import { IUser } from './User';
 
 /**
  * Menu Object to store a week meal plan. Used by the user database model.
  * @param user: ref => User.email
  * @param date: date
- * @param ingredients:IIngredient["name"][]
+ * @param ingredients:IIngredient['name'][]
  * @param expense: number
  * @param estExpense: number
  * //bill picture
  */
 export interface IExpense extends Document {
-    user: IUser["email"];
+    user: IUser['email'];
     date: Date;
-    ingredients: IIngredient["name"][];
+    ingredients: IIngredient['name'][];
     expense: number;
     estExpense: number;
 }
@@ -24,7 +24,7 @@ const expenseSchema: Schema = new Schema (
         _user: {
             type: String,
             required: true,
-            ref: "User"
+            ref: 'User'
         },
         date: {
             type: Date,
@@ -33,7 +33,7 @@ const expenseSchema: Schema = new Schema (
         },
         ingredients: [{
             type: String,
-            ref: "Ingredient"
+            ref: 'Ingredient'
         }],
         expense: {
             type: Number,
@@ -46,6 +46,6 @@ const expenseSchema: Schema = new Schema (
     { timestamps: true }
 );
 
-const Menu: Model<IExpense> = model("Expense", expenseSchema);
+const Menu: Model<IExpense> = model('Expense', expenseSchema);
 
 export default Menu;

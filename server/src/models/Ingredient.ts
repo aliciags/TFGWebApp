@@ -1,10 +1,10 @@
-import { Document, Model, Schema, model } from "mongoose";
+import { Document, Model, Schema, model } from 'mongoose';
 import Diet from '../types/Diet';
 import { IUser } from './User';
-import { IRecipe } from "./Recipe";
+import { IRecipe } from './Recipe';
 
 /**
- * Interface to model the Ingredient Schema 
+ * Interface to model the Ingredient Schema
  * @param name: string
  * @param diet: string
  * @param avgPrice: number
@@ -15,8 +15,8 @@ export interface IIngredient extends Document {
     name: string;
     diet: Diet;
     avgPrice: number;
-    users: IUser["email"][];
-    recipes: IRecipe["_id"][];
+    users: IUser['email'][];
+    recipes: IRecipe['_id'][];
 }
 
 const ingredientSchema: Schema = new Schema(
@@ -29,9 +29,9 @@ const ingredientSchema: Schema = new Schema(
         diet: {
             type: String,
             enum: {
-                values: ["Omnivorous",
-                    "Vegetarian",
-                    "Vegan"],
+                values: ['Omnivorous',
+                    'Vegetarian',
+                    'Vegan'],
                 message: '{VALUE} is not a valid diet'
             },
             required: true
@@ -51,6 +51,6 @@ const ingredientSchema: Schema = new Schema(
     { timestamps: true }
 );
 
-const Ingredient : Model<IIngredient> = model("Ingredient", ingredientSchema);
+const Ingredient: Model<IIngredient> = model('Ingredient', ingredientSchema);
 
 export default Ingredient;

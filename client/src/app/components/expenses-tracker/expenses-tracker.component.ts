@@ -10,68 +10,80 @@ import { DatePipe } from '@angular/common';
   selector: 'app-expenses-tracker',
   templateUrl: './expenses-tracker.component.html',
   styleUrls: ['./expenses-tracker.component.css'],
-  providers: [ LocalStorageService, ApiService, DatePipe ]
+  providers: [LocalStorageService, ApiService, DatePipe],
 })
 export class ExpensesTrackerComponent implements OnInit {
-
   public expenses: Expense[];
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token'
-    })
+      'x-auth-token': 'token',
+    }),
   };
 
-  constructor(private router: Router,
-              private apiService: ApiService,
-              private localStorage: LocalStorageService,
-              public datepipe: DatePipe) {
-      this.expenses = [];
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private localStorage: LocalStorageService,
+    public datepipe: DatePipe
+  ) {
+    this.expenses = [];
   }
 
   ngOnInit(): void {
-    if (this.localStorage.get('token') == null){
+    if (this.localStorage.get('token') == null) {
       this.router.navigate(['/login']);
     } else {
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
-      this.apiService.get('/expense/user/' + this.localStorage.get('email'), this.httpOptions)
-      .subscribe(response => {
-        this.expenses = response;
-        this.expenses = this.transformDate(this.expenses);
-      },
-      error => {
-        if (error.error.msg === 'There are no expenses for such user'){
-          this.router.navigate(['/notfound']);
-        } else {
-          console.log('Internal server error');
-        }
-      });
+      this.httpOptions.headers = this.httpOptions.headers.set(
+        'x-auth-token',
+        this.localStorage.get('token')
+      );
+      this.apiService
+        .get(
+          '/expense/user/' + this.localStorage.get('email'),
+          this.httpOptions
+        )
+        .subscribe(
+          (response) => {
+            this.expenses = response;
+            this.expenses = this.transformDate(this.expenses);
+          },
+          (error) => {
+            if (error.error.msg === 'There are no expenses for such user') {
+              this.router.navigate(['/notfound']);
+            } else {
+              console.log('Internal server error');
+            }
+          }
+        );
     }
   }
 
-  onDelete(id: string | undefined): void{
-    if (id){
-      this.apiService.delete('/expense/' + id, this.httpOptions)
-      .subscribe(response => {
-        if (response.msg === 'expense removed'){
-          this.ngOnInit();
+  onDelete(id: string | undefined): void {
+    if (id) {
+      this.apiService.delete('/expense/' + id, this.httpOptions).subscribe(
+        (response) => {
+          if (response.msg === 'expense removed') {
+            this.ngOnInit();
+          }
+        },
+        (error) => {
+          if (error.error.msg === 'Expense does not exist') {
+            this.router.navigate(['/notfound']);
+          } else {
+            console.log('Internal server error');
+          }
         }
-      },
-      error => {
-        if (error.error.msg === 'Expense does not exist'){
-          this.router.navigate(['/notfound']);
-        } else {
-          console.log('Internal server error');
-        }
-      });
+      );
     }
   }
 
-  transformDate(expenses: Expense[]): Expense[]{
-    expenses.forEach(e => {
+  transformDate(expenses: Expense[]): Expense[] {
+    expenses.forEach((e) => {
       const date = this.datepipe.transform(e.date, 'dd-MM-yyyy');
-      if (date != null) { e.date = date; }
+      if (date != null) {
+        e.date = date;
+      }
     });
     return expenses;
   }
-
 }

@@ -1,18 +1,18 @@
-import { Response } from "express";
+import { Response } from 'express';
 
-import HttpStatusCodes from "http-status-codes";
+import HttpStatusCodes from 'http-status-codes';
 
-import Request from "../types/Request";
-import Menu, { IMenu } from "../models/Menu";
-import Day, { IDay } from "../models/Day";
-import User, { IUser } from "../models/User";
-import Mealtime from "../types/Mealtime";
+import Request from '../types/Request';
+import Menu, { IMenu } from '../models/Menu';
+import Day, { IDay } from '../models/Day';
+import User, { IUser } from '../models/User';
+import Mealtime from '../types/Mealtime';
 
 export const getAllMenus = async (req: Request, res: Response ) => {
 
     const role: string = req.role;
-    if (role !== "admin") {
-        return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
+    if (role !== 'admin') {
+        return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'Access denied'});
     }
 
     try {
@@ -29,17 +29,17 @@ export const getAllUserMenus = async (req: Request, res: Response ) => {
     try {
         const user: IUser = await User.findOne({email: req.params.uid});
         if (!user) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user does not exist"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'user does not exist'});
         }
         const menus: IMenu[] = await Menu.find({_user: user._id});
         if (!menus) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "There are no menus for such user"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'There are no menus for such user'});
         }
         res.json(menus);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a menu object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a menu object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -52,8 +52,8 @@ export const getMenu = async ( req: Request, res: Response ) => {
         res.json(menu);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a menu object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a menu object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -65,7 +65,7 @@ export const addMenu = async ( req: Request, res: Response ) =>  {
     try {
         const user: IUser = await User.findOne({email: _user});
         if (!user) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user does not exist"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'user does not exist'});
         }
         const menuFields = {
             _user: user._id,
@@ -76,8 +76,8 @@ export const addMenu = async ( req: Request, res: Response ) =>  {
         m = await m.save();
         let i = 0;
         const _menu = m._id;
-        const wdays = ["Monday", "Tuesday", "Wednesday",
-                        "Thursday", "Friday", "Saturday", "Sunday"];
+        const wdays = ['Monday', 'Tuesday', 'Wednesday',
+                        'Thursday', 'Friday', 'Saturday', 'Sunday'];
         wdays.forEach(async day => {
             const meals: Mealtime[] = [];
             for (i = 0; i < user.meals.length; i++) {
@@ -114,7 +114,7 @@ export const editMenu = async ( req: Request, res: Response ) => {
     try {
         let menu: IMenu = await Menu.findById({_id: req.params.mid});
         if (!menu) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Menu does not exist"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'Menu does not exist'});
         }
 
         const menuFields = {
@@ -129,8 +129,8 @@ export const editMenu = async ( req: Request, res: Response ) => {
         res.json(menu);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a menu object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a menu object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -146,11 +146,11 @@ export const deleteMenu = async ( req: Request, res: Response ) => {
             delDays.push(await Day.findByIdAndDelete({_id: days[i]._id}));
         }
         const menu: IMenu = await Menu.findByIdAndDelete({_id: req.params.mid});
-        res.json({msg: "menu removed", m: menu, days: delDays});
+        res.json({msg: 'menu removed', m: menu, days: delDays});
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a menu object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a menu object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }

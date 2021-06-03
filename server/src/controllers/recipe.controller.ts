@@ -1,12 +1,12 @@
-import { Response } from "express";
+import { Response } from 'express';
 
-import { validationResult } from "express-validator/check";
-import HttpStatusCodes from "http-status-codes";
+import { validationResult } from 'express-validator/check';
+import HttpStatusCodes from 'http-status-codes';
 
-import Request from "../types/Request";
-import Recipe, { IRecipe } from "../models/Recipe";
-import User, { IUser } from "../models/User";
-import { Schema } from "mongoose";
+import Request from '../types/Request';
+import Recipe, { IRecipe } from '../models/Recipe';
+import User, { IUser } from '../models/User';
+import { Schema } from 'mongoose';
 
 
 export const getAllRecipes = async (req: Request, res: Response) => {
@@ -47,11 +47,11 @@ export const getRecipe = async (req: Request, res: Response) => {
         if (recipe) {
             return res.json(recipe);
         }
-        res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
+        res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a recipe object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -64,7 +64,7 @@ export const addRecipe = async (req: Request, res: Response) => {
     try {
         const user: IUser = await User.findById(userID);
         if (!user) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "user not found"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'user not found'});
         }
         const creator: string = user.email;
         const recipeFields = {
@@ -101,7 +101,7 @@ export const getUserRecipes = async (req: Request, res: Response) => {
     try {
         const user: IUser = await User.findOne({email: req.params.uid});
         if (!user) {
-            res.status(HttpStatusCodes.NOT_FOUND).json({msg: "user not found"});
+            res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user not found'});
         }
         const recipes: IRecipe[] = [];
         for (i = 0; i < user.recipes.length; i++) {
@@ -131,14 +131,14 @@ export const editRecipe = async (req: Request, res: Response) => {
     try {
         const user: IUser = await User.findById(req.userId);
         if (!user) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "user not found"});
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user not found'});
         }
         let recipe: IRecipe = await Recipe.findById({_id: req.params.rid });
         if (!recipe) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
         }
         if (recipe.creator != user.email) {
-            return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "not allowed to edit the recipe"});
+            return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'not allowed to edit the recipe'});
         }
         recipe = await Recipe.findByIdAndUpdate(
             {_id: req.params.rid},
@@ -148,8 +148,8 @@ export const editRecipe = async (req: Request, res: Response) => {
         res.json(recipe);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a recipe object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -161,7 +161,7 @@ export const deleteRecipe = async (req: Request, res: Response) => {
         let recipe: IRecipe = await Recipe.findOne({_id: req.params.rid});
         let user: IUser = await User.findOne({email: req.params.uid});
         if (!recipe) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "recipe not found"});
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
         }
         if (recipe.creator === user.email && recipe.saved.length > 0) {
             const c = recipe.saved.pop();
@@ -184,7 +184,7 @@ export const deleteRecipe = async (req: Request, res: Response) => {
                 {new: true}
             );
         } else {
-            return res.json({msg: "recipe not removed"});
+            return res.json({msg: 'recipe not removed'});
         }
         const recipeDeleting = user.recipes.filter(x => x ==  req.params.rid)[0];
         const index = user.recipes.indexOf(recipeDeleting, 0);
@@ -196,11 +196,11 @@ export const deleteRecipe = async (req: Request, res: Response) => {
             {$set: user},
             {new: true}
         );
-        res.json({msg: "recipe removed", r: recipe, u: user});
+        res.json({msg: 'recipe removed', r: recipe, u: user});
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a recipe object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a recipe object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }

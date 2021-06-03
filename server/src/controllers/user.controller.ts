@@ -1,24 +1,24 @@
-import bcrypt from "bcryptjs";
-import config from "config";
-import { Response } from "express";
+import bcrypt from 'bcryptjs';
+import config from 'config';
+import { Response } from 'express';
 
-import { validationResult } from "express-validator/check";
-import HttpStatusCodes from "http-status-codes";
-import jwt from "jsonwebtoken";
+import { validationResult } from 'express-validator/check';
+import HttpStatusCodes from 'http-status-codes';
+import jwt from 'jsonwebtoken';
 
-import Payload from "../types/Payload";
-import Request from "../types/Request";
-import User, { IUser } from "../models/User";
-import Ingredient, { IIngredient } from "../models/Ingredient";
-// import Mealtime, { IMealtime } from "../models/Day";
+import Payload from '../types/Payload';
+import Request from '../types/Request';
+import User, { IUser } from '../models/User';
+import Ingredient, { IIngredient } from '../models/Ingredient';
+// import Mealtime, { IMealtime } from '../models/Day';
 
 export const getAllUsers = async (req: Request, res: Response) => {
   const role: string = req.role;
   // console.log(role);
-  if (role !== "admin") {
+  if (role !== 'admin') {
     return res
       .status(HttpStatusCodes.FORBIDDEN)
-      .json({ msg: "Access denied", role: role });
+      .json({ msg: 'Access denied', role: role });
   }
 
   try {
@@ -38,7 +38,7 @@ export const getUser = async (req: Request, res: Response) => {
     if (user) {
       return res.json(user);
     }
-    res.status(HttpStatusCodes.NOT_FOUND).json({ msg: "user not found" });
+    res.status(HttpStatusCodes.NOT_FOUND).json({ msg: 'user not found' });
   } catch (err) {
     console.error(err.message);
     res
@@ -84,7 +84,7 @@ export const addUser = async (req: Request, res: Response) => {
     if (user) {
       res
         .status(HttpStatusCodes.BAD_REQUEST)
-        .json({ msg: "User already exists" });
+        .json({ msg: 'User already exists' });
     }
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
@@ -113,8 +113,8 @@ export const addUser = async (req: Request, res: Response) => {
     await user.save();
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
-      { expiresIn: config.get("jwtExpiration") },
+      config.get('jwtSecret'),
+      { expiresIn: config.get('jwtExpiration') },
       (err, token) => {
         if (err) throw err;
         res.json({ token });
@@ -155,7 +155,7 @@ export const editUser = async (req: Request, res: Response) => {
     if (!user) {
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
-        .json({ msg: "user not registered" });
+        .json({ msg: 'user not registered' });
     }
 
     user = await User.findOneAndUpdate(
@@ -181,24 +181,24 @@ export const editGroceries = async (req: Request, res: Response) => {
     if (!user) {
       return res
         .status(HttpStatusCodes.NOT_FOUND)
-        .json({ msg: "user not found" });
+        .json({ msg: 'user not found' });
     }
     const ing: IIngredient = await Ingredient.findOne({ name: ingredient });
     if (!ing) {
       return res
         .status(HttpStatusCodes.NOT_FOUND)
-        .json({ msg: "ingredient not found" });
+        .json({ msg: 'ingredient not found' });
     }
     const i = user.groceries.filter(x => x === ingredient)[0];
     const index = user.groceries.indexOf(i, 0);
-    if (action === "add") {
+    if (action === 'add') {
       if ( index > -1) {
         return res
         .status(HttpStatusCodes.NOT_FOUND)
-        .json({ msg: "ingredient already in the list" });
+        .json({ msg: 'ingredient already in the list' });
       }
       user.groceries.push(ingredient);
-    } else if (action === "delete" &&  index > -1) {
+    } else if (action === 'delete' &&  index > -1) {
       user.groceries.splice(index, 1);
     }
     user = await User.findOneAndUpdate(
@@ -208,7 +208,7 @@ export const editGroceries = async (req: Request, res: Response) => {
     );
     res.json(user);
   } catch (err) {
-    console.error("another one", err.message);
+    console.error('another one', err.message);
     res
       .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
       .json({ msg: err.message });
@@ -218,7 +218,7 @@ export const editGroceries = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user: IUser = await User.findOneAndDelete({ email: req.params.uid });
-    res.json({ msg: "User removed", usr: user });
+    res.json({ msg: 'User removed', usr: user });
   } catch (err) {
     console.error(err.message);
     res

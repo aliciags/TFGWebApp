@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { check } from "express-validator/check";
+import { Router } from 'express';
+import { check } from 'express-validator/check';
 
-import auth from "../../middleware/auth";
-import * as AuthController from "../../controllers/auth.controller";
+import auth from '../../middleware/auth';
+import * as AuthController from '../../controllers/auth.controller';
 
 const router: Router = Router();
 
@@ -11,18 +11,18 @@ const router: Router = Router();
  * GET api/auth
  * access Private
  */
-router.get("/", auth, AuthController.authenticate);
+router.get('/', auth, AuthController.authenticate);
 
 /**
  * Login user and get token
  * POST api/auth
- * access Public 
+ * access Public
  */
 router.post(
-  "/",
+  '/',
   [
-    check("email", "Please include a valid email").isEmail(),
-    check("password", "Password is required").exists()
+    check('email', 'Please include a valid email').isEmail(),
+    check('password', 'Password is required').exists()
   ],
   AuthController.login);
 

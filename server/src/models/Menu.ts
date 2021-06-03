@@ -1,5 +1,5 @@
-import { Document, Model, Schema, model } from "mongoose";
-import { IUser } from "./User";
+import { Document, Model, Schema, model } from 'mongoose';
+import { IUser } from './User';
 
 /**
  * Menu Object to store a week meal plan. Used by the user database model.
@@ -8,7 +8,7 @@ import { IUser } from "./User";
  * @param description: string
  */
 export interface IMenu extends Document {
-    user: IUser["email"];
+    user: IUser['email'];
     title: string;
     description: string;
 }
@@ -30,6 +30,6 @@ const menuSchema: Schema = new Schema (
     { timestamps: true }
 );
 
-const Menu: Model<IMenu> = model("Menu", menuSchema);
+const Menu: Model<IMenu> = model('Menu', menuSchema);
 
 export default Menu;

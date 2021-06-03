@@ -1,16 +1,16 @@
-import { Response } from "express";
+import { Response } from 'express';
 
-import HttpStatusCodes from "http-status-codes";
+import HttpStatusCodes from 'http-status-codes';
 
-import Request from "../types/Request";
-import Expense, { IExpense } from "../models/Expense";
+import Request from '../types/Request';
+import Expense, { IExpense } from '../models/Expense';
 
 
 export const getAllExpenses = async ( req: Request, res: Response ) => {
 
     const role: string = req.role;
-    if (role !== "admin") {
-        return res.status(HttpStatusCodes.FORBIDDEN).json({msg: "Access denied"});
+    if (role !== 'admin') {
+        return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'Access denied'});
     }
 
     try {
@@ -27,7 +27,7 @@ export const getUserExpenses = async ( req: Request, res: Response ) => {
     try {
         const expenses: IExpense[] = await Expense.find({_user: req.params.uid});
         if (!expenses) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "There are no expenses for such user"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'There are no expenses for such user'});
         }
         res.json(expenses);
     } catch (err) {
@@ -41,13 +41,13 @@ export const getExpense = async ( req: Request, res: Response ) => {
     try {
         const expense: IExpense = await Expense.findById({_id: req.params.eid});
         if (!expense) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: "Expense not found"});
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'Expense not found'});
         }
         res.json(expense);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a expense object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -85,7 +85,7 @@ export const editExpense = async ( req: Request, res: Response ) => {
     try {
         let expense: IExpense = await Expense.findById({_id: req.params.eid});
         if (!expense) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Expense does not exist"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'Expense does not exist'});
         }
         expense = await Expense.findByIdAndUpdate(
             { _id: req.params.eid },
@@ -95,8 +95,8 @@ export const editExpense = async ( req: Request, res: Response ) => {
         res.json(expense);
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a expense object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
@@ -107,13 +107,13 @@ export const deleteExpense = async ( req: Request, res: Response ) => {
     try {
         const expense: IExpense = await Expense.findByIdAndDelete({_id: req.params.eid});
         if (!expense) {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "Expense does not exist"});
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'Expense does not exist'});
         }
-        res.json({msg: "expense removed", e: expense});
+        res.json({msg: 'expense removed', e: expense});
     } catch (err) {
         console.error(err.message);
-        if (err.kind === "ObjectId") {
-            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: "not a expense object id"});
+        if (err.kind === 'ObjectId') {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }

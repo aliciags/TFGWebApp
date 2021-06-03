@@ -1,5 +1,5 @@
-import { Document, Model, model, Schema } from "mongoose";
-import { IUsr } from "./Usr";
+import { Document, Model, model, Schema } from 'mongoose';
+import { IUsr } from './Usr';
 
 /**
  * Interface to model the Profile Schema for TypeScript.
@@ -9,7 +9,7 @@ import { IUsr } from "./Usr";
  * @param username:string
  */
 export interface IProfile extends Document {
-  user: IUsr["_id"];
+  user: IUsr['_id'];
   firstName: string;
   lastName: string;
   username: string;
@@ -18,7 +18,7 @@ export interface IProfile extends Document {
 const profileSchema: Schema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   firstName: {
     type: String,
@@ -39,6 +39,6 @@ const profileSchema: Schema = new Schema({
   }
 });
 
-const Profile: Model<IProfile> = model("Profile", profileSchema);
+const Profile: Model<IProfile> = model('Profile', profileSchema);
 
 export default Profile;
