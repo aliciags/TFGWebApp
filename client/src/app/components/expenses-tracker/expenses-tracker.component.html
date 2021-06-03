@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Expenses tracker</h1>
-    <div class="container">
+    <!--<div class="container">
         <div class="row headers">
             <div class="col">
                 <h3>Date</h3>
@@ -31,6 +31,43 @@
                 <div>
                     <button class="btn btn-secondary btn-circle" (click)="onDelete(expense._id)"><i class="fas fa-times-circle"></i></button>
                 </div>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="expenses">
+        <div class="header">
+            <h3>Date</h3>
+        </div>
+        <div class="header">
+            <h3>Groceries</h3>
+        </div>
+        <div class="header">
+            <h3>Expense</h3>
+        </div> 
+        <div class="header">
+            <h3>Estimated expense</h3>
+        </div>
+        <div class="header">
+            <h3>Remove</h3>
+        </div>   
+        <div *ngFor="let expense of expenses" class="expense">
+            <div class="item">
+                {{expense.date}}
+            </div>
+            <div class="item">
+                <i *ngFor="let i of expense.ingredients">
+                    {{i}}
+                </i>
+            </div>
+            <div class="item">
+                expense
+            </div>
+            <div class="item">
+                {{expense.expense}}
+            </div>
+            <div class="item">
+                <button class="btn btn-secondary btn-circle" (click)="onDelete(expense._id)"><i class="fas fa-times-circle"></i></button>
             </div>
         </div>
     </div>
