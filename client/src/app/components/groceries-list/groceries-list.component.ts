@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Ingredient } from 'src/app/model/ingredient';
 
 @Component({
   selector: 'app-groceries-list',
@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class GroceriesListComponent implements OnInit {
 
   public ing = 'ingredient';
+  public ingredientsDropdown: Ingredient[];
   public ingredientsList: string[];
   public ingredientsBought: string[];
   public showModal: boolean;
@@ -28,8 +29,8 @@ export class GroceriesListComponent implements OnInit {
   constructor( private router: Router,
                private fb: FormBuilder,
                private localStorage: LocalStorageService,
-               private apiService: ApiService,
-               private dialog: MatDialog) {
+               private apiService: ApiService) {
+      this.ingredientsDropdown = [];
       this.ingredientsList = [];
       this.ingredientsBought = [];
       this.showModal = false;
@@ -39,6 +40,21 @@ export class GroceriesListComponent implements OnInit {
       this.ingredientForm.controls[this.ing].setErrors({
         alreadyInList: false,
         notExists: false
+      });
+      this.ingredientForm.controls[this.ing].valueChanges
+        .subscribe((value: string) => {
+          if ( value.length >= 3 ){
+            console.log(value);
+            this.apiService.post('/ingredient/filter', {name: value}, this.httpOptions)
+            .subscribe( response => {
+              this.ingredientsDropdown = response;
+              console.log(this.ingredientsDropdown);
+            }, error => {
+              console.log('e', error);
+            });
+          } else {
+            this.ingredientsDropdown.splice(0, this.ingredientsDropdown.length);
+          }
       });
    }
 

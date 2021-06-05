@@ -26,8 +26,7 @@ export class HomeComponent implements OnInit {
     })
   };
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              private localStorage: LocalStorageService,
+  constructor(private localStorage: LocalStorageService,
               private apiService: ApiService) {
       this.recipes = [];
       this.environment = '';

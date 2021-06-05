@@ -5,13 +5,19 @@
         <div>
             <div>
                 <input type="text" #ingredient class="form-control" formControlName="ingredient" placeholder="Introduce an ingredient"> 
+                <ul class="dropdown-menu">
+                    <!--<ul *ngFor="let ing of ingredientsDropdown" class="dropdown-menu">-->
+                    <li *ngFor="let ing of ingredientsDropdown" class="dropdown-item">{{ing.name}}</li>
+                    <!--</ul>-->
+                </ul>
                 <button type="button" class="btn btn-primary btn-circle-md" (click)="onAdd(ingredient.value)">
                     <i class="fas fa-plus-circle"></i>
                 </button>
                 <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-primary btn-circle-md" (click)="onShow()">
                     <i class="fas fa-check-circle"></i>
                 </button>
-            </div>
+            </div
+            >
             <div>
                 <div *ngIf="ingredientForm.controls.ingredient.touched && ingredientForm.controls.ingredient.errors">
                     <div *ngIf="ingredientForm.controls.ingredient.errors.alreadyInList" class="alert alert-danger">
@@ -78,3 +84,18 @@
         </mat-card>
     </div> 
 </div>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown button
+    </button>
+    <ul *ngFor="let ing of ingredientsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li>{{ing.name}}</li>
+    </ul>
+</div>
+
+<ul *ngFor="let ing of ingredientsDropdown" class="dropdown-menu">
+    <!--<ul *ngFor="let ing of ingredientsDropdown" class="dropdown-menu">-->
+    <li class="dropdown-item">{{ing.name}}</li>
+    <!--</ul>-->
+</ul>

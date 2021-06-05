@@ -69,27 +69,66 @@ export class MenuComponent implements OnInit, OnChanges {
     this.card.splice(0, this.card.length);
     days.forEach( d => {
       d.meals.forEach( meal => {
-        let c: MenuCard;
-        c = {
-          _id: d._id,
-          _idMeal: meal._id,
-          recipes: meal.recipes,
-          day: d.day,
-          meal: meal.meal
-        };
-        this.card.push(c);
+        /*const r: string[] = [];
+        let i = 0;
+        console.log(meal.recipes.length);
+        if (meal.recipes.length > 0 ) {
+          for (i = 0; i < meal.recipes.length; i++ ) {
+            this.apiService.get('/recipe/' + meal.recipes[i], this.httpOptions)
+              .subscribe( response => {
+                r.push(response.name);
+                console.log(r);
+                if ( (i + 1) === meal.recipes.length ) {
+                  let c: MenuCard;
+                  c = {
+                    _id: d._id,
+                    _idMeal: meal._id,
+                    recipes: r,
+                    day: d.day,
+                    meal: meal.meal
+                  };
+                  this.card.push(c);
+                }
+            });
+          }
+        } else {
+          console.log('hola');*/
+          let c: MenuCard;
+          c = {
+            _id: d._id,
+            _idMeal: meal._id,
+            recipes: meal.recipes,
+            day: d.day,
+            meal: meal.meal
+          };
+          this.card.push(c);
+        // }
       });
     });
   }
 
   addRecipe(mealid: string): void{
     const body = {
-      recipe: '60abe2524293963bd0141cde'
+      recipe: '60abe2524293963bd0141cde',
+      edit: 'add'
     };
     this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
       .subscribe(response => {
         console.log(response);
-      });
+        this.ngOnChanges();
+    });
+  }
+
+  deleteRecipe(mealid: string, rid: string): void{
+    const body = {
+      recipe: rid,
+      edit: 'delete'
+    };
+    this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
+      .subscribe(response => {
+        console.log(response);
+        this.ngOnChanges();
+    });
   }
 
 }

@@ -119,28 +119,41 @@ export const editDay = async (req: Request, res: Response) => {
   }
 };
 
-export const addRecipe = async (req: Request, res: Response) => {
+export const editRecipe = async (req: Request, res: Response) => {
 
-  const { recipe } = req.body;
+  const { recipe, edit } = req.body;
 
   try {
     const day: IDay = await Day.findOne({'meals._id': req.params.mealid});
     const meal = day.meals.filter(m => m._id == req.params.mealid)[0];
-    const index = day.meals.indexOf(meal, 0);
-    meal.recipes.push(recipe);
-    console.log(meal, index);
+    const indexM = day.meals.indexOf(meal, 0);
+    const r = day.meals[indexM].recipes.filter(r => r == recipe)[0];
+    const indexR = day.meals[indexM].recipes.indexOf(r, 0);
+    if (indexR > -1 && edit === 'add') {
+      return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'recipe already in the meal'});
+    } else if (indexR === -1 && edit === 'delete') {
+      return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'recipe does not exist'});
+    } else if (indexR > -1 && edit === 'delete') {
+      meal.recipes.splice(indexR, 1);
+      day.meals[indexM] = meal;
+    } else {
+      meal.recipes.push(recipe);
+      day.meals[indexM] = meal;
+    }
     await Day.findOneAndUpdate(
       { _id: day._id },
-      { $set: {'meals.index': meal}},
+      { $set: day},
       { new: true, runValidators: true }
     );
+    res.json({msg: 'update sucessfully'});
   } catch (err) {
     console.log(err.message);
+    res
+      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: err.message });
   }
 };
 
-// add a recipe to a day
-// delete a recipe to a day
 
 export const deleteDay = async (req: Request, res: Response) => {
   try {

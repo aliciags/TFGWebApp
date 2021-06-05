@@ -19,7 +19,8 @@
                         </i>
                         <mat-menu #menu="matMenu" xPosition="before">
                             <button mat-menu-item>Add recipe</button>
-                            <button mat-menu-item>Expand</button>
+                            <button mat-menu-item>See recipe</button>
+                            <button mat-menu-item (click)="deleteRecipe(c._idMeal, c.recipes[0])">Delete recipe</button>
                         </mat-menu>
                     </mat-card-title>
                 </mat-card-header> 
@@ -28,7 +29,7 @@
                     <button *ngIf="c.recipes.length == 0" class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
                         <i class="fas fa-plus-circle"></i>
                     </button> 
-                    <h1>{{c.recipes}}</h1>
+                    <h5>{{c.recipes}}</h5>
                 </mat-card-content>
             </mat-card>
         </div>

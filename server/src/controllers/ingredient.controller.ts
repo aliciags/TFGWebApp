@@ -39,6 +39,19 @@ export const getIngredient = async (req: Request, res: Response) => {
     }
 };
 
+export const getFilterIngredient = async (req: Request, res: Response) => {
+
+    const { name } = req.body;
+
+    try {
+        const ingredients: IIngredient[] = await Ingredient.find({name: {$regex: name, $options: 'i'}});
+        res.json(ingredients);
+    } catch (err) {
+        console.error(err.message);
+        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+    }
+};
+
 export const addIngredient = async (req: Request, res: Response) => {
 
     const role: string = req.role;
