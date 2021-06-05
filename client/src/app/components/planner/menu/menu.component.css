@@ -27,6 +27,7 @@ h1 {
     padding-right: 5%;
     margin-top: 5px;
     margin-left: 5%;
+    width: 100%;
 }
 
 .badge-primary {
@@ -43,6 +44,18 @@ h1 {
     top: 5px;
     right: 1px;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.header {
+    flex-basis: 14%;
+}
+
 
 .menu1 {
     height: 440px;
@@ -90,6 +103,10 @@ h1 {
 
 .btn-outline-dark {
     border: 0px;
+}
+
+.modal.show {
+    display: block;
 }
 
 #useless 

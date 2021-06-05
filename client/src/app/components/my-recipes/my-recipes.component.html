@@ -2,7 +2,7 @@
     <h1 class="mat-h1">My recipes</h1>
     <div class="filter-input">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Recipe's name" aria-label="recipe" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" [formControl]="searchControl"  placeholder="Search recipe" aria-label="recipe" aria-describedby="basic-addon1">
       </div>
     <div>
         <button class="btn btn-primary"  type="button" routerLink="recipe-form">Add recipe</button>

@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Recipe } from 'src/app/model/recipe';
 import { ApiService } from 'src/app/service/api.service';
@@ -17,6 +18,7 @@ export class MyRecipesComponent implements OnInit {
   public filters: boolean;
   public environment: string;
   public showModal: boolean;
+  public searchControl: FormControl;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
@@ -31,6 +33,30 @@ export class MyRecipesComponent implements OnInit {
     this.rid = '';
     this.filters = false;
     this.showModal = false;
+    this.searchControl = new FormControl();
+    this.searchControl.valueChanges
+        .subscribe((value: string) => {
+          if ( value.length > 0 ){
+            // asi no se puede hacer porq no filtra las recetas q sean solo del user
+            // lo hace con tda la colleccion
+            this.apiService.post('/filter', {name: value})
+            .subscribe( response => {
+              console.log('r', response);
+              this.recipes = response;
+            }, error => {
+              console.log('e', error);
+            });
+          } else {
+            this.apiService.get('/').subscribe(response => {
+              this.recipes = response;
+              // this.setRecipes(this.recipes);
+            },
+            err => {
+              // internal server error
+              console.log(err);
+            });
+          }
+      });
   }
 
   ngOnInit(): void {

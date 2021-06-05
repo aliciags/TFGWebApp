@@ -19,6 +19,10 @@ export class MenuComponent implements OnInit, OnChanges {
   public meals: string[] = ['Breakfast', 'Lunch', 'Diner'];
   public card: MenuCard[];
   public days: Day[];
+  public active: MenuCard;
+  public showModalAdd: boolean;
+  public showModalDel: boolean;
+  public showModalEdit: boolean;
 
   public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -34,10 +38,20 @@ export class MenuComponent implements OnInit, OnChanges {
               private router: Router) {
     this.card = [];
     this.days = [];
+    this.showModalAdd = false;
+    this.showModalDel = false;
+    this.showModalEdit = false;
     this.menu = {
       _id: '',
       _user: '',
       title: ''
+    };
+    this.active = {
+      _id: '',
+      _idMeal: '',
+      recipes: [],
+      day: '',
+      meal: ''
     };
     this.httpOptions = {};
   }
@@ -107,6 +121,10 @@ export class MenuComponent implements OnInit, OnChanges {
     });
   }
 
+  expandRecipe(rid: string): void {
+    this.router.navigateByUrl('recipe', {state: {id: rid}});
+  }
+
   addRecipe(mealid: string): void{
     const body = {
       recipe: '60abe2524293963bd0141cde',
@@ -129,6 +147,11 @@ export class MenuComponent implements OnInit, OnChanges {
         console.log(response);
         this.ngOnChanges();
     });
+  }
+
+  showEditModal(meal: MenuCard): void{
+    this.showModalEdit = true;
+    this.active = meal;
   }
 
 }

@@ -17,6 +17,7 @@ export class PlannerComponent implements OnInit {
 
   public menus: Menu[];
   public menu: Menu;
+  public showModalDel: boolean;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
@@ -29,7 +30,7 @@ export class PlannerComponent implements OnInit {
               private apiService: ApiService) {
       // this.card = [];
       this.menus = [];
-      // this.days = [];
+      this.showModalDel = false;
       this.menu = {
         _id: '',
         _user: '',
@@ -66,9 +67,9 @@ export class PlannerComponent implements OnInit {
     this.router.navigate(['planner/menu-form']);
   }
 
-  editMenu(): void{
+  /*editMenu(): void{
     this.router.navigate(['planner/meal-form']);
-  }
+  }*/
 
   deleteMenu(mid: string): void{
 
@@ -80,6 +81,7 @@ export class PlannerComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+    this.showModalDel = false;
   }
 
 }

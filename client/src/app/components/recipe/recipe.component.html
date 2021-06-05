@@ -41,7 +41,7 @@
         </div>
     </div>
     <br>
-    <button class="btn btn-warning" ><i class="fas fa-pen"></i></button> 
+    <button *ngIf="loggedIn == true" class="btn btn-warning" ><i class="fas fa-pen"></i></button> 
     <router-outlet></router-outlet>
     
     <!-- Modal -->
