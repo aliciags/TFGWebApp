@@ -13,6 +13,7 @@ export class DisplayRecipesComponent implements OnInit {
   @Input() recipes: Recipe[];
   @Input() environment: string;
   @Output() deleteRecipe = new EventEmitter();
+  @Output() saveRecipe = new EventEmitter();
 
   constructor(private router: Router) {
     this.recipes = [];
@@ -28,6 +29,10 @@ export class DisplayRecipesComponent implements OnInit {
 
   onDelete(rid: string): void {
     this.deleteRecipe.emit(rid);
+  }
+
+  onSave(rid: string): void {
+    this.saveRecipe.emit(rid);
   }
 
 }

@@ -13,8 +13,10 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 export class MyRecipesComponent implements OnInit {
 
   public recipes: Recipe[];
+  public rid: string;
   public filters: boolean;
   public environment: string;
+  public showModal: boolean;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
@@ -26,7 +28,9 @@ export class MyRecipesComponent implements OnInit {
                private localStorage: LocalStorageService ) {
     this.recipes = [];
     this.environment = 'myrecipes';
+    this.rid = '';
     this.filters = false;
+    this.showModal = false;
   }
 
   ngOnInit(): void {
@@ -43,8 +47,8 @@ export class MyRecipesComponent implements OnInit {
     }
   }
 
-  onDelete(rid: string): void{
-    this.apiService.delete('/recipe/' + rid + '&' + this.localStorage.get('email'), this.httpOptions)
+  onDelete(): void{
+    this.apiService.delete('/recipe/' + this.rid + '&' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
         console.log(response);
         if (response.msg === 'recipe removed'){
@@ -53,6 +57,12 @@ export class MyRecipesComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+    this.showModal = false;
+  }
+
+  onShow(rid: string): void {
+    this.rid = rid;
+    this.showModal = true;
   }
 
   onFilter(): void {

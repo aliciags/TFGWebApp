@@ -10,7 +10,6 @@
 
 .container-box {
     margin-top: 3%;
-    border: 2px solid grey;
     flex-basis: 49%;
     height: 250px;
 }
@@ -19,6 +18,15 @@
     position: absolute;
     top: 6px;
     right: 6px;
+}
+
+.btn-outline-danger, .btn-outline-info {
+    padding: 1%;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: large;
+    border: 0px;
 }
 
 .header {

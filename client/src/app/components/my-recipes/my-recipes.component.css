@@ -28,6 +28,10 @@ h1 {
     margin-right: 2px;
     margin-bottom: 5px;
 }
+
+.modal.show {
+    display: block;
+}
   
 
   

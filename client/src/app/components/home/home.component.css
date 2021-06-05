@@ -13,9 +13,11 @@ h1 {
 .filter-input {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .input-group {
+  flex-basis: 65%;
   margin-left: 5px;
   margin-right: 5px;
 }
