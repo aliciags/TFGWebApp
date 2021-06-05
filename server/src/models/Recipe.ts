@@ -54,7 +54,7 @@ const recipeSchema: Schema = new Schema (
                     'Lunch',
                     'Snack',
                     'Dinner'],
-                message: '{VALUE} is not a valid meal' 
+                message: '{VALUE} is not a valid meal'
             }
         }],
         diet: {
@@ -67,7 +67,10 @@ const recipeSchema: Schema = new Schema (
             },
             required: true
         },
-        image: { type: Buffer },
+        image: {
+            type: String,
+            data: Buffer
+        },
         ingredients: [{
             type: String,
             ref: 'Ingredient'
