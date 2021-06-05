@@ -1,7 +1,21 @@
+@media (min-width: 768px){
+
+    .list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
 input[type=text] {
     border: none;
     border-bottom: 2px solid grey;
-    width: 65%;
+    flex-basis: 75%;
 }
 
 .btn-circle-md{
@@ -12,7 +26,7 @@ input[type=text] {
     text-align: center;
     font-size: 17px;
     line-height: 1.02857;
-    margin-left: 5px;
+    margin-left: 1%;
 }
 
 .btn-circle {
@@ -29,26 +43,25 @@ input[type=text] {
 .ingredient > div > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
 }
 
-.ingredientList > div >div {
+.ingredientList > div > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .ingredientList > div {
     margin-bottom: 3px;
 }
 
-.list {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+.modal.show{
+    display: block;
 }
 
-.card {
-    width: 100%;
-    margin: 5px;
+mat-card {
+    flex-basis: 45%;
+    margin-bottom: 2%;
 }

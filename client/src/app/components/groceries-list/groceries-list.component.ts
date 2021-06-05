@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CheckListComponent } from '../check-list/check-list.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -15,10 +14,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class GroceriesListComponent implements OnInit {
 
-  // sera un arry de ingredientes
   public ing = 'ingredient';
   public ingredientsList: string[];
   public ingredientsBought: string[];
+  public showModal: boolean;
   public ingredientForm: FormGroup;
   public httpOptions = {
     headers: new HttpHeaders({
@@ -33,8 +32,9 @@ export class GroceriesListComponent implements OnInit {
                private dialog: MatDialog) {
       this.ingredientsList = [];
       this.ingredientsBought = [];
+      this.showModal = false;
       this.ingredientForm = this.fb.group({
-        ingredient: ['', [Validators.required]]
+        ingredient: ['']
       });
       this.ingredientForm.controls[this.ing].setErrors({
         alreadyInList: false,
@@ -130,21 +130,13 @@ export class GroceriesListComponent implements OnInit {
         console.log('Internal server error');
       }
     });
-    /*// look for the ingredient in the list
-    const ing = this.ingredientsList.filter(x => x === ingredient)[0];
-    // then looks for the index of that element
-    const index = this.ingredientsList.indexOf(ing, 0);
-    if ( index > -1){
-      // removes an element from the position index
-      this.ingredientsList.splice(index, 1);
-    }*/
+  }
+
+  onShow(): void{
+    this.showModal = true;
   }
 
   onSubmit(): void{
-    /*const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(CheckListComponent, dialogConfig);*/
     const body = {
       _user: this.localStorage.get('email'),
       ingredients: this.ingredientsBought,
@@ -168,6 +160,7 @@ export class GroceriesListComponent implements OnInit {
           console.log('Internal server error');
         }
       });
+    this.showModal = false;
   }
 
 }

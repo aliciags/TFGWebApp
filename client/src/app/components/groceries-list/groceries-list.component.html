@@ -8,16 +8,12 @@
                 <button type="button" class="btn btn-primary btn-circle-md" (click)="onAdd(ingredient.value)">
                     <i class="fas fa-plus-circle"></i>
                 </button>
-                <button type="sumbmit" class="btn btn-primary" (click)="onSubmit()">
+                <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-primary btn-circle-md" (click)="onShow()">
                     <i class="fas fa-check-circle"></i>
-                    Shopping done
                 </button>
             </div>
             <div>
                 <div *ngIf="ingredientForm.controls.ingredient.touched && ingredientForm.controls.ingredient.errors">
-                    <div *ngIf="ingredientForm.controls.ingredient.errors.required" class="alert alert-danger">
-                        Please introduce an ingredient
-                    </div>
                     <div *ngIf="ingredientForm.controls.ingredient.errors.alreadyInList" class="alert alert-danger">
                         Ingredient already in the list
                     </div>
@@ -29,59 +25,56 @@
         </div>
     </form>
     <br>
-    <div class="list">
-        <div class="card">
-            <div class="card-body border-light">
-                <div class="list-group list-group-flush">
-                    <h2 class="card-title">To Buy</h2>
-                    <div class="ingredientList">
-                        <div *ngFor="let ingredient of ingredientsList">
-                            <div>
-                                <div>{{ingredient}}</div>
-                                <div>
-                                    <button  class="btn btn-primary btn-circle" (click)="onBought(ingredient)"><i class="fas fa-check-circle"></i></button>
-                                    <button  class="btn btn-secondary btn-circle" (click)="onDelete(ingredient)"><i class="fas fa-times-circle"></i></button>
-                                </div>
-                                <!--<label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
-                                    <input class="form-check-input me-1" formControlName="ingredients" type="checkbox" value="{{ingredient}}">
-                                        {{ingredient}}
-                                </label>-->
-                            </div>
-                        </div>
-                    </div>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal fade" role="dialog" [ngClass]="{'show': showModal}">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="showModal=false" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h2>Are you done shopping?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="onSubmit()">Check out</button>
+                    <button type="button" class="btn btn-secondary" (click)="showModal=false" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div> 
-        <div class="card">
-            <div class="card-body border-light">
-                <div class="list-group list-group-flush">
-                    <h2 class="card-title">Bought</h2>
-                    <div class="ingredientList">
-                        <div *ngFor="let ingredient of ingredientsBought">
-                            <div>
-                                <div>{{ingredient}}</div>
-                                <div>
-                                    <!--<button  class="btn btn-primary btn-circle" (click)="onBought(ingredient)"><i class="fas fa-check-circle"></i></button>-->
-                                    <button  class="btn btn-secondary btn-circle" (click)="onNotBought(ingredient)"><i class="fas fa-times-circle"></i></button>
-                                </div>
-                                <!--<label class="list-group-item list-group-item-action" list-group-active-border-color="#FFFFFF">
-                                    <input class="form-check-input me-1" formControlName="ingredients" type="checkbox" value="{{ingredient}}">
-                                        {{ingredient}}
-                                </label>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
+    </div>
+
+
+    <div class="list">
+        <mat-card>
+            <h2 class="card-title">To Buy</h2>
+            <div class="ingredientList">
+                <div *ngFor="let ingredient of ingredientsList">
+                    <div>
+                        <div>{{ingredient}}</div>
+                        <div>
+                            <button  class="btn btn-primary btn-circle" (click)="onBought(ingredient)"><i class="fas fa-check-circle"></i></button>
+                            <button  class="btn btn-secondary btn-circle" (click)="onDelete(ingredient)"><i class="fas fa-times-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card> 
+        <mat-card>
+            <h2 class="card-title">Bought</h2>
+            <div class="ingredientList">
+                <div *ngFor="let ingredient of ingredientsBought">
+                    <div>
+                        <div>{{ingredient}}</div>
+                        <div>
+                            <button  class="btn btn-secondary btn-circle" (click)="onNotBought(ingredient)"><i class="fas fa-times-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </mat-card>
     </div> 
 </div>
-
-<!--.btn-warning {
-    border-radius: 50px;
-    margin-left: 2%;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 6px;
-    padding-right: 6px;
-}-->

@@ -1,7 +1,12 @@
+h1 {
+    text-align: center;
+}
+
 .expenses {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .expense {
@@ -9,15 +14,16 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .header {
-    flex-basis: 20%;
+    flex-basis: 19%;
     text-align: center;
 }
 
 .item {
-    flex-basis: 20%;
+    flex-basis: 19%;
     text-align: center;
     margin-bottom: 5px;
 }
@@ -31,13 +37,5 @@
     font-size: 17px;
     line-height: 1.02857;
     margin-left: 5px;
+    margin-bottom: 3px;
 }
-
-/*.expenses > div {
-    margin-bottom: 5px;
-    flex-basis: 90%;
-}
-
-.headers {
-    text-align: center;
-}*/
