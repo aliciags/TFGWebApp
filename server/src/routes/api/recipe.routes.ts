@@ -13,6 +13,13 @@ const recipeRouter: Router = Router();
 recipeRouter.get('/', RecipeController.getAllRecipes);
 
 /**
+ * gett all recipes with the defined filters
+ * POST /api/filter
+ * access Public
+ */
+recipeRouter.post('/filter', RecipeController.getFilteredRecipes);
+
+/**
  * get single recipe by recipe id
  * GET /api/:rid
  * access Public
@@ -39,6 +46,13 @@ recipeRouter.put('/recipe/:rid', auth, RecipeController.editRecipe);
  * access Private
  */
 recipeRouter.get('/recipe/book/:uid', auth, RecipeController.getUserRecipes);
+
+/**
+ * save a recipe by user email and update user recipes
+ * PUT /api/recipe/:rid&:uid
+ * access Private
+ */
+ recipeRouter.put('/recipe/save/:rid&:uid', auth, RecipeController.saveRecipe);
 
 /**
  * remove a recipe by  recipe id

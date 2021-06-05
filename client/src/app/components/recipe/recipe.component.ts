@@ -5,7 +5,6 @@ import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { Recipe } from '../../model/recipe';
 
-
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
@@ -15,6 +14,9 @@ import { Recipe } from '../../model/recipe';
 export class RecipeComponent implements OnInit {
 
   public recipe: Recipe;
+  public loggedIn: boolean;
+  public modalText: string;
+  public showModal: boolean;
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token'
@@ -22,7 +24,11 @@ export class RecipeComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private localStorage: LocalStorageService, private apiService: ApiService) {
+              private localStorage: LocalStorageService,
+              private apiService: ApiService) {
+      this.loggedIn = false;
+      this.modalText = '';
+      this.showModal = false;
       this.recipe = {
         _id: '',
         name: '',
@@ -37,25 +43,46 @@ export class RecipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.localStorage.get('token') == null){
-      this.router.navigate(['/login']);
-    } else {
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
-      this.apiService.get('/recipe/' + history.state.id, this.httpOptions)
-      .subscribe(response => {
-        this.recipe = response;
-      },
-      error => {
-        if (error.error.msg === 'recipe not found'){
-          this.router.navigate(['/notfound']);
-        } else {
-          console.log('Internal server error');
-        }
-      });
+    this.apiService.get('/recipe/' + history.state.id)
+    .subscribe(response => {
+      this.recipe = response;
+    },
+    error => {
+      if (error.error.msg === 'recipe not found'){
+        this.router.navigate(['/notfound']);
+      } else {
+        console.log('Internal server error');
+      }
+    });
+    if (this.localStorage.get('token') != null){
+    this.loggedIn = true;
+    this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
     }
   }
 
-  addIngredient(id: string): void {
-
+  onAdd(ingredient: string): void {
+    const body = {
+      action: 'add'
+    };
+    this.apiService.put('/user/ingredient/' + this.localStorage.get('email') + '&' + ingredient, body, this.httpOptions)
+      .subscribe(response => {
+        console.log(ingredient, 'added to the groceries');
+        this.modalText = 'added to the groceries';
+      },
+      error => {
+        if (error.error.msg === 'user not found'){
+          this.router.navigate(['/notfound']);
+        } else if (error.error.msg === 'ingredient not found'){
+          console.log('no such ingredient');
+          this.modalText = 'no such ingredient';
+        } else if (error.error.msg === 'ingredient already in the list'){
+          console.log('already in the list');
+          this.modalText = 'already in the list';
+        } else {
+          console.log('Internal server error');
+          this.modalText = 'internal server error';
+        }
+      });
+    this.showModal = true;
   }
 }

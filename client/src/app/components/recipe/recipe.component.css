@@ -34,3 +34,12 @@ img {
 .ingredient{
     font: bold;
 }
+
+.modal.show {
+    display: block;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: space-between;
+}

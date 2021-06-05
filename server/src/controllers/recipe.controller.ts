@@ -1,12 +1,10 @@
 import { Response } from 'express';
 
-import { validationResult } from 'express-validator/check';
 import HttpStatusCodes from 'http-status-codes';
 
 import Request from '../types/Request';
 import Recipe, { IRecipe } from '../models/Recipe';
 import User, { IUser } from '../models/User';
-import { Schema } from 'mongoose';
 
 
 export const getAllRecipes = async (req: Request, res: Response) => {
@@ -22,16 +20,28 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 
 export const getFilteredRecipes = async (req: Request, res: Response) => {
 
-    const { diet, meals, ingredients } = req.body;
+    const { name, diet, meals, ingredients } = req.body;
     let recipes: IRecipe[];
 
     try {
-        if (diet || meals) {
-            recipes = await Recipe.find({diet: diet, meal: meals});
+        /* if ( name && diet && meals && ingredients) {
+            recipes = await Recipe.find({name: {$regex: name, $options: 'i' }, diet: diet, meal: meals});
+            return res.json(recipes);
+        } */
+        if ( name ) {
+            recipes = await Recipe.find({name: {$regex: name, $options: 'i' }});
+            return res.json(recipes);
+        }
+        if ( diet ) {
+            recipes = await Recipe.find({diet: diet});
+            return res.json(recipes);
+        }
+        if ( meals ) {
+            recipes = await Recipe.find({meals: meals});
             return res.json(recipes);
         }
         if ( ingredients ) {
-            recipes = await Recipe.find({ingredients: ingredients});
+            recipes = await Recipe.find({ingredients: {$regex: ingredients, $options: 'i'}});
             return res.json(recipes);
         }
     } catch (err) {
@@ -108,6 +118,41 @@ export const getUserRecipes = async (req: Request, res: Response) => {
             recipes.push( await Recipe.findById({_id: user.recipes[i]._id}));
         }
         res.json(recipes);
+    } catch (err) {
+        console.error(err.message);
+        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+    }
+};
+
+export const saveRecipe = async (req: Request, res: Response) => {
+
+    const rid = req.params.rid;
+    const uid = req.params.uid;
+
+    try {
+        const recipe: IRecipe = await Recipe.findOne({_id: rid });
+        const u = recipe.saved.filter( user => user == uid)[0];
+        const index = recipe.saved.indexOf(u, 0);
+        if ( index > -1 || recipe.creator == uid ) {
+            return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'the user already has this recipe'});
+        }
+        const user: IUser = await User.findOne({email: uid});
+        user.recipes.push(rid);
+        recipe.saved.push(uid);
+
+        await Recipe.findOneAndUpdate(
+            {_id: rid},
+            {$set: {saved: recipe.saved}},
+            {new: true, runValidators: true}
+        );
+
+        await User.findOneAndUpdate(
+            {_id: user.id},
+            {$set: {recipes: user.recipes}},
+            {new: true, runValidators: true}
+        );
+
+        res.json({msg: 'recipe saved'});
     } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});

@@ -37,6 +37,7 @@ import { CheckListComponent } from './components/check-list/check-list.component
 import { DatePipe } from '@angular/common';
 import { DisplayRecipesComponent } from './components/home/display-recipes/display-recipes.component';
 import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
+import { FilterPipe } from './filter/filter.pipe';
 
 
 
@@ -50,7 +51,8 @@ import { MyRecipesComponent } from './components/my-recipes/my-recipes.component
     ExpensesTrackerComponent,
     CheckListComponent,
     DisplayRecipesComponent,
-    MyRecipesComponent
+    MyRecipesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

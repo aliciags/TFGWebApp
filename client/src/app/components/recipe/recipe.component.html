@@ -1,4 +1,3 @@
-<br>
 <div class="container">
     <h1>{{ recipe.name }}</h1>
     <div class="row">
@@ -31,8 +30,8 @@
     <div class="row">
         <div class="col-6">
             <div class="label">Ingredients:</div> 
-               <div class="ingredient" *ngFor="let ing of recipe.ingredients">
-                    <i class="fas fa-plus-circle"></i>
+                <div class="ingredient" *ngFor="let ing of recipe.ingredients">
+                    <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing)"></i>
                     {{ing}}
                 </div>
             <br>
@@ -42,5 +41,21 @@
         </div>
     </div>
     <br>
+    <button class="btn btn-warning" ><i class="fas fa-pen"></i></button> 
     <router-outlet></router-outlet>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal fade" role="dialog" [ngClass]="{'show': showModal}">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>{{modalText}}</p>
+                    <button type="button" class="close" (click)="showModal=false" data-bs-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </div>
