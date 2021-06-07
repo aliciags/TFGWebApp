@@ -7,6 +7,8 @@ import { Menu } from 'src/app/model/menu';
 import { ApiService } from 'src/app/service/api.service';
 import { Day } from 'src/app/model/day';
 import { OnChanges } from '@angular/core';
+import { Recipe } from 'src/app/model/recipe';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -34,6 +36,7 @@ export class MenuComponent implements OnInit, OnChanges {
   @Input() httpOptions: object;
 
   constructor(private breakpointObserver: BreakpointObserver,
+              private localStorage: LocalStorageService,
               private apiService: ApiService,
               private router: Router) {
     this.card = [];
@@ -49,7 +52,10 @@ export class MenuComponent implements OnInit, OnChanges {
     this.active = {
       _id: '',
       _idMeal: '',
-      recipes: [],
+      recipes: [{
+        _id: '',
+        name: ''
+      }],
       day: '',
       meal: ''
     };
@@ -79,62 +85,71 @@ export class MenuComponent implements OnInit, OnChanges {
     });
   }
 
-  setDays(days: Day[]): void{
+  async setDays(days: Day[]): Promise<void>{
     this.card.splice(0, this.card.length);
     days.forEach( d => {
       d.meals.forEach( meal => {
-        /*const r: string[] = [];
-        let i = 0;
-        console.log(meal.recipes.length);
-        if (meal.recipes.length > 0 ) {
-          for (i = 0; i < meal.recipes.length; i++ ) {
-            this.apiService.get('/recipe/' + meal.recipes[i], this.httpOptions)
-              .subscribe( response => {
-                r.push(response.name);
-                console.log(r);
-                if ( (i + 1) === meal.recipes.length ) {
-                  let c: MenuCard;
-                  c = {
-                    _id: d._id,
-                    _idMeal: meal._id,
-                    recipes: r,
-                    day: d.day,
-                    meal: meal.meal
-                  };
-                  this.card.push(c);
-                }
-            });
-          }
-        } else {
-          console.log('hola');*/
-          let c: MenuCard;
-          c = {
-            _id: d._id,
-            _idMeal: meal._id,
-            recipes: meal.recipes,
-            day: d.day,
-            meal: meal.meal
-          };
-          this.card.push(c);
-        // }
+        const r = [{
+          _id: '',
+          name: ''
+        }];
+        meal.recipes.forEach(rid => {
+          r.push({
+            _id: rid,
+            name: 'Recipe'
+          });
+        });
+
+        let c: MenuCard;
+        c = {
+          _id: d._id,
+          _idMeal: meal._id,
+          recipes: r,
+          day: d.day,
+          meal: meal.meal
+        };
+        this.card.push(c);
       });
     });
+
+    let i = 0;
+    let j = 0;
+    for (i = 0; i < this.card.length; i++){
+      if ( this.card[i].recipes.length > 0){
+        for (j = 0; j < this.card[i].recipes.length; j++){
+          if (this.card[i].recipes[j]._id !== ''){
+            this.card[i].recipes[j].name =  (await this.getRecipe(this.card[i].recipes[j]._id)).name;
+          }
+        }
+      }
+    }
+  }
+
+  async getRecipe(rid: string): Promise<Recipe> {
+    return this.apiService.get('/recipe/' + rid, this.httpOptions)
+              .toPromise();
   }
 
   expandRecipe(rid: string): void {
     this.router.navigateByUrl('recipe', {state: {id: rid}});
   }
 
-  addRecipe(mealid: string): void{
-    const body = {
-      recipe: '60abe2524293963bd0141cde',
-      edit: 'add'
-    };
-    this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
-      .subscribe(response => {
-        console.log(response);
-        this.ngOnChanges();
-    });
+  addRecipe(mealid: string, input: string): void{
+    this.apiService.post('/filter', {name: input, user: this.localStorage.get('email')})
+            .subscribe( response => {
+              console.log('r', response);
+              console.log(response[0]._id);
+              const body = {
+                recipe: response[0]._id,
+                edit: 'add'
+              };
+              this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
+                .subscribe(value => {
+                  this.ngOnChanges();
+              });
+            }, error => {
+              console.log('e', error);
+            });
   }
 
   deleteRecipe(mealid: string, rid: string): void{
@@ -144,14 +159,26 @@ export class MenuComponent implements OnInit, OnChanges {
     };
     this.apiService.put('/day/meal/' + mealid, body, this.httpOptions)
       .subscribe(response => {
-        console.log(response);
         this.ngOnChanges();
     });
   }
 
-  showEditModal(meal: MenuCard): void{
+  showEditModal(card: MenuCard): void{
     this.showModalEdit = true;
-    this.active = meal;
+    this.apiService.get('/day/menu/' + card._id, this.httpOptions)
+    .subscribe(response => {
+      const index = response.meals.array.forEach((element: string) => {
+        console.log(element);
+      });
+      // console.log(this.days);
+    }, error => {
+      if (error.error.msg === 'There is no such menu'){
+        console.log(error);
+      } else if (error.error.msg === 'not a menu object id'){
+        console.log(error);
+      }
+    });
+    // this.active = meal;
   }
 
 }

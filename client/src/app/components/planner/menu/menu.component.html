@@ -13,23 +13,22 @@
                         <mat-card-title>
                             <h5 class="badge badge-primary">{{c.meal}}</h5>
                             <span class="spacer"></span>
-                            <i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                            <!--<i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                                 <mat-icon>more_vert</mat-icon>
-                            </i>
-                            <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item (click)="showEditModal(c)">Edit recipe</button>
+                            </i>-->
+                            <button class="btn btn-info btn-circle" (click)="showEditModal(c)"><i class="fas fa-edit"></i></button>
+                            <!--<mat-menu #menu="matMenu" xPosition="before">
                                 <button mat-menu-item>See recipe</button>
-                                <button mat-menu-item (click)="deleteRecipe(c._idMeal, c.recipes[0])">Delete recipe</button>
-                            </mat-menu>
+                                <!--<button mat-menu-item (click)="deleteRecipe(c._idMeal, c.recipes[0])">Delete recipe</button>
+                            </mat-menu>-->
                         </mat-card-title>
                     </mat-card-header> 
-                    <mat-card-content class="dashboard-card-content">
-                        <br>
-                        <button *ngIf="c.recipes.length == 0" class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
+                    <mat-card-content class="dashboard-card-content content">
+                        <!--<button *ngIf="c.recipes.length == 0" class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
                             <i class="fas fa-plus-circle"></i>
-                        </button> 
+                        </button>--> 
                         <div *ngFor="let r of c.recipes">
-                            <h5 (click)="expandRecipe(r)">{{r}}</h5>
+                            <span class="r" (click)="expandRecipe(r._id)">{{r.name}}</span>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -54,11 +53,11 @@
                     </mat-card-header> 
                     <mat-card-content class="dashboard-card-content">
                         <br>
-                        <button *ngIf="c.recipes.length == 0" class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
+                        <!--<button *ngIf="c.recipes.length == 0" class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
                             <i class="fas fa-plus-circle"></i>
-                        </button> 
+                        </button>--> 
                         <div *ngFor="let r of c.recipes">
-                            <h5 (click)="expandRecipe(r)">{{r}}</h5>
+                            <h5 (click)="expandRecipe(r._id)">{{r.name}}</h5>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -83,11 +82,11 @@
                     </mat-card-header> 
                     <mat-card-content class="dashboard-card-content">
                         <br>
-                        <button class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
+                        <!--<button class="btn btn-outline-dark btn-circle-md" (click)="addRecipe(c._idMeal)">
                             <i class="fas fa-plus-circle"></i>
-                        </button> 
+                        </button>--> 
                         <div *ngFor="let r of c.recipes">
-                            <h5 (click)="expandRecipe(r)">{{r}}</h5>
+                            <h5 (click)="expandRecipe(r._id)">{{r.name}}</h5>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -104,19 +103,21 @@
                     <button type="button" class="close" (click)="showModalEdit=false" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" placeholder="Introduce recipe">
-                    <button class="btn btn-primary btn-circle-md" (click)="addRecipe(active._idMeal)">
-                        <i class="fas fa-plus-circle"></i>
-                    </button>
-                    <div *ngFor="let r of active.recipes">
-                        <h5>{{r}}</h5>
-                        <button class="btn btn-secondary btn-circle-md" (click)="deleteRecipe(active._idMeal, r)">
+                    <div class="flex-box">
+                        <input #recipesName type="text" placeholder="Introduce recipe">
+                        <button class="btn btn-primary btn-circle" (click)="addRecipe(active._idMeal, recipesName.value)">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                    </div>  
+                    <div class="flex-box" *ngFor="let r of active.recipes">
+                        <h3 class="recipe-name">{{r.name}}</h3>
+                        <button *ngIf="r._id !== ''" class="btn btn-secondary btn-circle delete" (click)="deleteRecipe(active._idMeal, r._id)">
                             <i class="fas fa-minus-circle"></i>
                         </button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" >Check out</button>
+                    <button type="button" class="btn btn-primary">Check out</button>
                     <button type="button" class="btn btn-secondary" (click)="showModalEdit=false" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -3,16 +3,21 @@ h1 {
     font-size: xx-large;
 }
 
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
 .grid-container {
     height: 100%;
     width: 100%;
 }
 
-.btn-primary {
+.btn {
     margin-bottom: 10px;
 }
 
-.row {
+/*.row {
     width: 100%;
 }
 
@@ -20,7 +25,7 @@ h1 {
     text-align: center;
     height: 100%;
     width: 100%;
-}
+}*/
 
 .badge-dark {
     padding-left: 5%;
@@ -39,10 +44,11 @@ h1 {
     left:10px
 }
 
-.more-button {
+.btn-info {
     position: absolute;
     top: 5px;
     right: 1px;
+    border: 0px;
 }
 
 .container {
@@ -101,15 +107,46 @@ h1 {
     margin-left: 5px;
 }
 
-.btn-outline-dark {
-    border: 0px;
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
 }
 
 .modal.show {
     display: block;
 }
 
-#useless 
+.flex-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.recipe-name {
+    flex-basis: 75%;
+    margin-bottom: 2px;
+}
+
+.delete {
+    margin-top: 5px;
+}
+
+.r {
+    margin-bottom: 5px;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+/*#useless 
 .card {
     text-align: left;
     
@@ -122,4 +159,4 @@ h1 {
     grid-template-columns: max-content;
     grid-template-rows: max-content;
 
-}
+}*/

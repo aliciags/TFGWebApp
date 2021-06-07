@@ -46,7 +46,7 @@ export const getMenuDays = async (req: Request, res: Response) => {
 
 export const getDay = async (req: Request, res: Response) => {
   try {
-    const day: IDay = await Day.findById({ _id: req.params.did });
+    const day: IDay = await Day.findById( { $or: [{ _id: req.params.did }, {'meals._id': req.params.did}] });
     if (!day) {
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
@@ -124,11 +124,13 @@ export const editRecipe = async (req: Request, res: Response) => {
   const { recipe, edit } = req.body;
 
   try {
+
     const day: IDay = await Day.findOne({'meals._id': req.params.mealid});
     const meal = day.meals.filter(m => m._id == req.params.mealid)[0];
     const indexM = day.meals.indexOf(meal, 0);
     const r = day.meals[indexM].recipes.filter(r => r == recipe)[0];
     const indexR = day.meals[indexM].recipes.indexOf(r, 0);
+
     if (indexR > -1 && edit === 'add') {
       return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'recipe already in the meal'});
     } else if (indexR === -1 && edit === 'delete') {
@@ -140,6 +142,7 @@ export const editRecipe = async (req: Request, res: Response) => {
       meal.recipes.push(recipe);
       day.meals[indexM] = meal;
     }
+
     await Day.findOneAndUpdate(
       { _id: day._id },
       { $set: day},

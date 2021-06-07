@@ -20,10 +20,19 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 
 export const getFilteredRecipes = async (req: Request, res: Response) => {
 
-    const { name, diet, meals, ingredients } = req.body;
+    const { name, diet, meals, ingredients, user } = req.body;
     let recipes: IRecipe[];
 
     try {
+        if (user) {
+            recipes = await Recipe.find({
+                $and: [
+                    { name: {$regex: name, $options: 'i' } },
+                    { $or: [ {creator: user}, {saved: user} ] }
+                ]
+            });
+            return res.json(recipes);
+        }
         /* if ( name && diet && meals && ingredients) {
             recipes = await Recipe.find({name: {$regex: name, $options: 'i' }, diet: diet, meal: meals});
             return res.json(recipes);

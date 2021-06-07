@@ -39,7 +39,7 @@ export class MyRecipesComponent implements OnInit {
           if ( value.length > 0 ){
             // asi no se puede hacer porq no filtra las recetas q sean solo del user
             // lo hace con tda la colleccion
-            this.apiService.post('/filter', {name: value})
+            this.apiService.post('/filter', {name: value, user: this.localStorage.get('email')})
             .subscribe( response => {
               console.log('r', response);
               this.recipes = response;
@@ -47,13 +47,14 @@ export class MyRecipesComponent implements OnInit {
               console.log('e', error);
             });
           } else {
-            this.apiService.get('/').subscribe(response => {
-              this.recipes = response;
-              // this.setRecipes(this.recipes);
-            },
-            err => {
-              // internal server error
-              console.log(err);
+            this.apiService.get('/recipe/book/' + this.localStorage.get('email'), this.httpOptions)
+              .subscribe(response => {
+                this.recipes = response;
+                // this.setRecipes(this.recipes);
+              },
+              err => {
+                // internal server error
+                console.log(err);
             });
           }
       });
