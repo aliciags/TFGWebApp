@@ -6,8 +6,8 @@
             <h4 class="badge badge-dark">{{d}}</h4>
         </div>
 
-        <div *ngIf="card.length/7 == 3" class="grid-container menu1">
-            <div *ngFor="let c of card">
+        <div *ngIf="cards.length/7 == 3" class="grid-container menu1">
+            <div *ngFor="let c of cards">
                 <mat-card class="dashboard-card">
                     <mat-card-header>
                         <mat-card-title>
@@ -35,20 +35,20 @@
             </div>
         </div>
 
-        <div *ngIf="card.length/7 == 4" class="grid-container menu2">
-            <div *ngFor="let c of card">
+        <div *ngIf="cards.length/7 == 4" class="grid-container menu2">
+            <div *ngFor="let c of cards">
                 <mat-card class="dashboard-card">
                     <mat-card-header>
                         <mat-card-title>
                             <h5 class="badge badge-primary">{{c.meal}}</h5>
-                            <span class="spacer"></span>
-                            <i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                            <button class="btn btn-info btn-circle" (click)="showEditModal(c)"><i class="fas fa-edit"></i></button>
+                            <!--<i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                                 <mat-icon>more_vert</mat-icon>
                             </i>
                             <mat-menu #menu="matMenu" xPosition="before">
                                 <button mat-menu-item>Add recipe</button>
                                 <button mat-menu-item>Expand</button>
-                            </mat-menu>
+                            </mat-menu>-->
                         </mat-card-title>
                     </mat-card-header> 
                     <mat-card-content class="dashboard-card-content">
@@ -64,8 +64,8 @@
             </div>
         </div>
 
-        <div *ngIf="card.length/7 == 5" class="grid-container menu3">
-            <div *ngFor="let c of card">
+        <div *ngIf="cards.length/7 == 5" class="grid-container menu3">
+            <div *ngFor="let c of cards">
                 <mat-card class="dashboard-card">
                     <mat-card-header>
                         <mat-card-title>

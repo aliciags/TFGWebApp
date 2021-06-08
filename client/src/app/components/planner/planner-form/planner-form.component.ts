@@ -15,7 +15,7 @@ export class PlannerFormComponent implements OnInit {
 
   public plannerForm: FormGroup;
   public submitted: boolean = false;
-  public meals: string[] = ['Breakfast', 'Lunch', 'Diner', 'Snack'];
+  public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
 
   constructor(

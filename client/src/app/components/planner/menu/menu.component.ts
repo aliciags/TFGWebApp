@@ -9,6 +9,7 @@ import { Day } from 'src/app/model/day';
 import { OnChanges } from '@angular/core';
 import { Recipe } from 'src/app/model/recipe';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { Mealtime } from 'src/app/model/mealtime';
 
 @Component({
   selector: 'app-menu',
@@ -19,18 +20,18 @@ export class MenuComponent implements OnInit, OnChanges {
 
   public daysWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public meals: string[] = ['Breakfast', 'Lunch', 'Diner'];
-  public card: MenuCard[];
+  public cards: MenuCard[];
   public days: Day[];
   public active: MenuCard;
   public showModalAdd: boolean;
   public showModalDel: boolean;
   public showModalEdit: boolean;
 
-  public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  /*public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       return this.card;
     })
-  );
+  );*/
 
   @Input() menu: Menu;
   @Input() httpOptions: object;
@@ -39,7 +40,7 @@ export class MenuComponent implements OnInit, OnChanges {
               private localStorage: LocalStorageService,
               private apiService: ApiService,
               private router: Router) {
-    this.card = [];
+    this.cards = [];
     this.days = [];
     this.showModalAdd = false;
     this.showModalDel = false;
@@ -86,7 +87,7 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   async setDays(days: Day[]): Promise<void>{
-    this.card.splice(0, this.card.length);
+    this.cards.splice(0, this.cards.length);
     days.forEach( d => {
       d.meals.forEach( meal => {
         const r = [{
@@ -108,17 +109,17 @@ export class MenuComponent implements OnInit, OnChanges {
           day: d.day,
           meal: meal.meal
         };
-        this.card.push(c);
+        this.cards.push(c);
       });
     });
 
     let i = 0;
     let j = 0;
-    for (i = 0; i < this.card.length; i++){
-      if ( this.card[i].recipes.length > 0){
-        for (j = 0; j < this.card[i].recipes.length; j++){
-          if (this.card[i].recipes[j]._id !== ''){
-            this.card[i].recipes[j].name =  (await this.getRecipe(this.card[i].recipes[j]._id)).name;
+    for (i = 0; i < this.cards.length; i++){
+      if ( this.cards[i].recipes.length > 0){
+        for (j = 0; j < this.cards[i].recipes.length; j++){
+          if (this.cards[i].recipes[j]._id !== ''){
+            this.cards[i].recipes[j].name =  (await this.getRecipe(this.cards[i].recipes[j]._id)).name;
           }
         }
       }
@@ -165,12 +166,17 @@ export class MenuComponent implements OnInit, OnChanges {
 
   showEditModal(card: MenuCard): void{
     this.showModalEdit = true;
-    this.apiService.get('/day/menu/' + card._id, this.httpOptions)
+    this.active = this.cards.filter(c => c._idMeal === card._idMeal)[0];
+    /*this.apiService.get('/day/menu/' + card._id, this.httpOptions)
     .subscribe(response => {
-      const index = response.meals.array.forEach((element: string) => {
-        console.log(element);
-      });
-      // console.log(this.days);
+      const meal = response.meals.filter( (m: Mealtime) => m._id === card._idMeal)[0];
+      this.active = {
+          _id: card._id,
+          _idMeal: card._idMeal,
+          recipes: meal.recipes,
+          day: d.day,
+          meal: meal.meal
+      };
     }, error => {
       if (error.error.msg === 'There is no such menu'){
         console.log(error);
@@ -178,7 +184,7 @@ export class MenuComponent implements OnInit, OnChanges {
         console.log(error);
       }
     });
-    // this.active = meal;
+    // this.active = meal;*/
   }
 
 }

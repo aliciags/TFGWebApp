@@ -8,10 +8,10 @@
             <a class="nav-link" (click)="showModalDel=true">
                 <i class="fas fa-minus-circle"></i> Delete menu</a>
         </li>
-        <li *ngIf="menus.length > 0" class="nav-item">
+        <!--<li *ngIf="menus.length > 0" class="nav-item">
             <a class="nav-link" routerLink="meal-form">
                 <i class="fas fa-pen"></i> Edit</a>
-        </li>
+        </li>-->
         <li *ngFor="let menu of menus">
             <a class="nav-link" (click)="activeMenu(menu.title)">
                 {{menu.title}}

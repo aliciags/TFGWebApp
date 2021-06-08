@@ -9,6 +9,11 @@
             <label for="description">Description</label>
             <input id="description" type="text" class="form-control" formControlName="description" placeholder="Introduce a description">
         </div>
+        <label for="meals">Meals</label>
+            <select id="meal" type="meal" class="form-control" formControlName="meal" multiple>
+                <option *ngFor="let m of meals"
+                    [value]="m">{{m}}</option>
+            </select>
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Add</button>
         </div>

@@ -62,6 +62,7 @@ export const getMenu = async ( req: Request, res: Response ) => {
 export const addMenu = async ( req: Request, res: Response ) =>  {
 
     const { _user, title, description } = req.body;
+    let { meal } = req.body;
     try {
         const user: IUser = await User.findOne({email: _user});
         if (!user) {
@@ -80,12 +81,15 @@ export const addMenu = async ( req: Request, res: Response ) =>  {
                         'Thursday', 'Friday', 'Saturday', 'Sunday'];
         wdays.forEach(async day => {
             const meals: Mealtime[] = [];
-            for (i = 0; i < user.meals.length; i++) {
-                const meal: Mealtime = {
-                    meal: user.meals[i],
+            if (!meal) {
+                meal = user.meals;
+            }
+            for (i = 0; i < meal.length; i++) {
+                const m: Mealtime = {
+                    meal: meal[i],
                     recipes: []
                 };
-                meals.push(meal);
+                meals.push(m);
             }
 
             const dayFields = {
