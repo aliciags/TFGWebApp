@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   public recipes: Recipe[];
   public environment: string;
-  public filters: boolean;
+  // public filters: boolean;
+  public ingredientsFilter: string[];
   public searchText: string;
   public searchControl: FormControl;
   public httpOptions = {
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
               private apiService: ApiService) {
       this.recipes = [];
       this.environment = '';
-      this.filters = false;
+      // this.filters = false;
+      this.ingredientsFilter = [];
       this.searchText = '';
       this.searchControl = new FormControl();
       this.searchControl.valueChanges
@@ -46,7 +48,6 @@ export class HomeComponent implements OnInit {
           } else {
             this.apiService.get('/').subscribe(response => {
               this.recipes = response;
-              // this.setRecipes(this.recipes);
             },
             err => {
               // internal server error
@@ -63,7 +64,6 @@ export class HomeComponent implements OnInit {
     }
     this.apiService.get('/').subscribe(response => {
       this.recipes = response;
-      // this.setRecipes(this.recipes);
       console.log(this.recipes);
     },
     err => {
@@ -72,9 +72,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onFilter(): void{
+  /*onFilter(): void{
     this.filters ? this.filters = false : this.filters = true;
-  }
+  }*/
 
   onSave(rid: string): void{
     this.apiService.put('/recipe/save/' + rid + '&' + this.localStorage.get('email'), {}, this.httpOptions)
@@ -89,17 +89,35 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  /*setRecipes(recipes: Recipe[]): void{
-    this.recipes.splice(0, this.card.length);
-    recipes.forEach( r => {
-      let c: RecipeCard;
-      c = {
-        _id: r._id,
-        name: r.name,
-        diet: r.diet,
-        meals: r.meal
-      };
-      this.card.push(c);
+  onAddIngredient(ingredient: string): void{
+    this.apiService.get('/ingredient/' + ingredient).subscribe( ing => {
+      if ( this.ingredientsFilter.indexOf(this.ingredientsFilter.filter( i => i === ing.name)[0], 0) === -1 ){
+        this.ingredientsFilter.push(ing.name);
+      } else {
+        // already in the list
+      }
+    }, error => {
+      // not a valid ingredient
+      console.log('e', error);
     });
-  }*/
+  }
+
+  onDeleteIngredient(ingredient: string): void{
+    const i = this.ingredientsFilter.filter( ing => ing === ingredient)[0];
+    const index = this.ingredientsFilter.indexOf(i, 0);
+    if ( index > -1 ) {
+      this.ingredientsFilter.splice(index, 1);
+    }
+  }
+
+  onSubmit(n: string, d: string, m: string): void{
+    console.log(n, d, m);
+    this.apiService.post('/filter', {name: n, diet: d, meal: m, ingredients: this.ingredientsFilter})
+            .subscribe( response => {
+              console.log('r', response);
+              this.recipes = response;
+            }, error => {
+              console.log('e', error);
+            });
+  }
 }

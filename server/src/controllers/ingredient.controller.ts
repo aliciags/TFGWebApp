@@ -27,14 +27,12 @@ export const getIngredient = async (req: Request, res: Response) => {
 
     try {
         const ingredient: IIngredient = await Ingredient.findOne({name: req.params.iid});
-        if (ingredient) {
-            return res.json(ingredient);
+        if (!ingredient) {
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'Ingredient not found'});
         }
-        res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'Ingredient not found'});
+        res.json(ingredient);
     } catch (err) {
         console.error(err.message);
-        // if( err.kind === 'ObjectId') {
-        // return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not an ingredient object id'});}
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
 };

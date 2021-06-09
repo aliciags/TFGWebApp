@@ -10,12 +10,16 @@ h1 {
     justify-content: center;
 }
 
-.input-group {
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-bottom: 5px;
-    flex-basis: 65%;
+.input-group, .custom-select {
+    flex-basis: 20%;
+    margin-left: 5px;
+    margin-right: 5px;
 }
+  
+.check {
+    margin-left: 5px;
+}
+  
 
 .small {
     margin-left: 2px;
@@ -33,5 +37,31 @@ h1 {
     display: block;
 }
   
+.ingredient-filter {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
 
+.ingredient > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-basis: 20%;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+  
   

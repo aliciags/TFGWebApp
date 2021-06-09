@@ -20,11 +20,12 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 
 export const getFilteredRecipes = async (req: Request, res: Response) => {
 
-    const { name, diet, meals, ingredients, user } = req.body;
+    const { name, diet, meal, ingredients, user } = req.body;
     let recipes: IRecipe[];
+    const filter = [];
 
     try {
-        if (user) {
+        /*if (user) {
             recipes = await Recipe.find({
                 $and: [
                     { name: {$regex: name, $options: 'i' } },
@@ -32,27 +33,51 @@ export const getFilteredRecipes = async (req: Request, res: Response) => {
                 ]
             });
             return res.json(recipes);
-        }
+        } else {
+            recipes = await Recipe.find({
+                $and: [
+                    { name: {$regex: name, $options: 'i' } },
+                    {diet: diet},
+                    {meals: meals},
+                ]
+            });
+        }*/
         /* if ( name && diet && meals && ingredients) {
             recipes = await Recipe.find({name: {$regex: name, $options: 'i' }, diet: diet, meal: meals});
             return res.json(recipes);
         } */
+        if ( user ) {
+            filter.push(
+                { $or: [ {creator: user}, {saved: user} ] }
+            );
+        }
         if ( name ) {
-            recipes = await Recipe.find({name: {$regex: name, $options: 'i' }});
-            return res.json(recipes);
+            console.log('hola');
+            filter.push(
+                {name: {$regex: name, $options: 'i' }}
+            );
         }
-        if ( diet ) {
-            recipes = await Recipe.find({diet: diet});
-            return res.json(recipes);
+        if ( diet != 'Diet...' && diet ) {
+            filter.push(
+                {diet: diet}
+            );
         }
-        if ( meals ) {
-            recipes = await Recipe.find({meals: meals});
-            return res.json(recipes);
+        if ( meal != 'Meal...' && meal ) {
+            filter.push(
+                {meal: meal}
+            );
         }
-        if ( ingredients ) {
-            recipes = await Recipe.find({ingredients: {$regex: ingredients, $options: 'i'}});
-            return res.json(recipes);
+        if ( ingredients.length != 0 ) {
+            // ingredients has to be an array of ingredients
+            filter.push(
+                {ingredients: {$all: ingredients}}
+            );
         }
+        console.log(filter);
+        recipes = await Recipe.find({
+            $and: filter
+        });
+        return res.json(recipes);
     } catch (err) {
         console.error(err.message);
         res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});

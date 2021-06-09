@@ -15,9 +15,9 @@ ingredientRouter.get('/', auth,  IngredientController.getAllIngredients);
 /**
  * get ingredients by ingredient id
  * GET /api/ingredient/:iid
- * access Private
+ * access Public
  */
-ingredientRouter.get('/:iid', auth,  IngredientController.getIngredient);
+ingredientRouter.get('/:iid',  IngredientController.getIngredient);
 
 /**
  * get ingredients by ingredient name

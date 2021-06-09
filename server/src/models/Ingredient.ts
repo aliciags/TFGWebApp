@@ -23,7 +23,7 @@ const ingredientSchema: Schema = new Schema(
     {
         name: {
             type: String,
-            required: true, 
+            required: true,
             unique: true
         },
         diet: {
@@ -37,8 +37,8 @@ const ingredientSchema: Schema = new Schema(
             required: true
         },
         avgPrice: {
-            type: Number, 
-            required: true, 
+            type: Number,
+            required: true,
             min: 0
         },
         users: {

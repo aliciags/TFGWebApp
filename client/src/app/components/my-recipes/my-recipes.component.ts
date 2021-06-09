@@ -15,7 +15,8 @@ export class MyRecipesComponent implements OnInit {
 
   public recipes: Recipe[];
   public rid: string;
-  public filters: boolean;
+  // public filters: boolean;
+  public ingredientsFilter: string[];
   public environment: string;
   public showModal: boolean;
   public searchControl: FormControl;
@@ -31,7 +32,8 @@ export class MyRecipesComponent implements OnInit {
     this.recipes = [];
     this.environment = 'myrecipes';
     this.rid = '';
-    this.filters = false;
+    // this.filters = false;
+    this.ingredientsFilter = [];
     this.showModal = false;
     this.searchControl = new FormControl();
     this.searchControl.valueChanges
@@ -74,6 +76,17 @@ export class MyRecipesComponent implements OnInit {
     }
   }
 
+  onFilter(n: string, d: string, m: string): void{
+    console.log(n, d, m);
+    this.apiService.post('/filter', {name: n, diet: d, meal: m, ingredients: this.ingredientsFilter, user: this.localStorage.get('email')})
+            .subscribe( response => {
+              console.log('r', response);
+              this.recipes = response;
+            }, error => {
+              console.log('e', error);
+            });
+  }
+
   onDelete(): void{
     this.apiService.delete('/recipe/' + this.rid + '&' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
@@ -92,8 +105,29 @@ export class MyRecipesComponent implements OnInit {
     this.showModal = true;
   }
 
-  onFilter(): void {
+  /*onFilter(): void {
     this.filters ? this.filters = false : this.filters = true;
+  }*/
+
+  onAddIngredient(ingredient: string): void{
+    this.apiService.get('/ingredient/' + ingredient).subscribe( ing => {
+      if ( this.ingredientsFilter.indexOf(this.ingredientsFilter.filter( i => i === ing.name)[0], 0) === -1 ){
+        this.ingredientsFilter.push(ing.name);
+      } else {
+        // already in the list
+      }
+    }, error => {
+      // not a valid ingredient
+      console.log('e', error);
+    });
+  }
+
+  onDeleteIngredient(ingredient: string): void{
+    const i = this.ingredientsFilter.filter( ing => ing === ingredient)[0];
+    const index = this.ingredientsFilter.indexOf(i, 0);
+    if ( index > -1 ) {
+      this.ingredientsFilter.splice(index, 1);
+    }
   }
 
 }
