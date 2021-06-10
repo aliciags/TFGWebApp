@@ -58,6 +58,10 @@ export class ExpensesTrackerComponent implements OnInit {
     }
   }
 
+  onEdit(id: string): void{
+
+  }
+
   onDelete(id: string | undefined): void {
     if (id) {
       this.apiService.delete('/expense/' + id, this.httpOptions).subscribe(

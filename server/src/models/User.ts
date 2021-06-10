@@ -46,7 +46,7 @@ const userSchema: Schema = new Schema(
         },
         email: {
             type: String,
-            required: true, 
+            required: true,
             unique: true,
             validate: {
                 validator: function(e: string) {
@@ -107,7 +107,7 @@ const userSchema: Schema = new Schema(
         },
         private: {
             type: Boolean,
-            required: true, 
+            required: true,
             default: false
         },
         recipes: [{

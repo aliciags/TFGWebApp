@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExpensesTrackerComponent } from './components/expenses-tracker/expenses-tracker.component';
 import { GroceriesListComponent } from './components/groceries-list/groceries-list.component';
 
 import { HomeComponent } from './components/home/home.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
   {path: 'my-recipes/recipe-form', component: RecipeFormComponent},
   {path: 'login', component: LoginComponent},
   {path: 'groceries', component: GroceriesListComponent},
-  {path: 'expenses', component: ExpensesTrackerComponent}
 ];
 
 @NgModule({
