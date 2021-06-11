@@ -6,47 +6,57 @@ import Request from '../types/Request';
 import Day, { IDay } from '../models/Day';
 
 export const getAllDays = async (req: Request, res: Response) => {
+
   const role: string = req.role;
   if (role !== 'admin') {
     return res.status(HttpStatusCodes.FORBIDDEN).json({ msg: 'Access denied' });
   }
 
+  let days: IDay[];
+
   try {
-    const days: IDay[] = await Day.find();
-    res.json(days);
+    days = await Day.find();
   } catch (err) {
     console.error(err.message);
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+
+  return res.json(days);
 };
 
 export const getMenuDays = async (req: Request, res: Response) => {
+
+  let days: IDay[];
+
   try {
-    const days: IDay[] = await Day.find({ _menu: req.params.mid });
+    days = await Day.find({ _menu: req.params.mid });
     if (!days) {
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
         .json({ msg: 'There is no such menu' });
     }
-    res.json(days);
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
       return res
-        .status(HttpStatusCodes.BAD_REQUEST)
-        .json({ msg: 'not a menu object id' });
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ msg: 'not a menu object id' });
     }
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+  return res.json(days);
 };
 
 export const getDay = async (req: Request, res: Response) => {
+
+  let day: IDay;
+
   try {
-    const day: IDay = await Day.findById( { $or: [{ _id: req.params.did }, {'meals._id': req.params.did}] });
+    day = await Day.findById( { $or: [{ _id: req.params.did }, {'meals._id': req.params.did}] });
     if (!day) {
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
@@ -67,25 +77,30 @@ export const getDay = async (req: Request, res: Response) => {
 };
 
 export const addDay = async (req: Request, res: Response) => {
+
   const { menu, day, meals } = req.body;
   const dayFields = {
     menu,
     day,
     meals,
   };
+  let d: IDay;
+
   try {
-    const day: IDay = new Day(dayFields);
-    await day.save();
-    res.json(day);
+    d = new Day(dayFields);
+    await d.save();
   } catch (err) {
     console.error(err.message);
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+
+  return res.json(d);
 };
 
 export const editDay = async (req: Request, res: Response) => {
+
   const id = req.params.did;
   const { menu, day, meals } = req.body;
   const dayFields = {
@@ -93,39 +108,43 @@ export const editDay = async (req: Request, res: Response) => {
     day,
     meals,
   };
+
+  let d: IDay;
   try {
-    let day: IDay = await Day.findById({ _id: id });
-    if (!day) {
+    d = await Day.findById({ _id: id });
+    if (!d) {
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
         .json({ msg: 'Day does not exist' });
     }
-    day = await Day.findByIdAndUpdate(
+    d = await Day.findByIdAndUpdate(
       { _id: id },
       { $set: dayFields },
       { new: true, runValidators: true }
     );
-    res.json(day);
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
       return res
-        .status(HttpStatusCodes.BAD_REQUEST)
-        .json({ msg: 'not a day object id' });
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ msg: 'not a day object id' });
     }
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+
+  return res.json(d);
 };
 
 export const editRecipe = async (req: Request, res: Response) => {
 
   const { recipe, edit } = req.body;
+  let day: IDay;
 
   try {
 
-    const day: IDay = await Day.findOne({'meals._id': req.params.mealid});
+    day = await Day.findOne({'meals._id': req.params.mealid});
     const meal = day.meals.filter(m => m._id == req.params.mealid)[0];
     const indexM = day.meals.indexOf(meal, 0);
     const r = day.meals[indexM].recipes.filter(r => r == recipe)[0];
@@ -148,29 +167,35 @@ export const editRecipe = async (req: Request, res: Response) => {
       { $set: day},
       { new: true, runValidators: true }
     );
-    res.json({msg: 'update sucessfully'});
+
   } catch (err) {
     console.log(err.message);
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+
+  return res.json({msg: 'update sucessfully'});
 };
 
 
 export const deleteDay = async (req: Request, res: Response) => {
+
+  let day: IDay;
+
   try {
-    const day: IDay = await Day.findByIdAndDelete({ _id: req.params.did });
-    res.json({ msg: 'day removed', d: day });
+    day = await Day.findByIdAndDelete({ _id: req.params.did });
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
       return res
-        .status(HttpStatusCodes.BAD_REQUEST)
-        .json({ msg: 'not a day object id' });
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ msg: 'not a day object id' });
     }
-    res
-      .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ msg: err.message });
+    return res
+    .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: err.message });
   }
+
+  return res.json({ msg: 'day removed', d: day });
 };

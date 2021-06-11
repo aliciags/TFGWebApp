@@ -6,6 +6,7 @@ import { Recipe } from 'src/app/model/recipe';
 import { FormControl } from '@angular/forms';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { HttpHeaders } from '@angular/common/http';
+import { RecipeService } from 'src/app/service/recipe.sercive';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,6 @@ export class HomeComponent implements OnInit {
 
   public recipes: Recipe[];
   public environment: string;
-  // public filters: boolean;
   public ingredientsFilter: string[];
   public searchText: string;
   public searchControl: FormControl;
@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(private localStorage: LocalStorageService,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private recipeService: RecipeService) {
       this.recipes = [];
       this.environment = '';
       // this.filters = false;
@@ -57,14 +58,15 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void{
+  async ngOnInit(): Promise<void>{
+
+    // this.recipes = await this.recipeService.init();
     if (this.localStorage.get('token') != null) {
       this.environment = 'home';
       this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
     }
     this.apiService.get('/').subscribe(response => {
       this.recipes = response;
-      console.log(this.recipes);
     },
     err => {
       // internal server error

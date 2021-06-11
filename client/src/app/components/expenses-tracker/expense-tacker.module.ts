@@ -16,7 +16,9 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     exports: [],
     imports: [
         CommonModule,
-        ExpensesRoutingModule
+        ExpensesRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [ ]
 })

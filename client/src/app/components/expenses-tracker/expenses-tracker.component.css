@@ -18,12 +18,12 @@ h1 {
 }
 
 .header {
-    flex-basis: 19%;
+    flex-basis: 24%;
     text-align: center;
 }
 
 .item {
-    flex-basis: 19%;
+    flex-basis: 24%;
     text-align: center;
     margin-bottom: 5px;
 }

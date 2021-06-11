@@ -36,6 +36,7 @@ import { DatePipe } from '@angular/common';
 import { DisplayRecipesComponent } from './components/home/display-recipes/display-recipes.component';
 import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
 import { FilterPipe } from './filter/filter.pipe';
+import { RecipeService } from './service/recipe.sercive';
 
 
 
@@ -77,7 +78,7 @@ import { FilterPipe } from './filter/filter.pipe';
     ExpenseModule,
     WildcardRoutingModule // always last module to check first other child routes
   ],
-  providers: [ApiService, LocalStorageService, DatePipe],
+  providers: [ApiService, LocalStorageService, RecipeService, DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [CheckListComponent]
 })

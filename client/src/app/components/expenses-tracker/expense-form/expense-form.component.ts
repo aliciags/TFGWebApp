@@ -9,14 +9,22 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ExpenseFormComponent implements OnInit {
 
   public expenseForm: FormGroup;
+  public expenseId: string;
 
   constructor(private fb: FormBuilder) {
     this.expenseForm = this.fb.group({
-      ingredients: ['', []]
+      ingredients: ['', []],
+      expense: ['', []]
     });
+    this.expenseId = '';
    }
 
   ngOnInit(): void {
+    this.expenseId = history.state.id;
+  }
+
+  onSubmit(): void{
+
   }
 
 }

@@ -67,7 +67,7 @@ export const getFilteredRecipes = async (req: Request, res: Response) => {
                 {meal: meal}
             );
         }
-        if ( ingredients.length != 0 ) {
+        if ( ingredients ) {
             // ingredients has to be an array of ingredients
             filter.push(
                 {ingredients: {$all: ingredients}}

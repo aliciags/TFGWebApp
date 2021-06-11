@@ -58,8 +58,8 @@ export class ExpensesTrackerComponent implements OnInit {
     }
   }
 
-  onEdit(id: string): void{
-
+  onEdit(id: string | undefined): void{
+    this.router.navigateByUrl('/expenses/form', {state: {id}});
   }
 
   onDelete(id: string | undefined): void {

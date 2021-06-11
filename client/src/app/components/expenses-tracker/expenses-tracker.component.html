@@ -10,9 +10,6 @@
         </div>
         <div class="header">
             <h3>Expense</h3>
-        </div> 
-        <div class="header">
-            <h3>Estimated expense</h3>
         </div>
         <div class="header">
             <h3>Remove</h3>
@@ -27,13 +24,10 @@
                 </i>
             </div>
             <div class="item">
-                expense
-            </div>
-            <div class="item">
                 {{expense.expense}}
             </div>
             <div class="item">
-                <button class="btn btn-warning btn-circle" (click)="onDelete(expense._id)"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-warning btn-circle" (click)="onEdit(expense._id)"><i class="fas fa-pen"></i></button>
                 <button class="btn btn-secondary btn-circle" (click)="onDelete(expense._id)"><i class="fas fa-times-circle"></i></button>
             </div>
         </div>

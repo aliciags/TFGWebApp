@@ -155,8 +155,7 @@ export class GroceriesListComponent implements OnInit {
   onSubmit(): void{
     const body = {
       _user: this.localStorage.get('email'),
-      ingredients: this.ingredientsBought,
-      expense: 50
+      ingredients: this.ingredientsBought
     };
     this.apiService.post('/expense', body, this.httpOptions)
     .subscribe(response => {
