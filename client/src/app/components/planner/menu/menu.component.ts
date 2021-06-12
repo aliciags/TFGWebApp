@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { MenuCard } from 'src/app/model/menu-card';
 import { Menu } from 'src/app/model/menu';
@@ -23,27 +21,20 @@ export class MenuComponent implements OnInit, OnChanges {
   public cards: MenuCard[];
   public days: Day[];
   public active: MenuCard;
-  public showModalAdd: boolean;
-  public showModalDel: boolean;
+  // public showModalAdd: boolean;
+  // public showModalDel: boolean;
   public showModalEdit: boolean;
-
-  /*public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      return this.card;
-    })
-  );*/
 
   @Input() menu: Menu;
   @Input() httpOptions: object;
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              private localStorage: LocalStorageService,
+  constructor(private localStorage: LocalStorageService,
               private apiService: ApiService,
               private router: Router) {
     this.cards = [];
     this.days = [];
-    this.showModalAdd = false;
-    this.showModalDel = false;
+    // this.showModalAdd = false;
+    // this.showModalDel = false;
     this.showModalEdit = false;
     this.menu = {
       _id: '',
@@ -78,9 +69,9 @@ export class MenuComponent implements OnInit, OnChanges {
       this.setDays(this.days);
       // console.log(this.days);
     }, error => {
-      if (error.error.msg === 'There is no such menu'){
+      if (error.message === 'There is no such menu'){
         console.log(error);
-      } else if (error.error.msg === 'not a menu object id'){
+      } else if (error.message === 'not a menu object id'){
         console.log(error);
       }
     });
@@ -138,8 +129,8 @@ export class MenuComponent implements OnInit, OnChanges {
   addRecipe(mealid: string, input: string): void{
     this.apiService.post('/filter', {name: input, user: this.localStorage.get('email')})
             .subscribe( response => {
-              console.log('r', response);
-              console.log(response[0]._id);
+              // console.log('r', response);
+              // console.log(response[0]._id);
               const body = {
                 recipe: response[0]._id,
                 edit: 'add'
@@ -149,7 +140,7 @@ export class MenuComponent implements OnInit, OnChanges {
                   this.ngOnChanges();
               });
             }, error => {
-              console.log('e', error);
+              console.log(error);
             });
   }
 
@@ -178,9 +169,9 @@ export class MenuComponent implements OnInit, OnChanges {
           meal: meal.meal
       };
     }, error => {
-      if (error.error.msg === 'There is no such menu'){
+      if (error.message === 'There is no such menu'){
         console.log(error);
-      } else if (error.error.msg === 'not a menu object id'){
+      } else if (error.message === 'not a menu object id'){
         console.log(error);
       }
     });

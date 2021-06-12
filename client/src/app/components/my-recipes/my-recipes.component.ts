@@ -43,10 +43,10 @@ export class MyRecipesComponent implements OnInit {
             // lo hace con tda la colleccion
             this.apiService.post('/filter', {name: value, user: this.localStorage.get('email')})
             .subscribe( response => {
-              console.log('r', response);
+              // console.log('r', response);
               this.recipes = response;
             }, error => {
-              console.log('e', error);
+              console.log(error);
             });
           } else {
             this.apiService.get('/recipe/book/' + this.localStorage.get('email'), this.httpOptions)
@@ -54,9 +54,9 @@ export class MyRecipesComponent implements OnInit {
                 this.recipes = response;
                 // this.setRecipes(this.recipes);
               },
-              err => {
+              error => {
                 // internal server error
-                console.log(err);
+                console.log(error);
             });
           }
       });
@@ -70,14 +70,14 @@ export class MyRecipesComponent implements OnInit {
       this.apiService.get('/recipe/book/' + this.localStorage.get('email'), this.httpOptions).subscribe(response => {
         this.recipes = response;
       },
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
       });
     }
   }
 
   onFilter(n: string, d: string, m: string): void{
-    console.log(n, d, m);
+    // console.log(n, d, m);
     this.apiService.post('/filter', {name: n, diet: d, meal: m, ingredients: this.ingredientsFilter, user: this.localStorage.get('email')})
             .subscribe( response => {
               console.log('r', response);
@@ -90,7 +90,7 @@ export class MyRecipesComponent implements OnInit {
   onDelete(): void{
     this.apiService.delete('/recipe/' + this.rid + '&' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         if (response.msg === 'recipe removed'){
           this.ngOnInit();
         }
@@ -118,7 +118,7 @@ export class MyRecipesComponent implements OnInit {
       }
     }, error => {
       // not a valid ingredient
-      console.log('e', error);
+      console.log(error);
     });
   }
 

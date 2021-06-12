@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { ApiService } from 'src/app/service/api.service';
 import { Recipe } from 'src/app/model/recipe';
 import { FormControl } from '@angular/forms';
@@ -28,8 +26,7 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(private localStorage: LocalStorageService,
-              private apiService: ApiService,
-              private recipeService: RecipeService) {
+              private apiService: ApiService) {
       this.recipes = [];
       this.environment = '';
       // this.filters = false;
@@ -41,10 +38,10 @@ export class HomeComponent implements OnInit {
           if ( value.length > 0 ){
             this.apiService.post('/filter', {name: value})
             .subscribe( response => {
-              console.log('r', response);
+              // console.log('r', response);
               this.recipes = response;
             }, error => {
-              console.log('e', error);
+              console.log(error);
             });
           } else {
             this.apiService.get('/').subscribe(response => {
@@ -68,9 +65,9 @@ export class HomeComponent implements OnInit {
     this.apiService.get('/').subscribe(response => {
       this.recipes = response;
     },
-    err => {
+    error => {
       // internal server error
-      console.log(err);
+      console.log(error);
     });
   }
 
@@ -81,7 +78,7 @@ export class HomeComponent implements OnInit {
   onSave(rid: string): void{
     this.apiService.put('/recipe/save/' + rid + '&' + this.localStorage.get('email'), {}, this.httpOptions)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         if (response.msg === 'recipe saved'){
           // make toast
           console.log('saved');
@@ -100,7 +97,7 @@ export class HomeComponent implements OnInit {
       }
     }, error => {
       // not a valid ingredient
-      console.log('e', error);
+      console.log(error);
     });
   }
 
@@ -113,13 +110,13 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(n: string, d: string, m: string): void{
-    console.log(n, d, m);
+    // console.log(n, d, m);
     this.apiService.post('/filter', {name: n, diet: d, meal: m, ingredients: this.ingredientsFilter})
             .subscribe( response => {
-              console.log('r', response);
+              // console.log('r', response);
               this.recipes = response;
             }, error => {
-              console.log('e', error);
+              console.log(error);
             });
   }
 }

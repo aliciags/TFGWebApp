@@ -29,7 +29,7 @@ export class RecipeService {
         if (this.localStorage.get('token') != null) {
             this.environment = 'home';
             this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
-        }
+          }
         this.apiService.get('/').subscribe(response => {
             recipes = response;
         },

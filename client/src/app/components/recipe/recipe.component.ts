@@ -48,7 +48,7 @@ export class RecipeComponent implements OnInit {
       this.recipe = response;
     },
     error => {
-      if (error.error.msg === 'recipe not found'){
+      if (error.message === 'recipe not found'){
         this.router.navigate(['/notfound']);
       } else {
         console.log('Internal server error');
@@ -70,12 +70,12 @@ export class RecipeComponent implements OnInit {
         this.modalText = 'added to the groceries';
       },
       error => {
-        if (error.error.msg === 'user not found'){
+        if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
-        } else if (error.error.msg === 'ingredient not found'){
+        } else if (error.message === 'ingredient not found'){
           console.log('no such ingredient');
           this.modalText = 'no such ingredient';
-        } else if (error.error.msg === 'ingredient already in the list'){
+        } else if (error.message === 'ingredient already in the list'){
           console.log('already in the list');
           this.modalText = 'already in the list';
         } else {

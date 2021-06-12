@@ -48,7 +48,7 @@ export class ExpensesTrackerComponent implements OnInit {
             this.expenses = this.transformDate(this.expenses);
           },
           (error) => {
-            if (error.error.msg === 'There are no expenses for such user') {
+            if (error.message === 'There are no expenses for such user') {
               this.router.navigate(['/notfound']);
             } else {
               console.log('Internal server error');
@@ -71,7 +71,7 @@ export class ExpensesTrackerComponent implements OnInit {
           }
         },
         (error) => {
-          if (error.error.msg === 'Expense does not exist') {
+          if (error.message === 'Expense does not exist') {
             this.router.navigate(['/notfound']);
           } else {
             console.log('Internal server error');

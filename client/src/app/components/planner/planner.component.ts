@@ -52,7 +52,7 @@ export class PlannerComponent implements OnInit {
           }
         },
         error => {
-          if (error.error.msg === 'There are no menus for such user'){
+          if (error.message === 'There are no menus for such user'){
             console.log(error);
           }
         });

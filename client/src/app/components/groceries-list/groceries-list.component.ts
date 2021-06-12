@@ -68,7 +68,7 @@ export class GroceriesListComponent implements OnInit {
         this.ingredientsList = response.groceries;
       },
       error => {
-        if (error.error.msg === 'user not found'){
+        if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
         } else {
           console.log('Internal server error');
@@ -86,15 +86,15 @@ export class GroceriesListComponent implements OnInit {
         this.ingredientsList = response.groceries;
       },
       error => {
-        if (error.error.msg === 'user not found'){
+        if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
-        } else if (error.error.msg === 'ingredient not found'){
-          console.log('no such ingredient');
+        } else if (error.message === 'ingredient not found'){
+          // console.log('no such ingredient');
           this.ingredientForm.controls[this.ing].setErrors({
             notExists: true
           });
-        } else if (error.error.msg === 'ingredient already in the list'){
-          console.log('already in the list');
+        } else if (error.message === 'ingredient already in the list'){
+          // console.log('already in the list');
           this.ingredientForm.controls[this.ing].setErrors({
             alreadyInList: true
           });
@@ -138,9 +138,9 @@ export class GroceriesListComponent implements OnInit {
       this.ingredientsList = response.groceries;
     },
     error => {
-      if (error.error.msg === 'user not found'){
+      if (error.message === 'user not found'){
         this.router.navigate(['/notfound']);
-      } else if (error.error.msg === 'ingredient not found'){
+      } else if (error.message === 'ingredient not found'){
         this.router.navigate(['/notfound']);
       }else {
         console.log('Internal server error');
@@ -162,14 +162,14 @@ export class GroceriesListComponent implements OnInit {
       this.ingredientsBought = [];
     },
     error => {
-      console.log('Internal server error');
+      console.log(error.error);
     });
     this.apiService.get('/user/' + this.localStorage.get('email'), this.httpOptions)
       .subscribe(response => {
         this.ingredientsList = response.groceries;
       },
       error => {
-        if (error.error.msg === 'user not found'){
+        if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
         } else {
           console.log('Internal server error');

@@ -31,7 +31,6 @@ import { LoginComponent } from './components/login/login.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { GroceriesListComponent } from './components/groceries-list/groceries-list.component';
 import { LocalStorageService } from './service/local-storage.service';
-import { CheckListComponent } from './components/check-list/check-list.component';
 import { DatePipe } from '@angular/common';
 import { DisplayRecipesComponent } from './components/home/display-recipes/display-recipes.component';
 import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
@@ -47,7 +46,6 @@ import { RecipeService } from './service/recipe.sercive';
     LoginComponent,
     MainNavComponent,
     GroceriesListComponent,
-    CheckListComponent,
     DisplayRecipesComponent,
     MyRecipesComponent,
     FilterPipe
@@ -79,7 +77,6 @@ import { RecipeService } from './service/recipe.sercive';
     WildcardRoutingModule // always last module to check first other child routes
   ],
   providers: [ApiService, LocalStorageService, RecipeService, DatePipe],
-  bootstrap: [AppComponent],
-  entryComponents: [CheckListComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

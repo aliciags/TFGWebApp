@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       }
     },
     error => {
-      if (error.error.msg === 'Invalid Credentials'){
+      if (error.message === 'Invalid Credentials'){
         // console.log(error)
         const password = 'password';
         this.loginForm.controls[password].setErrors({

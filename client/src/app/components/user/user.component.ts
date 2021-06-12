@@ -39,7 +39,7 @@ export class UserComponent implements OnInit {
         this.user = response;
       },
       error => {
-        if (error.error.msg === 'user not found'){
+        if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
         } else {
           console.log('Internal server error');
