@@ -1,21 +1,55 @@
-<p>expense-form works {{expenseId}}!</p>
 <div class="container">
-    <h1>Edit menu</h1>
+    <h1 *ngIf="expenseId">Edit expense</h1>
+    <h1 *ngIf="!expenseId">Add expense</h1>
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
-        <!--<div class="form-group">
-            <label for="date">Date</label>
-            <input id="date" type="text" class="form-control" formControlName="date" placeholder="Introduce the purchase date">
-        </div>-->
         <div class="form-group">
-            <label for="ingredients">Ingredients</label>
-            <input id="ingredients" type="text" class="form-control" formControlName="ingredients" placeholder="">
+            <label for="date">Date</label>
+            <input id="date" type="date" class="form-control" formControlName="date">
+            <div *ngIf="expenseForm.controls.date.touched && !expenseForm.controls.date.valid" class="alert alert-danger">
+                Date is required
+            </div>
         </div>
         <div class="form-group">
             <label for="expense">Expense</label>
-            <input id="expense" type="number" class="form-control" formControlName="expense" value={{expenseId}} placeholder="expenseId.value">
+            <input id="expense" type="number" class="form-control" formControlName="expense" placeholder="Introduce the expense amount">
+            <div *ngIf="expenseForm.controls.expense.touched && !expenseForm.controls.expense.valid" class="alert alert-danger">
+                Expense is required
+            </div>
         </div>
+            <div class="form-group">
+                <label for="ingredients">Ingredients</label>
+                <div class="add-ingredient">
+                    <input #ingredient id="ingredients" type="text" class="form-control" formControlName="ingredients" placeholder="Introduce an ingredient">
+                    <button class="btn btn-primary btn-circle" (click)="onAddIngredient(ingredient.value)"><i class="fas fa-plus"></i></button>
+                </div>
+                <div *ngIf="expenseForm.controls.ingredients.touched && expenseForm.controls.ingredients.errors">
+                    <div *ngIf="expenseForm.controls.ingredients.errors.alreadyInList" class="alert alert-danger">
+                        Ingredient already in the list
+                    </div>
+                    <div *ngIf="expenseForm.controls.ingredients.errors.notExists" class="alert alert-danger">
+                        Ingredient does not exist
+                    </div>
+                </div>
+            </div>
+            <div class="list">
+                <mat-card>
+                    <h2 class="card-title">Ingredients Bought</h2>
+                    <div class="ingredientList">
+                        <div *ngFor="let ingredient of ingredientsBought">
+                            <div>
+                                <div>{{ingredient}}</div>
+                                <div>
+                                    <button  class="btn btn-secondary btn-circle" (click)="onDeleteIngredient(ingredient)"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card> 
+            </div>
+
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">Add</button>
+            <button *ngIf="expenseId" class="btn btn-primary" type="submit">Edit</button>
+            <button *ngIf="!expenseId" class="btn btn-primary" type="submit">Add</button>
         </div>
     </form>
 </div>

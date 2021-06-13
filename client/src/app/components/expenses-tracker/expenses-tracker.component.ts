@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
   providers: [LocalStorageService, ApiService, DatePipe],
 })
 export class ExpensesTrackerComponent implements OnInit {
+
   public expenses: Expense[];
   public httpOptions = {
     headers: new HttpHeaders({
@@ -59,7 +60,7 @@ export class ExpensesTrackerComponent implements OnInit {
   }
 
   onEdit(id: string | undefined): void{
-    this.router.navigateByUrl('/expenses/form', {state: {id}});
+    this.router.navigateByUrl('/expenses/expense-form', {state: {id}});
   }
 
   onDelete(id: string | undefined): void {

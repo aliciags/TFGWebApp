@@ -13,65 +13,77 @@ export const getAllExpenses = async ( req: Request, res: Response ) => {
         return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'Access denied'});
     }
 
+    let expenses: IExpense[];
+
     try {
-        const expenses: IExpense[] = await Expense.find();
-        res.json(expenses);
+        expenses = await Expense.find();
     } catch (err) {
         console.error(err.message);
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json(expenses);
 };
 
 export const getUserExpenses = async ( req: Request, res: Response ) => {
 
+    let expenses: IExpense[];
+
     try {
-        const expenses: IExpense[] = await Expense.find({_user: req.params.uid});
+        expenses = await Expense.find({_user: req.params.uid});
         if (!expenses) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'There are no expenses for such user'});
         }
-        res.json(expenses);
     } catch (err) {
         console.error(err.message);
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json(expenses);
 };
 
 export const getExpense = async ( req: Request, res: Response ) => {
 
+    let expense: IExpense;
+
     try {
-        const expense: IExpense = await Expense.findById({_id: req.params.eid});
+        expense = await Expense.findById({_id: req.params.eid});
         if (!expense) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'Expense not found'});
         }
-        res.json(expense);
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId') {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json(expense);
 };
 
 export const addExpense = async ( req: Request, res: Response ) => {
 
-    const { _user, ingredients, expense } = req.body;
+    const { _user, ingredients, expense, date } = req.body;
     // calculate estimated expense
     const expenseFields = {
         _user,
-        date: Date.now(),
+        date: date,
         ingredients,
         expense,
         // estExpense
     };
+
+    if ( !expenseFields.date ) {
+        expenseFields.date = Date.now();
+    }
+
+    let exp: IExpense;
     try {
-        const expense: IExpense = new Expense(expenseFields);
-        await expense.save();
-        res.json(expense);
+        exp = new Expense(expenseFields);
+        await exp.save();
     } catch (err) {
         console.error(err.message);
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json(exp);
 };
 
 export const editExpense = async ( req: Request, res: Response ) => {
@@ -82,39 +94,41 @@ export const editExpense = async ( req: Request, res: Response ) => {
         ingredients,
         expense
     };
+    let exp: IExpense;
     try {
-        let expense: IExpense = await Expense.findById({_id: req.params.eid});
-        if (!expense) {
+        exp = await Expense.findById({_id: req.params.eid});
+        if (!exp) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'Expense does not exist'});
         }
-        expense = await Expense.findByIdAndUpdate(
+        exp = await Expense.findByIdAndUpdate(
             { _id: req.params.eid },
             { $set: expenseFields },
             { new: true, runValidators: true }
         );
-        res.json(expense);
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId') {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json(exp);
 };
 
 export const deleteExpense = async ( req: Request, res: Response ) => {
 
+    let expense: IExpense;
     try {
-        const expense: IExpense = await Expense.findByIdAndDelete({_id: req.params.eid});
+        expense = await Expense.findByIdAndDelete({_id: req.params.eid});
         if (!expense) {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'Expense does not exist'});
         }
-        res.json({msg: 'expense removed', e: expense});
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId') {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({msg: 'not a expense object id'});
         }
-        res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
+        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({msg: err.message});
     }
+    return res.json({msg: 'expense removed', e: expense});
 };

@@ -5,7 +5,7 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 
 const expensesRoutes: Routes = [
     {path: 'expenses', component: ExpensesTrackerComponent},
-    {path: 'expenses/form', component: ExpenseFormComponent}
+    {path: 'expenses/expense-form', component: ExpenseFormComponent}
 ];
 
 @NgModule({

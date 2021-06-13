@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 import { ExpensesRoutingModule } from './expense-tracker.routing';
 
@@ -18,7 +19,8 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
         CommonModule,
         ExpensesRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatCardModule
     ],
     providers: [ ]
 })
