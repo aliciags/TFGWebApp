@@ -10,19 +10,23 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
   selector: 'app-recipe-form',
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css'],
-  providers: [ LocalStorageService, ApiService ]
+  providers: [LocalStorageService, ApiService],
 })
+
 export class RecipeFormComponent implements OnInit {
 
   public recipeForm: FormGroup;
-  public submitted: boolean = false;
-  public title: string = 'New recipe';
+  public recipeId: string;
+  public ingredients: string[];
+  public steps: string[];
+  // public submitted: boolean;
+  // public title: string = 'New recipe';
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
   public httpOptions = {
     headers: new HttpHeaders({
-      'x-auth-token': 'token'
-    })
+      'x-auth-token': 'token',
+    }),
   };
 
   constructor(
@@ -30,48 +34,121 @@ export class RecipeFormComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private apiService: ApiService
-  ) { 
+  ) {
+    this.ingredients = [];
+    this.steps = [];
+    this.recipeId = '';
+    // this.submitted = flase;
     this.recipeForm = this.fb.group({
       name: ['', [Validators.required]],
-      timing: ['', [Validators.required]],
-      dinnerGuest: ['', [Validators.required]],   // number of portions, eaters
-      meal: ['', [Validators.required]],          // breakfast, lunch, diner, snack
-      diet: ['', [Validators.required]],          // omnivor, vegetrian, vegan
-      ingredients: ['', [Validators.required]],
+      timing: ['', ],
+      dinnerGuest: ['', ],                      // number of portions, eaters
+      meal: ['', ],                             // breakfast, lunch, diner, snack
+      diet: ['', [Validators.required]],        // omnivor, vegetrian, vegan
+      ingredients: [''],
       steps: ['', [Validators.required]],
-      image: ['', ],
-      videoRecipe: ['', ]
+      image: [''],
+      videoRecipe: [''],
     });
   }
 
   ngOnInit(): void {
+    this.recipeId = history.state.id;
+    this.httpOptions.headers = this.httpOptions.headers.set(
+      'x-auth-token',
+      this.localStorage.get('token')
+    );
   }
 
-  onSubmit(): void{
-    if (this.recipeForm.valid){
+  onSubmit(): void {
+    if (this.recipeForm.valid) {
       const recipe: Recipe = {
         _id: '',
-        name: this.recipeForm.value["name"],
-        timing: this.recipeForm.value["timing"],
-        guest: this.recipeForm.value["dinnerGuest"],
-        meal: this.recipeForm.value["meal"],
-        diet: this.recipeForm.value["diet"],
-        ingredients: this.recipeForm.value["ingredients"],
-        steps: this.recipeForm.value["steps"],
-        image: this.recipeForm.value["image"],
-        videoRecipe: this.recipeForm.value["videoRecipe"],
-        creator: this.localStorage.get('email')
+        name: this.recipeForm.value['name'],
+        timing: this.recipeForm.value['timing'],
+        guest: this.recipeForm.value['dinnerGuest'],
+        meal: this.recipeForm.value['meal'],
+        diet: this.recipeForm.value['diet'],
+        ingredients: this.ingredients,
+        steps: this.steps,
+        image: this.recipeForm.value['image'],
+        videoRecipe: this.recipeForm.value['videoRecipe'],
+        creator: this.localStorage.get('email'),
       };
-      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
-      this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(response => {
-        console.log(response);
-        this.router.navigate(['/my-recipes']);
-      },
-      error => {
-        console.log(error);
-      });
-    }else{
+      if (this.recipeId != null) {
+        recipe._id = this.recipeId;
+        this.apiService.put('/recipe/' + this.recipeId, recipe, this.httpOptions).subscribe(
+          (response) => {
+            console.log(response);
+            this.router.navigate(['/my-recipes']);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(
+          (response) => {
+            console.log(response);
+            this.router.navigate(['/my-recipes']);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    } else {
       console.log('there is an error');
+      console.log(this.recipeForm.errors);
+    }
+  }
+
+  onAddIngredient(ingredient: string): void {
+    const ingredients = 'ingredients';
+    this.apiService.get('/ingredient/' + ingredient).subscribe(
+      (response) => {
+        const ing = this.ingredients.filter((x) => x === response.name)[0];
+        if (this.ingredients.indexOf(ing, 0) > -1) {
+          this.recipeForm.controls[ingredients].setErrors({
+            alreadyInList: true,
+          });
+        } else {
+          this.ingredients.push(response.name);
+        }
+      },
+      (error) => {
+        if (error.message === 'Ingredient not found') {
+          this.recipeForm.controls[ingredients].setErrors({
+            notExists: true,
+          });
+        } else {
+          console.log('Internal server error');
+        }
+      }
+    );
+  }
+
+  onDeleteIngredient(ingredient: string): void {
+    const ing = this.ingredients.filter((x) => x === ingredient)[0];
+    const index = this.ingredients.indexOf(ing, 0);
+    if (index > -1) {
+      this.ingredients.splice(index, 1);
+    } else {
+      console.log('No such ingredient in the list');
+    }
+  }
+
+  onAddStep(step: string): void{
+    this.steps.push(step);
+  }
+
+  onDeleteStep(step: string): void{
+    const ing = this.steps.filter((x) => x === step)[0];
+    const index = this.steps.indexOf(ing, 0);
+    if (index > -1) {
+      this.steps.splice(index, 1);
+    } else {
+      console.log('No such ingredient in the list');
     }
   }
 }

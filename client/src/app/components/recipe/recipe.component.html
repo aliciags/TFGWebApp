@@ -37,11 +37,12 @@
             <br>
             <div class="label">Recipe steps:</div>
             <div class="input" *ngFor="let step of recipe.steps">
-                {{ step }}</div>
+                {{ step }}
+            </div>
         </div>
     </div>
     <br>
-    <button *ngIf="loggedIn == true" class="btn btn-warning" ><i class="fas fa-pen"></i></button> 
+    <button *ngIf="loggedIn == true" class="btn btn-warning" (click)="onEdit(recipe._id)" ><i class="fas fa-pen"></i></button> 
     <router-outlet></router-outlet>
     
     <!-- Modal -->

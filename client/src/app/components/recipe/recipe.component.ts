@@ -85,4 +85,8 @@ export class RecipeComponent implements OnInit {
       });
     this.showModal = true;
   }
+
+  onEdit(id: string): void{
+    this.router.navigateByUrl('/recipe/recipe-form', {state: {id}});
+  }
 }

@@ -1,6 +1,7 @@
 <div class="container">
-    <h1>{{title}}</h1>
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <h1 *ngIf="recipeId">Edit recipe</h1>
+    <h1 *ngIf="!recipeId">Add recipe</h1>
+    <form [formGroup]="recipeForm">
         <div class="form-group">
             <label for="name">Name</label>
             <!--We associate each input field to the formControl object using the formControlName directive-->
@@ -46,20 +47,64 @@
         </div>
         <div class="form-group">
             <label for="ingredients">Ingredients</label>
-            <input id="ingredients" type="ingredients" class="form-control" formControlName="ingredients" placeholder="Introduce the different ingredients" multiple>
-            <div *ngIf="recipeForm.controls.ingredients.touched && !recipeForm.controls.ingredients.valid" class="alert alert-danger">
-                Please introduce at least one ingredient
+            <div class="add">
+                <input #ingredient id="ingredients" type="ingredients" class="form-control" formControlName="ingredients" placeholder="Introduce the different ingredients">
+                <button class="btn btn-primary btn-circle" (click)="onAddIngredient(ingredient.value)"><i class="fas fa-plus"></i></button>
+            </div>    
+            <div *ngIf="recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.errors">
+                <div *ngIf="recipeForm.controls.ingredients.errors.required" class="alert alert-danger">
+                    Please introduce at least one ingredient
+                </div>
+                <div *ngIf="recipeForm.controls.ingredients.errors.alreadyInList" class="alert alert-danger">
+                    Ingredients already in the recipe
+                </div>
+                <div *ngIf="recipeForm.controls.ingredients.errors.notExists" class="alert alert-danger">
+                    Ingedient does not exist
+                </div>
             </div>
+        </div>
+        <div class="list">
+            <mat-card>
+                <h3 class="card-title">Ingredients</h3>
+                <div class="ingredientList">
+                    <div *ngFor="let ingredient of ingredients">
+                        <div class="add">
+                            <div>{{ingredient}}</div>
+                            <div>
+                                <button  class="btn btn-secondary btn-circle" (click)="onDeleteIngredient(ingredient)"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card> 
         </div>
         <div class="form-group">
             <label for="steps">Steps</label>
-            <input id="steps" type="steps" class="form-control" formControlName="steps" placeholder="Introduce the steps to follow" multiple>
+            <div class="add">
+                <input #step id="steps" type="steps" class="form-control" formControlName="steps" placeholder="Introduce the steps to follow">
+                <button class="btn btn-primary btn-circle" (click)="onAddStep(step.value)"><i class="fas fa-plus"></i></button>
+            </div>
             <div *ngIf="recipeForm.controls.steps.touched && !recipeForm.controls.steps.valid" class="alert alert-danger">
                 Please introduce at least one step
             </div>
         </div>
+        <div class="list">
+            <mat-card>
+                <h3 class="card-title">Steps</h3>
+                <div class="stepsList">
+                    <div *ngFor="let step of steps">
+                        <div>
+                            <div>{{step}}</div>
+                            <div>
+                                <button  class="btn btn-secondary btn-circle" (click)="onDeleteStep(step)"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card> 
+        </div>
         <br>
-        <button class="btn btn-primary" type="submit">Done!</button>
+        <button class="btn btn-primary" (click)="onSubmit()">Done!</button>
     </form>
 </div>
 

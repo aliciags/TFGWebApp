@@ -1,0 +1,41 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.add {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ingredientList > div > div, .stepsList > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02857;
+    margin-left: 5px;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+mat-card {
+    flex-basis: 100%;
+    margin-bottom: 2%;
+}

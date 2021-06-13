@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { RecipeComponent } from './recipe.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
@@ -19,6 +20,7 @@ import { RecipeRoutingModule } from './recipe.routing';
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
+        MatCardModule,
         RecipeRoutingModule
     ],
     providers: []

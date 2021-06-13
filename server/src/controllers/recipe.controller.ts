@@ -31,7 +31,6 @@ export const getFilteredRecipes = async (req: Request, res: Response) => {
             );
         }
         if ( name ) {
-            console.log('hola');
             filter.push(
                 {name: {$regex: name, $options: 'i' }}
             );
@@ -47,13 +46,16 @@ export const getFilteredRecipes = async (req: Request, res: Response) => {
             );
         }
         // console.log(<Array<string>>ingredients.length);
-        if ( ingredients && (<Array<string>>ingredients).length > 0) {
-            // ingredients has to be an array of ingredients
-            filter.push(
-                {ingredients: {$all: ingredients}}
-            );
+        if ( ingredients ) {
+            if ( (<Array<string>>ingredients).length > 0) {
+                // ingredients has to be an array of ingredients
+                // console.log('hello');
+                filter.push(
+                    {ingredients: {$all: ingredients}}
+                );
+            }
         }
-        console.log(filter);
+        console.log(filter.length);
         if (filter.length > 0) {
             recipes = await Recipe.find({
                 $and: filter
@@ -186,35 +188,52 @@ export const saveRecipe = async (req: Request, res: Response) => {
 export const editRecipe = async (req: Request, res: Response) => {
 
     const {name, timing, guest, meal, diet, image, ingredients, steps, videoRecipe} = req.body;
-    const recipeFields = {
-        name,
-        timing,
-        guest,
-        meal,
-        diet,
-        image,
-        ingredients,
-        steps,
-        videoRecipe
-    };
     let user: IUser;
     let recipe: IRecipe;
 
     try {
         user = await User.findById(req.userId);
-        if (!user) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user not found'});
-        }
         recipe = await Recipe.findById({_id: req.params.rid });
-        if (!recipe) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
+        if (!user || !recipe) {
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user or recipe not found'});
         }
+        /*if (!recipe) {
+            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
+        }*/
         if (recipe.creator != user.email) {
             return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'not allowed to edit the recipe'});
         }
+
+        if (name) {
+            recipe.name = name;
+        }
+        if (timing) {
+            recipe.timing = timing;
+        }
+        if (guest) {
+            recipe.guest = guest;
+        }
+        if (meal) {
+            recipe.meal = meal;
+        }
+        if (diet) {
+            recipe.diet = diet;
+        }
+        if (image) {
+            recipe.image = image;
+        }
+        if (ingredients) {
+            recipe.ingredients = ingredients;
+        }
+        if (steps) {
+            recipe.steps = steps;
+        }
+        if (videoRecipe) {
+            recipe.name = videoRecipe;
+        }
         recipe = await Recipe.findByIdAndUpdate(
             {_id: req.params.rid},
-            {$set: recipeFields},
+            {$set: recipe},
             {new: true, runValidators: true}
         );
     } catch (err) {

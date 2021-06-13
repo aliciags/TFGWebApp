@@ -55,6 +55,7 @@ export class ApiService {
       };
     } else {
       // get server error
+      console.log(error);
       errorMessage = {
         error: `Error code : ${error.status}\n Message: ${error.message}`,
         message: error.error.msg

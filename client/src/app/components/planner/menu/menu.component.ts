@@ -126,7 +126,12 @@ export class MenuComponent implements OnInit, OnChanges {
     this.router.navigateByUrl('recipe', {state: {id: rid}});
   }
 
-  addRecipe(mealid: string, input: string): void{
+  editMeal(mealid: string, r: { _id: string; name: string; }[]): void{
+    this.router.navigateByUrl('planner/meal-form', {state: {id: mealid, recipes: r}});
+  }
+
+  /*addRecipe(mealid: string, input: string): void{
+
     this.apiService.post('/filter', {name: input, user: this.localStorage.get('email')})
             .subscribe( response => {
               // console.log('r', response);
@@ -142,9 +147,9 @@ export class MenuComponent implements OnInit, OnChanges {
             }, error => {
               console.log(error);
             });
-  }
+  }*/
 
-  deleteRecipe(mealid: string, rid: string): void{
+  /*deleteRecipe(mealid: string, rid: string): void{
     const body = {
       recipe: rid,
       edit: 'delete'
@@ -175,7 +180,7 @@ export class MenuComponent implements OnInit, OnChanges {
         console.log(error);
       }
     });
-    // this.active = meal;*/
-  }
+    // this.active = meal;
+  }*/
 
 }
