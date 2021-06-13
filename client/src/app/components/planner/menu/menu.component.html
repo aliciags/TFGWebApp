@@ -16,7 +16,7 @@
                             <!--<i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                                 <mat-icon>more_vert</mat-icon>
                             </i>-->
-                            <button class="btn btn-info btn-circle" (click)="showEditModal(c)"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-info btn-circle" (click)="editMeal(c._idMeal, c.recipes)"><i class="fas fa-edit"></i></button>
                             <!--<mat-menu #menu="matMenu" xPosition="before">
                                 <button mat-menu-item>See recipe</button>
                                 <!--<button mat-menu-item (click)="deleteRecipe(c._idMeal, c.recipes[0])">Delete recipe</button>
@@ -41,7 +41,7 @@
                     <mat-card-header>
                         <mat-card-title>
                             <h5 class="badge badge-primary">{{c.meal}}</h5>
-                            <button class="btn btn-info btn-circle" (click)="showEditModal(c)"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-info btn-circle" (click)="editMeal(c._idMeal, c.recipes)"><i class="fas fa-edit"></i></button>
                             <!--<i mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                                 <mat-icon>more_vert</mat-icon>
                             </i>
@@ -95,9 +95,8 @@
     </div>
 
     <!-- Edit Recipe Modal -->
-    <div id="editModal" class="modal fade" role="dialog" [ngClass]="{'show': showModalEdit}">
+    <!--<div id="editModal" class="modal fade" role="dialog" [ngClass]="{'show': showModalEdit}">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" (click)="showModalEdit=false" data-bs-dismiss="modal">&times;</button>
@@ -117,12 +116,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Check out</button>
                     <button type="button" class="btn btn-secondary" (click)="showModalEdit=false" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- Delete Recipe Modal -->
     <!-- <div id="deleteModal" class="modal fade" role="dialog" [ngClass]="{'show': showModalDel}">

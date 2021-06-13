@@ -122,6 +122,7 @@ input[type=text] {
     display: block;
 }
 
+
 .flex-box {
     display: flex;
     flex-direction: row;

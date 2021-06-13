@@ -141,7 +141,7 @@ export const editRecipe = async (req: Request, res: Response) => {
 
   const { recipe, edit } = req.body;
   let day: IDay;
-
+  console.log(recipe, edit);
   try {
 
     day = await Day.findOne({'meals._id': req.params.mealid});

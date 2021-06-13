@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>{{ title }}</h1>
+    <!--<h1>{{ title }}</h1>
     <form [formGroup]="mealForm">
         <div class="form-group">
             <label for="day">Week day</label>
@@ -28,5 +28,20 @@
                 Introduce the a recipe
             </div>
         </div>
-    </form>
+    </form>-->
+    <h1>Introduce or delete a recipe</h1>
+    <div class="flex-box">
+        <input #recipeName type="text" placeholder="Introduce a recipe">
+        <button class="btn btn-primary btn-circle" (click)="addRecipe(recipeName.value)">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>  
+    <div class="flex-box" *ngFor="let r of recipes">
+        <h3 class="recipe-name">{{r.name}}</h3>
+        <button *ngIf="r._id !== ''" class="btn btn-secondary btn-circle delete" (click)="deleteRecipe(r._id)">
+            <i class="fas fa-minus"></i>
+        </button>
+    </div>
+
+    <button type="submit" class="btn btn-secondary" (click)="close()">Close</button>
 </div>
