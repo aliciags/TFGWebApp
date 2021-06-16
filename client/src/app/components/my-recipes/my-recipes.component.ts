@@ -105,9 +105,9 @@ export class MyRecipesComponent implements OnInit {
     this.showModal = true;
   }
 
-  /*onFilter(): void {
-    this.filters ? this.filters = false : this.filters = true;
-  }*/
+  onAddRecipe(): void{
+    this.router.navigate(['recipe/recipe-form']);
+  }
 
   onAddIngredient(ingredient: string): void{
     this.apiService.get('/ingredient/' + ingredient).subscribe( ing => {

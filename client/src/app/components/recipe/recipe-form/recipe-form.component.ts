@@ -20,8 +20,7 @@ export class RecipeFormComponent implements OnInit {
   public recipeId: string;
   public ingredients: recipeIngredient[];
   public steps: string[];
-  // public submitted: boolean;
-  // public title: string = 'New recipe';
+  public selectedFile: File | null;
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
   public units: string[] = ['unit', 'g', 'kg', 'ml', 'cl', 'L', 'tsp', 'tbps'];
@@ -40,7 +39,7 @@ export class RecipeFormComponent implements OnInit {
     this.ingredients = [];
     this.steps = [];
     this.recipeId = '';
-    // this.submitted = flase;
+    this.selectedFile = null;
     this.recipeForm = this.fb.group({
       name: ['', [Validators.required]],
       timing: ['', ],
@@ -68,7 +67,17 @@ export class RecipeFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.recipeForm.valid) {
-      const recipe: Recipe = {
+      const recipe = new FormData();
+      recipe.append('image', this.selectedFile, this.selectedFile.name);
+      /*recipe.append('name', this.recipeForm.value['name']);
+      recipe.append('timing', this.recipeForm.value['name']);
+      recipe.append('guest', this.recipeForm.value['name']);
+      recipe.append('meal', this.recipeForm.value['name']);
+      recipe.append('diet', this.recipeForm.value['name']);
+      recipe.append('ingredients', this.recipeForm.value['name']);
+      recipe.append('steps', this.steps.);
+      recipe.append('name', this.recipeForm.value['name']);*/
+      const r = JSON.stringify({
         _id: '',
         name: this.recipeForm.value['name'],
         timing: this.recipeForm.value['timing'],
@@ -77,13 +86,14 @@ export class RecipeFormComponent implements OnInit {
         diet: this.recipeForm.value['diet'],
         ingredients: this.ingredients,
         steps: this.steps,
-        image: this.recipeForm.value['image'],
+        image: '',
         videoRecipe: this.recipeForm.value['videoRecipe'],
         creator: this.localStorage.get('email'),
-      };
+      });
+      recipe.append('data', r);
       if (this.recipeId != null) {
-        recipe._id = this.recipeId;
-        this.apiService.put('/recipe/' + this.recipeId, recipe, this.httpOptions).subscribe(
+        recipe.append('_id', this.recipeId);
+        /*this.apiService.put('/recipe/' + this.recipeId, recipe, this.httpOptions).subscribe(
           (response) => {
             console.log(response);
             this.router.navigate(['/my-recipes']);
@@ -91,8 +101,9 @@ export class RecipeFormComponent implements OnInit {
           (error) => {
             console.log(error);
           }
-        );
+        );*/
       } else {
+        console.log(recipe);
         this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(
           (response) => {
             console.log(response);
@@ -106,6 +117,15 @@ export class RecipeFormComponent implements OnInit {
     } else {
       console.log('there is an error');
       console.log(this.recipeForm.errors);
+    }
+  }
+
+  onFileSelected(event: Event ): void{
+    const target = event.target as HTMLInputElement;
+    try {
+      this.selectedFile = target.files[0];
+    } catch (err) {
+      console.log(err);
     }
   }
 

@@ -1,9 +1,24 @@
 import { Router } from 'express';
+// import multer, { Multer } from 'multer';
 
 import auth from '../../middleware/auth';
+import upload from '../../middleware/image';
 import * as RecipeController from '../../controllers/recipe.controller';
 
 const recipeRouter: Router = Router();
+
+/*const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(undefined, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(undefined, file.originalname);
+    }
+});
+
+const upload: Multer = multer({
+    storage: storage
+});*/
 
 /**
  * get all recipes
@@ -31,7 +46,7 @@ recipeRouter.get('/recipe/:rid', RecipeController.getRecipe);
  * POST /api
  * access Private
  */
-recipeRouter.post('/recipe/', auth, RecipeController.addRecipe);
+recipeRouter.post('/recipe/', auth, upload.single('image'), RecipeController.addRecipe);
 
 /**
  * update a recipe by recipe id

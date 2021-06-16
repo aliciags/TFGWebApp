@@ -1,10 +1,15 @@
 import { Response } from 'express';
+//  import multer, { Multer } from 'multer';
 
 import HttpStatusCodes from 'http-status-codes';
 
 import Request from '../types/Request';
 import Recipe, { IRecipe } from '../models/Recipe';
 import User, { IUser } from '../models/User';
+
+/*const upload: Multer = multer({
+    dest: 'uploads/'
+});*/
 
 
 export const getAllRecipes = async (req: Request, res: Response) => {
@@ -89,7 +94,9 @@ export const getRecipe = async (req: Request, res: Response) => {
 
 export const addRecipe = async (req: Request, res: Response) => {
 
-    const {name, timing, guest, meal, diet, image, ingredients, steps, videoRecipe} = req.body;
+    console.log(JSON.parse(req.body.data));
+    const {name, timing, guest, meal, diet, ingredients, steps, videoRecipe} = JSON.parse(req.body.data); // JSON.parse(req.body.data);
+    const image = req.file.path;
     const userID = req.userId;
     let user: IUser;
     let recipe: IRecipe;

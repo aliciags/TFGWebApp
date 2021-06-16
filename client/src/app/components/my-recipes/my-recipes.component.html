@@ -1,5 +1,11 @@
 <div class="grid-container">
     <h1 class="mat-h1">My recipes</h1>
+    <div>
+      <button class="btn btn-primary" (click)="onAddRecipe()">
+        <i class="fas fa-plus"></i>
+        Add recipe
+      </button>
+    </div>
     <div class="filter-input">
       <div class="input-group">
         <input #name type="text" class="form-control" [formControl]="searchControl"  placeholder="Search recipe" aria-label="recipe" aria-describedby="basic-addon1">
