@@ -2,6 +2,7 @@ import { Document, Model, Schema, model } from 'mongoose';
 import Diet from '../types/Diet';
 import { IIngredient } from './Ingredient';
 import { IUser } from './User';
+import RecipeIngredient from '../types/RecipeIngredient';
 
 /**
  * Interface to model the Recipe Schema
@@ -11,7 +12,7 @@ import { IUser } from './User';
  * @param meal: string[]
  * @param diet: string
  * @param image: buffer
- * @param ingredients: ref => Ingrediens.name[]
+ * @param ingredients: RecipeIngredient[]
  * @param steps: string[]
  * @param videoRecipe: string
  * @param creator: ref => User.email
@@ -24,7 +25,7 @@ export interface IRecipe extends Document {
     meal: string[];
     diet: Diet;
     image: Buffer;
-    ingredients: IIngredient['name'][];
+    ingredients: RecipeIngredient[];
     steps: string[];
     videoRecipe: string;
     creator: IUser['email'];
@@ -72,8 +73,19 @@ const recipeSchema: Schema = new Schema (
             data: Buffer
         },
         ingredients: [{
-            type: String,
-            ref: 'Ingredient'
+            quantity : {
+                type: Number,
+                required: true
+            },
+            unit: {
+                type: String,
+                required: true
+            },
+            ingredient: {
+                type: String,
+                ref: 'Ingredient',
+                required: true
+            }
         }],
         steps: [{
             type: String,

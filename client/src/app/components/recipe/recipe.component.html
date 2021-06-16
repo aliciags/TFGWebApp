@@ -31,8 +31,8 @@
         <div class="col-6">
             <div class="label">Ingredients:</div> 
                 <div class="ingredient" *ngFor="let ing of recipe.ingredients">
-                    <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing)"></i>
-                    {{ing}}
+                    <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing.ingredient)"></i>
+                    {{ing.quantity}} {{ing.unit}} {{ing.ingredient}}
                 </div>
             <br>
             <div class="label">Recipe steps:</div>

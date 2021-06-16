@@ -2,9 +2,10 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Recipe } from 'src/app/model/recipe';
 import { ApiService } from 'src/app/service/api.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { Recipe } from 'src/app/model/recipe';
+import recipeIngredient from 'src/app/model/recipe-ingredient';
 
 @Component({
   selector: 'app-recipe-form',
@@ -17,12 +18,13 @@ export class RecipeFormComponent implements OnInit {
 
   public recipeForm: FormGroup;
   public recipeId: string;
-  public ingredients: string[];
+  public ingredients: recipeIngredient[];
   public steps: string[];
   // public submitted: boolean;
   // public title: string = 'New recipe';
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
+  public units: string[] = ['unit', 'g', 'kg', 'ml', 'cl', 'L', 'tsp', 'tbps'];
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token',
@@ -45,7 +47,11 @@ export class RecipeFormComponent implements OnInit {
       dinnerGuest: ['', ],                      // number of portions, eaters
       meal: ['', ],                             // breakfast, lunch, diner, snack
       diet: ['', [Validators.required]],        // omnivor, vegetrian, vegan
-      ingredients: [''],
+      ingredients: this.fb.group({
+        quantity: ['', [Validators.required]],
+        unit: ['', [Validators.required]],
+        ingredient: ['', [Validators.required]]
+      }),
       steps: ['', [Validators.required]],
       image: [''],
       videoRecipe: [''],
@@ -103,17 +109,21 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  onAddIngredient(ingredient: string): void {
+  onAddIngredient(q: string, u: string, ingredient: string): void {
     const ingredients = 'ingredients';
     this.apiService.get('/ingredient/' + ingredient).subscribe(
       (response) => {
-        const ing = this.ingredients.filter((x) => x === response.name)[0];
+        const ing = this.ingredients.filter((x) => x.ingredient === response.name)[0];
         if (this.ingredients.indexOf(ing, 0) > -1) {
           this.recipeForm.controls[ingredients].setErrors({
             alreadyInList: true,
           });
         } else {
-          this.ingredients.push(response.name);
+          this.ingredients.push({
+            quantity: q,
+            unit: u,
+            ingredient: response.name}
+          );
         }
       },
       (error) => {
@@ -129,7 +139,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onDeleteIngredient(ingredient: string): void {
-    const ing = this.ingredients.filter((x) => x === ingredient)[0];
+    const ing = this.ingredients.filter((x) => x.ingredient === ingredient)[0];
     const index = this.ingredients.indexOf(ing, 0);
     if (index > -1) {
       this.ingredients.splice(index, 1);

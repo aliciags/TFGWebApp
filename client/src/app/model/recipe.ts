@@ -1,3 +1,5 @@
+import recipeIngredient from './recipe-ingredient';
+
 export interface Recipe {
 
     _id: string;
@@ -6,7 +8,7 @@ export interface Recipe {
     guest: number;
     meal: string[];
     diet: string;
-    ingredients: string[];
+    ingredients: recipeIngredient[];
     steps: string[];
     image: string;
     videoRecipe?: string;

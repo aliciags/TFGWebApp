@@ -45,21 +45,28 @@
                 Please select an option
             </div>
         </div>
-        <div class="form-group">
-            <label for="ingredients">Ingredients</label>
-            <div class="add">
-                <input #ingredient id="ingredients" type="ingredients" class="form-control" formControlName="ingredients" placeholder="Introduce the different ingredients">
-                <button class="btn btn-primary btn-circle" (click)="onAddIngredient(ingredient.value)"><i class="fas fa-plus"></i></button>
-            </div>    
-            <div *ngIf="recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.errors">
-                <div *ngIf="recipeForm.controls.ingredients.errors.required" class="alert alert-danger">
-                    Please introduce at least one ingredient
-                </div>
-                <div *ngIf="recipeForm.controls.ingredients.errors.alreadyInList" class="alert alert-danger">
-                    Ingredients already in the recipe
-                </div>
-                <div *ngIf="recipeForm.controls.ingredients.errors.notExists" class="alert alert-danger">
-                    Ingedient does not exist
+        <div formGroupName="ingredients">
+            <div class="form-group">
+                <label for="ingredients">Ingredients</label>
+                <div class="add">
+                    <input #quantity id="quantity" type="number" class="form-control" formControlName="quantity">
+                    <select #unit id="unit" type="unit" class="form-control" formControlName="unit">
+                        <option *ngFor="let u of units"
+                            [value]="u">{{u}}</option>
+                    </select>
+                    <input #ingredient id="ingredient" type="text" class="form-control" formControlName="ingredient" placeholder="Introduce the different ingredients">
+                    <button class="btn btn-primary btn-circle" (click)="onAddIngredient(quantity.value, unit.value, ingredient.value)"><i class="fas fa-plus"></i></button>
+                </div>    
+                <div *ngIf="recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.errors">
+                    <div *ngIf="recipeForm.controls.ingredients.errors.required" class="alert alert-danger">
+                        Please fill the three 
+                    </div>
+                    <div *ngIf="recipeForm.controls.ingredients.errors.alreadyInList" class="alert alert-danger">
+                        Ingredients already in the recipe
+                    </div>
+                    <div *ngIf="recipeForm.controls.ingredients.errors.notExists" class="alert alert-danger">
+                        Ingedient does not exist
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,9 +76,9 @@
                 <div class="ingredientList">
                     <div *ngFor="let ingredient of ingredients">
                         <div class="add">
-                            <div>{{ingredient}}</div>
+                            <div>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.ingredient}}</div>
                             <div>
-                                <button  class="btn btn-secondary btn-circle" (click)="onDeleteIngredient(ingredient)"><i class="fas fa-times"></i></button>
+                                <button  class="btn btn-secondary btn-circle" (click)="onDeleteIngredient(ingredient.ingredient)"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
                     </div>
