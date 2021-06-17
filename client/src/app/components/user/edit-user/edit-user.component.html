@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input [(ngModel)]="user.firstname" id="firstname" type="text" placeholder="Firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input [(ngModel)]="user.lastname" id="lastname" type="text" placeholder="Lastname">
+    </div>
+    <div class="form-group">
+        <label for="birthyear">Birth year</label>
+        <input [(ngModel)]="user.birthyear" id="birthyear" type="number">
+    </div>
+    <div class="form-group">
+        <label for="meal">Meal</label>
+        <select [(ngModel)]="user.meals" id="meal" type="meal" multiple>
+            <option *ngFor="let m of meals"
+                [value]="m">{{m}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="diet">Diet</label>
+        <select [(ngModel)]="user.diet" id="diet" type="diet">
+            <option *ngFor="let d of diets"
+                [value]="d">{{d}}</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" (click)="onSubmit()">Sumbit</button>
+</div>

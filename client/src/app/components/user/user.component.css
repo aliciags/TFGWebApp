@@ -3,10 +3,16 @@ h1 {
     font-size: xx-large;
 }
 
-.row {
-    margin-top: 2%;
-    
+.data {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+
+.data-pair {
+    flex-basis: 50%;
+    margin-bottom: 2%;
+} 
 
 .label {
     font-size: x-large;

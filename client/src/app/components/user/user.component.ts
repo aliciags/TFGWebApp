@@ -39,13 +39,19 @@ export class UserComponent implements OnInit {
         this.user = response;
       },
       error => {
-        if (error.message === 'user not found'){
+        if (error.status === 401 ){
+          this.router.navigateByUrl('/login', {state: {msg: 'Unauthorized'}});
+        } else if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
         } else {
           console.log('Internal server error');
         }
       });
     }
+  }
+
+  onEdit(userId: string): void{
+    this.router.navigate(['user/edit-user'], {state: {id: this.user.email}});
   }
 
 }
