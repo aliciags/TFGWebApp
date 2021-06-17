@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -10,7 +11,8 @@ export class ApiService {
   public headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
   private http: HttpClient;
 
-  constructor( http: HttpClient ) {
+  constructor( private router: Router,
+               http: HttpClient ) {
     this.http = http;
   }
 
@@ -42,6 +44,7 @@ export class ApiService {
   errorHandler(error: HttpErrorResponse): Observable<Error>{
     let errorMessage: {
       error: string,
+      status?: number,
       message: string
     } = {
       error: '',
@@ -55,14 +58,12 @@ export class ApiService {
       };
     } else {
       // get server error
-      console.log(error);
       errorMessage = {
         error: `Error code : ${error.status}\n Message: ${error.message}`,
+        status: error.status,
         message: error.error.msg
       };
     }
-    // console.log(error.error.msg);
-    // console.log(errorMessage);
     return throwError(errorMessage);
   }
 

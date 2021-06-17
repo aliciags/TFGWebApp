@@ -52,7 +52,9 @@ export class PlannerComponent implements OnInit {
           }
         },
         error => {
-          if (error.message === 'There are no menus for such user'){
+          if (error.status === 401 ){
+            this.router.navigateByUrl('/login', {state: {msg: 'Unauthorized'}});
+          } else if (error.message === 'There are no menus for such user'){
             console.log(error);
           }
         });

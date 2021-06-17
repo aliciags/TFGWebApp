@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public loggedIn: boolean;
+  public msg: string;
   private token: string;
 
   public constructor(private fb: FormBuilder,
                      private router: Router,
                      private apiService: ApiService,
-                     private localStorageService: LocalStorageService){
-      this.token = '';
+                     private localStorageService: LocalStorageService) {
       this.loggedIn = false;
       this.loginForm = this.fb.group({
           // The first parameter in a FormControl is optional, is the default value we give to the control
@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.localStorageService.get('token') != null ? this.loggedIn = true : this.loggedIn = false;
+    this.msg = history.state.msg;
+    ((this.localStorageService.get('token') != null) &&  (this.msg !== 'Unauthorized'))
+      ? this.loggedIn = true : this.loggedIn = false;
   }
 
   onSumbit(): void{

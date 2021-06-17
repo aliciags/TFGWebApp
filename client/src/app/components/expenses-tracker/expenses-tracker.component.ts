@@ -49,7 +49,9 @@ export class ExpensesTrackerComponent implements OnInit {
             this.expenses = this.transformDate(this.expenses);
           },
           (error) => {
-            if (error.message === 'There are no expenses for such user') {
+            if (error.status === 401 ){
+              this.router.navigateByUrl('/login', {state: {msg: 'Unauthorized'}});
+            } else if (error.message === 'There are no expenses for such user') {
               this.router.navigate(['/notfound']);
             } else {
               console.log('Internal server error');

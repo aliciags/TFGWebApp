@@ -68,7 +68,9 @@ export class GroceriesListComponent implements OnInit {
         this.ingredientsList = response.groceries;
       },
       error => {
-        if (error.message === 'user not found'){
+        if (error.status === 401 ){
+          this.router.navigateByUrl('/login', {state: {msg: 'Unauthorized'}});
+        } else if (error.message === 'user not found'){
           this.router.navigate(['/notfound']);
         } else {
           console.log('Internal server error');
