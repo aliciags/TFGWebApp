@@ -1,12 +1,10 @@
 <div class="container">
-    <h1 *ngIf="recipeId">Edit recipe</h1>
-    <h1 *ngIf="!recipeId">Add recipe</h1>
+    <h1 *ngIf="recipe._id !== ''">Edit recipe</h1>
+    <h1 *ngIf="recipe._id === ''">Add recipe</h1>
     <form [formGroup]="recipeForm">
         <div class="form-group">
             <label for="name">Name</label>
-            <!--We associate each input field to the formControl object using the formControlName directive-->
             <input id="name" type="text" class="form-control" formControlName="name" placeholder="Name your recipe">
-            <!--Implementing validation-->
             <div *ngIf="recipeForm.controls.name.touched && !recipeForm.controls.name.valid" class="alert alert-danger">
                 Name is required
             </div>
@@ -24,6 +22,10 @@
             <div *ngIf="recipeForm.controls.dinnerGuest.touched && !recipeForm.controls.dinnerGuest.valid" class="alert alert-danger">
                 Introduce the number of guests
             </div>
+        </div>
+        <div class="form-group">
+            <label for="videoRecipe">Video Recipe</label>
+            <input id="videoRecipe" type="string" class="form-control" formControlName="videoRecipe" placeholder="Introduce a link to your recipe's video">
         </div>
         <div class="form-group">
             <label for="meal">Meal</label>

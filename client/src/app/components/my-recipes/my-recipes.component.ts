@@ -15,7 +15,6 @@ export class MyRecipesComponent implements OnInit {
 
   public recipes: Recipe[];
   public rid: string;
-  // public filters: boolean;
   public ingredientsFilter: string[];
   public environment: string;
   public showModal: boolean;
@@ -32,7 +31,6 @@ export class MyRecipesComponent implements OnInit {
     this.recipes = [];
     this.environment = 'myrecipes';
     this.rid = '';
-    // this.filters = false;
     this.ingredientsFilter = [];
     this.showModal = false;
     this.searchControl = new FormControl();
@@ -71,7 +69,11 @@ export class MyRecipesComponent implements OnInit {
         this.recipes = response;
       },
       error => {
-        console.log(error);
+        if (error.status === 401 ){
+          this.router.navigateByUrl('/login', {state: {msg: 'Unauthorized'}});
+        } else {
+          console.log(error);
+        }
       });
     }
   }

@@ -29,6 +29,8 @@
     </div>
     <div class="row">
         <div class="col-6">
+            <div *ngIf="recipe.videoRecipe != ''" class="label">Video Recipe</div>
+            <a   *ngIf="recipe.videoRecipe != ''" class="input" href="{{recipe.videoRecipe}}">{{recipe.videoRecipe}}</a>
             <div class="label">Ingredients:</div> 
                 <div class="ingredient" *ngFor="let ing of recipe.ingredients">
                     <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing.ingredient)"></i>
@@ -45,11 +47,8 @@
     <button *ngIf="loggedIn == true" class="btn btn-warning" (click)="onEdit(recipe._id)" ><i class="fas fa-pen"></i></button> 
     <router-outlet></router-outlet>
     
-    <!-- Modal -->
     <div id="modal" class="modal fade" role="dialog" [ngClass]="{'show': showModal}">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
                     <p>{{modalText}}</p>

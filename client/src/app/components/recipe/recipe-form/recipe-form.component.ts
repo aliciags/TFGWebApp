@@ -17,7 +17,7 @@ import recipeIngredient from 'src/app/model/recipe-ingredient';
 export class RecipeFormComponent implements OnInit {
 
   public recipeForm: FormGroup;
-  public recipeId: string;
+  public recipe: Recipe;
   public ingredients: recipeIngredient[];
   public steps: string[];
   public selectedFile: File | null;
@@ -30,15 +30,12 @@ export class RecipeFormComponent implements OnInit {
     }),
   };
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private localStorage: LocalStorageService,
-    private apiService: ApiService
-  ) {
+  constructor( private fb: FormBuilder,
+               private router: Router,
+               private localStorage: LocalStorageService,
+               private apiService: ApiService ) {
     this.ingredients = [];
     this.steps = [];
-    this.recipeId = '';
     this.selectedFile = null;
     this.recipeForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -55,45 +52,60 @@ export class RecipeFormComponent implements OnInit {
       image: [''],
       videoRecipe: [''],
     });
+    this.recipe = {
+      _id: '',
+      name: '',
+      timing: 0,
+      guest: 0,
+      meal: [],
+      diet: '',
+      ingredients: [],
+      steps: [],
+      image: '',
+      videoRecipe: '',
+      creator: this.localStorage.get('email'),
+    };
   }
 
   ngOnInit(): void {
-    this.recipeId = history.state.id;
     this.httpOptions.headers = this.httpOptions.headers.set(
       'x-auth-token',
       this.localStorage.get('token')
-    );
+      );
+    if (history.state.id != null) {
+      this.apiService.get('/recipe/' + history.state.id, this.httpOptions )
+        .subscribe( response => {
+          this.recipe = response;
+          this.ingredients = this.recipe.ingredients;
+          this.steps = this.recipe.steps;
+        }, error => {
+          console.log(error);
+        });
+    }
   }
 
   onSubmit(): void {
+    console.log(this.recipe);
     if (this.recipeForm.valid) {
       const recipe = new FormData();
       recipe.append('image', this.selectedFile, this.selectedFile.name);
-      /*recipe.append('name', this.recipeForm.value['name']);
-      recipe.append('timing', this.recipeForm.value['name']);
-      recipe.append('guest', this.recipeForm.value['name']);
-      recipe.append('meal', this.recipeForm.value['name']);
-      recipe.append('diet', this.recipeForm.value['name']);
-      recipe.append('ingredients', this.recipeForm.value['name']);
-      recipe.append('steps', this.steps.);
-      recipe.append('name', this.recipeForm.value['name']);*/
-      const r = JSON.stringify({
-        _id: '',
-        name: this.recipeForm.value['name'],
-        timing: this.recipeForm.value['timing'],
-        guest: this.recipeForm.value['dinnerGuest'],
-        meal: this.recipeForm.value['meal'],
-        diet: this.recipeForm.value['diet'],
-        ingredients: this.ingredients,
-        steps: this.steps,
-        image: '',
-        videoRecipe: this.recipeForm.value['videoRecipe'],
-        creator: this.localStorage.get('email'),
-      });
+      const r = JSON.stringify( {
+          _id: '',
+          name: this.recipeForm.value['name'],
+          timing: this.recipeForm.value['timing'],
+          guest: this.recipeForm.value['dinnerGuest'],
+          meal: this.recipeForm.value['meal'],
+          diet: this.recipeForm.value['diet'],
+          ingredients: this.ingredients,
+          steps: this.steps,
+          image: '',
+          videoRecipe: this.recipeForm.value['videoRecipe'],
+          creator: this.localStorage.get('email'),
+        }
+      );
       recipe.append('data', r);
-      if (this.recipeId != null) {
-        recipe.append('_id', this.recipeId);
-        /*this.apiService.put('/recipe/' + this.recipeId, recipe, this.httpOptions).subscribe(
+      if (this.recipe._id !== '') {
+        this.apiService.put('/recipe/' + this.recipe._id, recipe, this.httpOptions).subscribe(
           (response) => {
             console.log(response);
             this.router.navigate(['/my-recipes']);
@@ -101,7 +113,7 @@ export class RecipeFormComponent implements OnInit {
           (error) => {
             console.log(error);
           }
-        );*/
+        );
       } else {
         console.log(recipe);
         this.apiService.post('/recipe', recipe, this.httpOptions).subscribe(

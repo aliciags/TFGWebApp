@@ -204,9 +204,6 @@ export const editRecipe = async (req: Request, res: Response) => {
         if (!user || !recipe) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user or recipe not found'});
         }
-        /*if (!recipe) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'recipe not found'});
-        }*/
         if (recipe.creator != user.email) {
             return res.status(HttpStatusCodes.FORBIDDEN).json({msg: 'not allowed to edit the recipe'});
         }
