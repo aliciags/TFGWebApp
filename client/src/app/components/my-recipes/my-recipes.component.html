@@ -1,33 +1,22 @@
 <div class="grid-container">
-    <h1 class="mat-h1">My recipes</h1>
-    <div>
-      <button class="btn btn-primary" (click)="onAddRecipe()">
-        <i class="fas fa-plus"></i>
-        Add recipe
-      </button>
-    </div>
+  <button class="btn btn-primary" (click)="onAddRecipe()">
+    <i class="fas fa-plus"></i>
+    Add recipe
+  </button>
+  <h1 class="mat-h1">My recipes</h1>
+    
     <div class="filter-input">
       <div class="input-group">
         <input #name type="text" class="form-control" [formControl]="searchControl"  placeholder="Search recipe" aria-label="recipe" aria-describedby="basic-addon1">
       </div>
-    <!--<div>
-        <button class="btn btn-primary"  type="button" routerLink="recipe-form">Add recipe</button>
-    </div>
-    <div *ngIf="!filters">
-        <button class="btn btn-primary" (click)="onFilter()">Filters</button>
-    </div>
-      <div *ngIf="filters" class="input-group small">-->
+    
         <select #diet class="custom-select" id="diet">
           <option selected>Diet...</option>
           <option value="Omnivorous">Omnivorous</option>
           <option value="Vegetarian">Vegetarian</option>
           <option value="Vegan">Vegan</option>
         </select>
-        <!--<div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button"><i class="fas fa-seedling"></i></button>
-        </div>
-      </div>
-      <div *ngIf="filters" class="input-group small">-->
+        
         <select #meal class="custom-select" id="meal">
           <option selected>Meal...</option>
           <option value="Breakfast">Breakfast</option>
@@ -39,14 +28,12 @@
         <div class="input-group">
           <input class="form-control"type="text" #ingredient placeholder="Introduce an ingredient"> 
         </div>
-          <button type="button" class="btn btn-primary btn-circle-md" (click)="onAddIngredient(ingredient.value)">
+          <button type="button" class="btn btn-primary btn-circle" (click)="onAddIngredient(ingredient.value)">
             <i class="fas fa-plus"></i>
         </button>
-        <!--<div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button"><i class="fas fa-utensils"></i></button>
-        </div>-->
+        
         <div>
-            <button class="btn btn-outline-primary check" (click)="onFilter(name.value, diet.value, meal.value)"><i class="fas fa-check"></i></button>
+            <button class="btn btn-outline-primary btn-circle" (click)="onFilter(name.value, diet.value, meal.value)"><i class="fas fa-check"></i></button>
         </div>
 
         <mat-card class="ingredient-filter" *ngIf="ingredientsFilter.length > 0">

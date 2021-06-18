@@ -65,7 +65,7 @@ export class ExpensesTrackerComponent implements OnInit {
     this.router.navigateByUrl('/expenses/expense-form', {state: {id}});
   }
 
-  onDelete(id: string | undefined): void {
+  onDelete(id: string | null): void {
     if (id) {
       this.apiService.delete('/expense/' + id, this.httpOptions).subscribe(
         (response) => {
