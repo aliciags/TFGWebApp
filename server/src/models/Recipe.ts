@@ -24,7 +24,7 @@ export interface IRecipe extends Document {
     guest: number;
     meal: string[];
     diet: Diet;
-    image: Buffer;
+    image: string;
     ingredients: RecipeIngredient[];
     steps: string[];
     videoRecipe: string;
@@ -69,8 +69,7 @@ const recipeSchema: Schema = new Schema (
             required: true
         },
         image: {
-            type: String,
-            data: Buffer
+            type: String
         },
         ingredients: [{
             quantity : {

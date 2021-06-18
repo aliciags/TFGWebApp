@@ -39,7 +39,7 @@ recipeRouter.post('/recipe/', auth, upload.single('image'), RecipeController.add
  * PUT /api/recipe/:rid
  * access Private
  */
-recipeRouter.put('/recipe/:rid', auth, RecipeController.editRecipe);
+recipeRouter.put('/recipe/:rid', auth, upload.single('image'), RecipeController.editRecipe);
 
 /**
  * get saved or own recipes by user id

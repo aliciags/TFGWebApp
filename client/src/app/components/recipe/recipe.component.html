@@ -29,8 +29,8 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <div *ngIf="recipe.videoRecipe != ''" class="label">Video Recipe</div>
-            <a   *ngIf="recipe.videoRecipe != ''" class="input" href="{{recipe.videoRecipe}}">{{recipe.videoRecipe}}</a>
+            <div *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="label">Video Recipe</div>
+            <a   *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="input" href="{{recipe.videoRecipe}}">{{recipe.videoRecipe}}</a>
             <div class="label">Ingredients:</div> 
                 <div class="ingredient" *ngFor="let ing of recipe.ingredients">
                     <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing.ingredient)"></i>

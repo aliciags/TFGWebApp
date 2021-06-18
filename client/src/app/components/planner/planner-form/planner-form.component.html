@@ -3,7 +3,7 @@
     <form [formGroup]="plannerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="diet">Diet:</label>
-            <div class="row" formGroupName="diet">
+            <!--<div class="row" formGroupName="diet">
                 <div class="form-check form-check-inline">
                     <input class="btn btn-outline-primary" type="checkbox" id="omnivorous" value="Omnivorous" formControlName="omnivorous">
                     <button class="btn btn-outline-primary" for="omnivorous"><i class="fas fa-drumstick-bite"></i><br>Omnivorous</button>
@@ -16,49 +16,22 @@
                     <input class="btn btn-outline-primary" type="checkbox" id="vegan" value="Vegan" formControlName="vegan">
                     <button class="btn btn-outline-primary" for="vegan"><i class="fas fa-seedling"></i><br>Vegan</button>
                 </div>
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="omnivorous" value="" formControlName="omnivorous">
-                        <span class="cr"><i class="cr-icon fa fa-drumstick-bite"></i></span>
-                        Omnivorous
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="vegetarian" value="" formControlName="vegetarian">
-                        <span class="cr"><i class="cr-icon fa fa-egg"></i></span>
-                        Vegetarian
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="vegan" value="" formControlName="vegan">
-                        <span class="cr"><i class="cr-icon fa fa-seedling"></i></span>
-                        Vegan
-                    </label>
-                </div>
-            <button type="checkbox" class="btn btn-outline-primary" id="omnivorous" formControlName="omnivorous">
-                <i class="fas fa-drumstick-bite"></i><br>Omnivorous</button>
-            <button type="checkbox" class="btn btn-outline-primary" id="vegetarian" formControlName="vegetarian">
-                <i class="fas fa-egg"></i><br>Vegetarian</button>
-            <button type="checkbox" class="btn btn-outline-primary" id="vegan" formControlName="vegan">
-                <i class="fas fa-seedling"></i><br>Vegan</button>-->
-            </div>
-            <!--<select id="diet" type="diet" class="form-control" formControlName="diet">
+            </div>-->
+            <select id="diet" type="diet" class="form-control" formControlName="diet">
                 <option *ngFor="let d of diets"
                     [value]="d">{{d}}</option>
-            </select>-->
+            </select>
             <div *ngIf="plannerForm.controls.diet.touched && !plannerForm.controls.diet.valid" class="alert alert-danger">
                 Please select an option
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="nMeals">Number of meals</label>
             <input id="nMeals" type="text" class="form-control" formControlName="nMeals" placeholder="Introduce your number of daily meals">
             <div *ngIf="plannerForm.controls.nMeals.touched && !plannerForm.controls.nMeals.valid" class="alert alert-danger">
                 Please introduce a number of meals
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label for="meals">Meals</label>
             <select id="meal" type="meal" class="form-control" formControlName="meal" multiple>

@@ -194,12 +194,14 @@ export const saveRecipe = async (req: Request, res: Response) => {
 
 export const editRecipe = async (req: Request, res: Response) => {
 
-    const {name, timing, guest, meal, diet, image, ingredients, steps, videoRecipe} = req.body;
+    console.log('here');
+    const {name, timing, guest, meal, diet, ingredients, steps, videoRecipe} = JSON.parse(req.body.data); // JSON.parse(req.body.data);
+    const image = req.file.path;
     let user: IUser;
     let recipe: IRecipe;
 
     try {
-        user = await User.findById(req.userId);
+        user = await User.findById({_id: req.userId});
         recipe = await Recipe.findById({_id: req.params.rid });
         if (!user || !recipe) {
             return res.status(HttpStatusCodes.NOT_FOUND).json({msg: 'user or recipe not found'});
