@@ -37,10 +37,11 @@ app.use(
 // @access  Public
 app.get('/', (_req, res) => {
   res.send(
-    // 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/FoodieWebApp1.0/client/dist/client/index.html'
     './dist/client'
-  );
-});
+    );
+  });
+  
+  // 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
 
 app.use('/api/', recipe);
 app.use('/api/auth', auth);

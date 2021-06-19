@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  public baseUri /*: string*/ = environment.baseUri;
+  public baseUri /*: string*/ = 'http://localhost:5000/api'; // environment.baseUri;
   public headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
   private http: HttpClient;
 
