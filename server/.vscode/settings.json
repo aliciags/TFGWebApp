@@ -1,4 +1,4 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/568ff5de-3a39-4ee5-9cd1-fa3cf7a23e53/resourceGroups/FoodieTFG/providers/Microsoft.Web/sites/FoodieTFG",
-    "appService.deploySubpath": "."
-}
+/*{
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/568ff5de-3a39-4ee5-9cd1-fa3cf7a23e53/resourceGroups/FoodieTFG/providers/Microsoft.Web/sites/FoodieTFG"
+}*/

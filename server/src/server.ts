@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   express.static(
-    'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
+    './dist/client'
   )
 );
 app.use(
@@ -42,8 +42,8 @@ app.get('/', (_req, res) => {
   );
 });
 
-app.use('/api/auth', auth);
 app.use('/api/', recipe);
+app.use('/api/auth', auth);
 app.use('/api/user', user);
 app.use('/api/ingredient', ingredient);
 app.use('/api/expense', expense);

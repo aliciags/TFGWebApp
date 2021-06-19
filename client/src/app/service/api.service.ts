@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  public baseUri /*: string*/ = 'http://localhost:5000/api';
+  public baseUri /*: string*/ = environment.baseUri;
   public headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
   private http: HttpClient;
 
