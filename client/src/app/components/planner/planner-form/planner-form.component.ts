@@ -13,24 +13,17 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 export class PlannerFormComponent implements OnInit {
 
   public plannerForm: FormGroup;
-  public submitted: boolean = false;
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private apiService: ApiService,
-    private localStorage: LocalStorageService
+  constructor( private fb: FormBuilder,
+               private router: Router,
+               private apiService: ApiService,
+               private localStorage: LocalStorageService
   ) {
     this.plannerForm = this.fb.group({
-      nMeals: ['', [Validators.required]],
       meal: ['', [Validators.required]],
-      diet: this.fb.group({
-        omnivorous: [''],
-        vegetarian: [''],
-        vegan: ['']
-      })
+      diet: ['', [Validators.required]]
     });
   }
 
@@ -38,16 +31,15 @@ export class PlannerFormComponent implements OnInit {
 
   onSubmit(): void{
     if (this.plannerForm.valid){
-      console.log(this.plannerForm.value['diet']);
       const user: User = {
         email: history.state.email,
         password: history.state.password,
         firstname: history.state.user.firstname,
         lastname: history.state.user.lastname,
         birthyear: history.state.user.birthyear,
-        numberMeals: this.plannerForm.value['nMeals'],
+        numberMeals: 0,
         meals: this.plannerForm.value['meal'],
-        diet: 'Omnivorous',
+        diet: this.plannerForm.value['diet'],
         recipes: [],
         groceries: []
       };

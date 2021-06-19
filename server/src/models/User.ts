@@ -11,7 +11,6 @@ import { IRecipe } from './Recipe';
  * @param firstname: string
  * @param lastname: string
  * @param birthyear: number
- * @param numberMeals: number
  * @param meals: string[]
  * @param diet: string
  * @param private: boolean
@@ -22,10 +21,9 @@ export interface IUser extends Document {
     role: string;
     email: string;
     password: string;
-    firstname: string;  // useless
-    lastname: string;   // useless
-    birthyear: number;  // useless
-    numberMeals: number;
+    firstname: string;
+    lastname: string;
+    birthyear: number;
     meals: string[];
     diet: Diet;
     private: boolean;
@@ -78,12 +76,12 @@ const userSchema: Schema = new Schema(
             min: 1900,
             max: 2021
         },
-        numberMeals: {
+        /* numberMeals: {
             type: Number,
             required: true,
             min: 2,
             max: 5
-        },
+        },*/
         meals: [{
             type: String,
             required: true,

@@ -3,20 +3,7 @@
     <form [formGroup]="plannerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="diet">Diet:</label>
-            <!--<div class="row" formGroupName="diet">
-                <div class="form-check form-check-inline">
-                    <input class="btn btn-outline-primary" type="checkbox" id="omnivorous" value="Omnivorous" formControlName="omnivorous">
-                    <button class="btn btn-outline-primary" for="omnivorous"><i class="fas fa-drumstick-bite"></i><br>Omnivorous</button>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="btn btn-outline-primary" type="checkbox" id="vegetarian" value="Vegetarian" formControlName="vegetarian">
-                    <button class="btn btn-outline-primary" for="vegetarian"><i class="fas fa-egg"></i><br>Vegetarian</button>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="btn btn-outline-primary" type="checkbox" id="vegan" value="Vegan" formControlName="vegan">
-                    <button class="btn btn-outline-primary" for="vegan"><i class="fas fa-seedling"></i><br>Vegan</button>
-                </div>
-            </div>-->
+            
             <select id="diet" type="diet" class="form-control" formControlName="diet">
                 <option *ngFor="let d of diets"
                     [value]="d">{{d}}</option>
@@ -25,13 +12,6 @@
                 Please select an option
             </div>
         </div>
-        <!--<div class="form-group">
-            <label for="nMeals">Number of meals</label>
-            <input id="nMeals" type="text" class="form-control" formControlName="nMeals" placeholder="Introduce your number of daily meals">
-            <div *ngIf="plannerForm.controls.nMeals.touched && !plannerForm.controls.nMeals.valid" class="alert alert-danger">
-                Please introduce a number of meals
-            </div>
-        </div>-->
         <div class="form-group">
             <label for="meals">Meals</label>
             <select id="meal" type="meal" class="form-control" formControlName="meal" multiple>
