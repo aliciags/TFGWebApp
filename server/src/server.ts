@@ -3,13 +3,14 @@ import express from 'express';
 
 import connectDB from '../config/database';
 import routes from './routes/routes';
-import auth from './routes/api/auth.routes';
+
+/* import auth from './routes/api/auth.routes';
 import recipe from './routes/api/recipe.routes';
 import ingredient from './routes/api/ingredient.routes';
 import user from './routes/api/user.routes';
 import expense from './routes/api/expense.routes';
 import menu from './routes/api/menu.routes';
-import day from './routes/api/day.routes';
+import day from './routes/api/day.routes'; */
 
 const cors = require('cors');
 
