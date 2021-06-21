@@ -1,19 +1,23 @@
 import { Document, Model, Schema, model } from 'mongoose';
 import { IMenu } from './Menu';
-import Mealtime from '../types/Mealtime';
+import { Mealtime } from '../types/Mealtime';
+import { WeekDays } from 'WeekDays';
 
 /**
- * Day Object to store a week meal plan. Used by the user database model.
- * @param menu: ref => Menu._id
- * @param day: string
- * @param meals: Mealtime[]
+ * A day is a part of a menu with the different meals defined
  */
 export interface IDay extends Document {
+    /** ref: menu object id */
     menu: IMenu['_id'];
-    day: string;
+    /** day of the week */
+    day: WeekDays;
+    /** meals of the the day */
     meals: Array<Mealtime>;
 }
 
+/**
+ * A daySchema generates de structure of the mongoDB document
+ */
 const daySchema: Schema = new Schema (
     {
         _menu: {
@@ -58,6 +62,7 @@ const daySchema: Schema = new Schema (
     { timestamps: true }
 );
 
+/** day model to do the requests to the database */
 const Day: Model<IDay> = model('Day', daySchema);
 
 export default Day;

@@ -22,14 +22,14 @@ recipeRouter.post('/filter', RecipeController.getFilteredRecipes);
 
 /**
  * get single recipe by recipe id
- * GET /api/:rid
+ * GET /api/recipe/:rid
  * access Public
  */
 recipeRouter.get('/recipe/:rid', RecipeController.getRecipe);
 
 /**
  * add recipe
- * POST /api
+ * POST /api/recipe
  * access Private
  */
 recipeRouter.post('/recipe/', auth, upload.single('image'), RecipeController.addRecipe);

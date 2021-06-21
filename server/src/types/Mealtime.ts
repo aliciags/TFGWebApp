@@ -1,15 +1,16 @@
 import { IRecipe } from '../models/Recipe';
 
 /**
- * Mealtime Object to store a week meal plan. Used by the user database model.
- * @param _id?: string - id of the nested object
- * @param meal: string - name of the meal
- * @param recipes: IRecipe["_id"][] - array with the diferent recipes
+ * Mealtime Object to store a week meal plan
  */
-type mealtime = {
+export type Mealtime = {
+  /** unique id of the mealtime */
   _id?: string;
+  /** name of the meal
+   * possible values
+   * Breakfast, Lunch, Snack or Dinner
+   */
   meal: string;
+  /** array with the different recipes of a meal */
   recipes: IRecipe['_id'][];
 };
-
-export default mealtime;

@@ -1,24 +1,14 @@
 import multer, { Multer } from 'multer';
 
-/* const storage = multer.diskStorage({
-    destination: (req: Express.Request, file: Express.Multer.File ,
-    callback: ((error: Error | null, destination: string) => void)) => {
-        callback(undefined, 'images/');
-        console.log('saving image');
-    },
-    filename: (req: Express.Request, file: Express.Multer.File ,
-        callback: ((error: Error | null, destination: string) => void)) => {
-        callback(undefined, file.originalname);
-        console.log('filename');
-    }
-}); */
-
+/** multer disk storage configuration */
 const storage = multer.diskStorage({
+    /** destination path ./public/images */
     destination: function(req, file, cb) {
-        cb(undefined, './uploads/');
+        cb(undefined, './public/images/');
     },
+    /** file name Date.now() + original file name */
     filename: function(req, file, cb) {
-        cb(undefined, file.originalname);
+        cb(undefined, Date.now() + file.originalname);
     }
 });
 
@@ -31,10 +21,15 @@ const storage = multer.diskStorage({
     }
 }; */
 
+/**
+ * multer object that enables uploading files throught form data.
+ * @param storage object that defines destination and filename
+ * @param limits limits the size of a file, 25MB
+ */
 const upload: Multer = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 25   // 25MB
+        fileSize: 1024 * 1024 * 25
     }
 });
 

@@ -1,16 +1,9 @@
 import { Response } from 'express';
-//  import multer, { Multer } from 'multer';
-
 import HttpStatusCodes from 'http-status-codes';
 
-import Request from '../types/Request';
+import { Request } from '../types/Request';
 import Recipe, { IRecipe } from '../models/Recipe';
 import User, { IUser } from '../models/User';
-
-/*const upload: Multer = multer({
-    dest: 'uploads/'
-});*/
-
 
 export const getAllRecipes = async (req: Request, res: Response) => {
     let recipes: IRecipe[];

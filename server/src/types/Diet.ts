@@ -1,12 +1,11 @@
 /**
- * Object that defines rather a User, Recipe or Ingredient
+ * Object that defines if a User, Recipe or Ingredient
  * is either Omnivorous, Vegetarian or Vegan
  */
-
-enum Diet {
+export enum Diet {
     Omnivorous,
     Vegetarian,
     Vegan
 }
 
-export default Diet;
+// export default Diet;

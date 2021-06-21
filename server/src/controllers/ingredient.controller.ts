@@ -1,9 +1,7 @@
 import { Response } from 'express';
-
-import { check, validationResult } from 'express-validator/check';
 import HttpStatusCodes from 'http-status-codes';
 
-import Request from '../types/Request';
+import { Request } from '../types/Request';
 import Ingredient, { IIngredient } from '../models/Ingredient';
 
 

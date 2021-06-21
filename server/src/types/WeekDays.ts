@@ -1,8 +1,7 @@
 /**
- * Object that defines rather a User, Recipe or Ingredient
- * is either Omnivorous, Vegetarian or Vegan
+ * Object that stores the different days of the week
  */
-enum WeekDays {
+export enum WeekDays {
   'Monday',
   'Tuesday',
   'Wednesday',
@@ -12,4 +11,4 @@ enum WeekDays {
   'Sunday',
 }
 
-export default WeekDays;
+// export default WeekDays;

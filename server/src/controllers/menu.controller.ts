@@ -2,11 +2,11 @@ import { Response } from 'express';
 
 import HttpStatusCodes from 'http-status-codes';
 
-import Request from '../types/Request';
+import {Request} from '../types/Request';
 import Menu, { IMenu } from '../models/Menu';
 import Day, { IDay } from '../models/Day';
 import User, { IUser } from '../models/User';
-import Mealtime from '../types/Mealtime';
+import {Mealtime} from '../types/Mealtime';
 
 export const getAllMenus = async (req: Request, res: Response ) => {
 

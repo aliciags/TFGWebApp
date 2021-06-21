@@ -1,12 +1,12 @@
 /**
- * Object that defines rather a User, Recipe or Ingredient
- * is either Omnivorous, Vegetarian or Vegan
+ * Object that defines a Day or a Recipe's meal
+ * is either Breakfast, Lunch, Snack or Dinner
  */
-enum Meals {
+enum Meal {
     Breakfast,
     Lunch,
     Snack,
     Dinner
 }
 
-export default Meals;
+export { Meal };

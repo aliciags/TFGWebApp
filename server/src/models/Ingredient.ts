@@ -1,24 +1,23 @@
 import { Document, Model, Schema, model } from 'mongoose';
-import Diet from '../types/Diet';
+import { Diet } from '../types/Diet';
 import { IUser } from './User';
 import { IRecipe } from './Recipe';
 
 /**
- * Interface to model the Ingredient Schema
- * @param name: string
- * @param diet: string
- * @param avgPrice: number
- * @param users: ref => User.email[]
- * @param recipes: ref => Recipe._id[]
+ * Ingredient required to make recipes,
+ * also found in the users groceries list
  */
 export interface IIngredient extends Document {
+    /** unique name of the ingredient */
     name: string;
+    /** diet of the ingredient  */
     diet: Diet;
-    avgPrice: number;
-    users: IUser['email'][];
-    recipes: IRecipe['_id'][];
+    // avgPrice: number;
 }
 
+/**
+ * An ingredientSchema generates de structure of the mongoDB document
+ */
 const ingredientSchema: Schema = new Schema(
     {
         name: {
@@ -36,21 +35,16 @@ const ingredientSchema: Schema = new Schema(
             },
             required: true
         },
-        avgPrice: {
+        /* avgPrice: {
             type: Number,
             required: true,
             min: 0
-        },
-        users: {
-            type: String
-        },
-        recipes: {
-            type: Schema.Types.ObjectId
-        }
+        } */
     },
     { timestamps: true }
 );
 
+/**  ingredient model to do the requests to the database */
 const Ingredient: Model<IIngredient> = model('Ingredient', ingredientSchema);
 
 export default Ingredient;

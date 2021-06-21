@@ -1,20 +1,17 @@
 import bcrypt from 'bcryptjs';
 import config from 'config';
 import { Response } from 'express';
-
-import { validationResult } from 'express-validator/check';
 import HttpStatusCodes from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
-import Payload from '../types/Payload';
-import Request from '../types/Request';
+import { Payload } from '../types/Payload';
+import { Request } from '../types/Request';
 import User, { IUser } from '../models/User';
 import Ingredient, { IIngredient } from '../models/Ingredient';
-// import Mealtime, { IMealtime } from '../models/Day';
 
 export const getAllUsers = async (req: Request, res: Response) => {
   const role: string = req.role;
-  // console.log(role);
+
   if (role !== 'admin') {
     return res
       .status(HttpStatusCodes.FORBIDDEN)

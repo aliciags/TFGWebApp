@@ -1,36 +1,40 @@
 import { Document, Model, Schema, model } from 'mongoose';
-import Diet from '../types/Diet';
 import { IIngredient } from './Ingredient';
 import { IRecipe } from './Recipe';
+import { Diet } from '../types/Diet';
 
 /**
  * Interafce to model the User Schema
- * @param role: string
- * @param email:string
- * @param password: string
- * @param firstname: string
- * @param lastname: string
- * @param birthyear: number
- * @param meals: string[]
- * @param diet: string
- * @param private: boolean
- * @param recipes: ref => Recipe._id[]
- * @param groceries: ref => Ingredient.name[]
  */
 export interface IUser extends Document {
+    /** role of the user either admin or user */
     role: string;
+    /** unique email of the user */
     email: string;
+    /** hashed password of the user */
     password: string;
+    /** firstname of the user */
     firstname: string;
+    /** last name of the user */
     lastname: string;
+    /** birth year of the user */
     birthyear: number;
+    /** usual meals of the suer */
     meals: string[];
+    /** eating diet either Omnivorous,
+     * Vegetarian or Vegan
+     */
     diet: Diet;
-    private: boolean;
+    // private: boolean;
+    /** recipes id either created or saved by the user */
     recipes: IRecipe['_id'][];
+    /** array of ingredient's name */
     groceries: IIngredient['name'][];
 }
 
+/**
+ * A userSchema generates de structure of the mongoDB document
+ */
 const userSchema: Schema = new Schema(
     {
         role: {
@@ -76,12 +80,6 @@ const userSchema: Schema = new Schema(
             min: 1900,
             max: 2021
         },
-        /* numberMeals: {
-            type: Number,
-            required: true,
-            min: 2,
-            max: 5
-        },*/
         meals: [{
             type: String,
             required: true,
@@ -120,6 +118,7 @@ const userSchema: Schema = new Schema(
     { timestamps: true }
 );
 
+/** day model to do the requests to the database */
 const User: Model<IUser> = model('User', userSchema);
 
 export default User;

@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 
 import connectDB from '../config/database';
+import routes from './routes/routes';
 import auth from './routes/api/auth.routes';
 import recipe from './routes/api/recipe.routes';
 import ingredient from './routes/api/ingredient.routes';
@@ -28,8 +29,9 @@ app.use(
     './dist/client'
   )
 );
+
 app.use(
-  '/uploads', express.static('uploads')
+  '/public', express.static('public')
 );
 
 // @route   GET the frontend
@@ -40,16 +42,17 @@ app.get('/', (_req, res) => {
     './dist/client'
     );
   });
-  
-  // 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
+// 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
 
-app.use('/api/', recipe);
+app.use('/api', routes);
+
+/*app.use('/api/', recipe);
 app.use('/api/auth', auth);
 app.use('/api/user', user);
 app.use('/api/ingredient', ingredient);
 app.use('/api/expense', expense);
 app.use('/api/menu', menu);
-app.use('/api/day', day);
+app.use('/api/day', day);*/
 
 const port = app.get('port');
 const server = app.listen(port, () =>

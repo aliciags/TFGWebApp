@@ -2,7 +2,7 @@ import { Response } from 'express';
 
 import HttpStatusCodes from 'http-status-codes';
 
-import Request from '../types/Request';
+import { Request } from '../types/Request';
 import Day, { IDay } from '../models/Day';
 
 export const getAllDays = async (req: Request, res: Response) => {

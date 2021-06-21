@@ -6,8 +6,8 @@ import { validationResult } from 'express-validator/check';
 import HttpStatusCodes from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
-import Payload from '../types/Payload';
-import Request from '../types/Request';
+import { Payload } from '../types/Payload';
+import { Request } from '../types/Request';
 import User, { IUser } from '../models/User';
 
 export const login = async (req: Request, res: Response) => {

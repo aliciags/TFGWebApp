@@ -1,0 +1,633 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>mongoose-express-ts</title>
+	<meta name="description" content="Documentation for mongoose-express-ts">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">mongoose-express-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>mongoose-express-ts</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#mongoose-nodejs-express-typescript-application-boilerplate-with-best-practices-for-api-development" id="mongoose-nodejs-express-typescript-application-boilerplate-with-best-practices-for-api-development" style="color: inherit; text-decoration: none;">
+					<h1>Mongoose Node.js Express TypeScript application boilerplate with best practices for API development.</h1>
+				</a>
+				<p><img src="https://user-images.githubusercontent.com/10678997/57565876-01281b00-73f8-11e9-8d86-911faa4a6c0f.png" alt="image"></p>
+				<p>The main purpose of this repository is to show a good end-to-end project setup and workflow for writing a Mongoose Node.js Express code in TypeScript complete with middleware, models, routes, and types.</p>
+				<p>This example comes with a complete REST API to handle Authentication and CRUD features on Users and their corresponding Profile. You may view the API documentation on the <a href="https://github.com/polcham/mongoose-express-ts/wiki">Wiki</a>.</p>
+				<a href="#why-typescript" id="why-typescript" style="color: inherit; text-decoration: none;">
+					<h1>Why TypeScript?</h1>
+				</a>
+				<p>While it&#39;s true that developing applications on an Untyped language such as <strong>JavaScript</strong>, is easier to learn and is faster to develop, it will undeniably get harder and harder to grasp as the application grows in scale. This in turn, leads to more run-time errors consuming more development hours, as the team gets accustomed to the growing codebase. And this is what this boilerplate hopes to achieve. By using the <strong>TypeScript</strong> standard, you&#39;ll have better team and code stability with <strong>Interface Oriented Development</strong>, leading to better standardized codes. TypeScript allows developers to focus more on exposed Interfaces or API, rather than having to know all the code by heart. This makes the codebase easier to maintain with big teams, especially if those teams are composed of developers of different skill levels.</p>
+				<a href="#prerequisites" id="prerequisites" style="color: inherit; text-decoration: none;">
+					<h1>Prerequisites</h1>
+				</a>
+				<p>To build and run this app locally you will need a few things:</p>
+				<ul>
+					<li>Install <a href="https://nodejs.org/en/">Node.js</a></li>
+					<li>Install <a href="https://code.visualstudio.com/">VS Code</a></li>
+				</ul>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h1>Getting started</h1>
+				</a>
+				<ul>
+					<li>Clone the repository</li>
+				</ul>
+				<pre><code><span style="color: #001080">git</span><span style="color: #000000"> </span><span style="color: #001080">clone</span><span style="color: #000000"> --</span><span style="color: #001080">depth</span><span style="color: #000000">=</span><span style="color: #098658">1</span><span style="color: #000000"> https:</span><span style="color: #008000">//github.com/polcham/mongoose-express-ts.git &lt;project_name&gt;</span>
+</code></pre>
+				<ul>
+					<li>Install dependencies</li>
+				</ul>
+				<pre><code><span style="color: #001080">cd</span><span style="color: #000000"> &lt;</span><span style="color: #001080">project_name</span><span style="color: #000000">&gt;</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">tsc</span>
+</code></pre>
+				<ul>
+					<li>Build and run the project with auto reload (nodemon)</li>
+				</ul>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">server</span>
+</code></pre>
+				<ul>
+					<li>Build and run the project</li>
+				</ul>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">start</span>
+</code></pre>
+				<p>Finally, navigate to <code>http://localhost:5000/</code> and you should see the API running!</p>
+				<a href="#project-structure" id="project-structure" style="color: inherit; text-decoration: none;">
+					<h2>Project Structure</h2>
+				</a>
+				<p>The most obvious difference in a TypeScript + Node project is the folder structure. In a TypeScript project, it&#39;s best to have separate <em>source</em> and <em>distributable</em> files. TypeScript (<code>.ts</code>) files live in your <code>src</code> folder and after compilation are output as JavaScript (<code>.js</code>) in the <code>dist</code> folder.</p>
+				<p>The full folder structure of this app is explained below:</p>
+				<blockquote>
+					<p><strong>Note!</strong> Make sure you have already built the app using <code>npm run start</code></p>
+				</blockquote>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><strong>config</strong></td>
+							<td>Contains config environment to be used by the config package, such as MongoDB URI, jwtSecret, and etc.</td>
+						</tr>
+						<tr>
+							<td><strong>dist</strong></td>
+							<td>Contains the distributable (or output) from your TypeScript build</td>
+						</tr>
+						<tr>
+							<td><strong>node_modules</strong></td>
+							<td>Contains all your npm dependencies</td>
+						</tr>
+						<tr>
+							<td><strong>REST</strong></td>
+							<td>Contains all API requests to test the routes, used with <a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client VSCode extension</a></td>
+						</tr>
+						<tr>
+							<td><strong>src</strong></td>
+							<td>Contains your source code that will be compiled to the dist dir</td>
+						</tr>
+						<tr>
+							<td><strong>src/middleware</strong></td>
+							<td>Contains the middlewares to intercept requests</td>
+						</tr>
+						<tr>
+							<td><strong>src/models</strong></td>
+							<td>Models define Mongoose schemas that will be used in storing and retrieving data from MongoDB</td>
+						</tr>
+						<tr>
+							<td><strong>src/routes</strong></td>
+							<td>Routes define the endpoints of your API</td>
+						</tr>
+						<tr>
+							<td><strong>src/types</strong></td>
+							<td>Contains all your custom types to better handle type checking with TypeScript</td>
+						</tr>
+						<tr>
+							<td><strong>src/server.ts</strong></td>
+							<td>Entry point to your express app</td>
+						</tr>
+						<tr>
+							<td>package.json</td>
+							<td>File that contains npm dependencies as well as <a href="#what-if-a-library-isnt-on-definitelytyped">build scripts</a></td>
+						</tr>
+						<tr>
+							<td>tsconfig.json</td>
+							<td>Config settings for compiling server code written in TypeScript</td>
+						</tr>
+						<tr>
+							<td>tslint.json</td>
+							<td>Config settings for TSLint code style checking</td>
+						</tr>
+				</tbody></table>
+				<a href="#configuring-typescript-compilation" id="configuring-typescript-compilation" style="color: inherit; text-decoration: none;">
+					<h3>Configuring TypeScript compilation</h3>
+				</a>
+				<p>TypeScript uses the file <code>tsconfig.json</code> to adjust project compile options.
+				Let&#39;s dissect this project&#39;s <code>tsconfig.json</code>, starting with the <code>compilerOptions</code> which details how your project is compiled.</p>
+				<pre><code class="language-json"><span style="color: #000000">    </span><span style="color: #A31515">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;module&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;commonjs&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;esModuleInterop&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;target&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;es6&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;noImplicitAny&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;moduleResolution&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;node&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;sourceMap&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;outDir&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;dist&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;baseUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;.&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;paths&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;*&quot;</span><span style="color: #000000">: [</span><span style="color: #A31515">&quot;node_modules/*&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;src/types/*&quot;</span><span style="color: #000000">]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  }</span>
+</code></pre>
+				<table>
+					<thead>
+						<tr>
+							<th><code>compilerOptions</code></th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>&quot;module&quot;: &quot;commonjs&quot;</code></td>
+							<td>The <strong>output</strong> module type (in your <code>.js</code> files). Node uses commonjs, so that is what we use</td>
+						</tr>
+						<tr>
+							<td><code>&quot;esModuleInterop&quot;: true,</code></td>
+							<td>Allows usage of an alternate module import syntax: <code>import foo from &#39;foo&#39;;</code></td>
+						</tr>
+						<tr>
+							<td><code>&quot;target&quot;: &quot;es6&quot;</code></td>
+							<td>The output language level. Node supports ES6, so we can target that here</td>
+						</tr>
+						<tr>
+							<td><code>&quot;noImplicitAny&quot;: true</code></td>
+							<td>Enables a stricter setting which throws errors when something has a default <code>any</code> value</td>
+						</tr>
+						<tr>
+							<td><code>&quot;moduleResolution&quot;: &quot;node&quot;</code></td>
+							<td>TypeScript attempts to mimic Node&#39;s module resolution strategy. Read more <a href="https://www.typescriptlang.org/docs/handbook/module-resolution.html#node">here</a></td>
+						</tr>
+						<tr>
+							<td><code>&quot;sourceMap&quot;: true</code></td>
+							<td>We want source maps to be output along side our JavaScript. See the <a href="#debugging">debugging</a> section</td>
+						</tr>
+						<tr>
+							<td><code>&quot;outDir&quot;: &quot;dist&quot;</code></td>
+							<td>Location to output <code>.js</code> files after compilation</td>
+						</tr>
+						<tr>
+							<td><code>&quot;baseUrl&quot;: &quot;.&quot;</code></td>
+							<td>Part of configuring module resolution. See <a href="#installing-dts-files-from-definitelytyped">path mapping section</a></td>
+						</tr>
+						<tr>
+							<td><code>paths: {...}</code></td>
+							<td>Part of configuring module resolution. See <a href="#installing-dts-files-from-definitelytyped">path mapping section</a></td>
+						</tr>
+				</tbody></table>
+				<p>The rest of the file define the TypeScript project context.
+					The project context is basically a set of options that determine which files are compiled when the compiler is invoked with a specific <code>tsconfig.json</code>.
+				In this case, we use the following to define our project context:</p>
+				<pre><code class="language-json"><span style="color: #000000">    </span><span style="color: #A31515">&quot;include&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;src/**/*&quot;</span>
+<span style="color: #000000">    ]</span>
+</code></pre>
+				<p><code>include</code> takes an array of glob patterns of files to include in the compilation. This project is fairly simple and all of our .ts files are under the <code>src</code> folder.</p>
+				<a href="#running-the-build" id="running-the-build" style="color: inherit; text-decoration: none;">
+					<h3>Running the build</h3>
+				</a>
+				<p>All the different build steps are orchestrated via <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a>.
+					Npm scripts basically allow us to call (and chain) terminal commands via npm.
+					This is nice because most JavaScript tools have easy to use command line utilities allowing us to not need grunt or gulp to manage our builds.
+					If you open <code>package.json</code>, you will see a <code>scripts</code> section with all the different scripts you can call.
+					To call a script, simply run <code>npm run &lt;script-name&gt;</code> from the command line.
+					You&#39;ll notice that npm scripts can call each other which makes it easy to compose complex builds out of simple individual build scripts.
+				Below is a list of all the scripts this template has available:</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Npm Script</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>tsc</code></td>
+							<td>Transpiles TypeScript codes to JavaScript.</td>
+						</tr>
+						<tr>
+							<td><code>watch-tsc</code></td>
+							<td>Transpiles TypeScript codes to JavaScript, with auto reload.</td>
+						</tr>
+						<tr>
+							<td><code>deploy</code></td>
+							<td>Runs node on <code>dist/server.js</code> which is the app&#39;s entry point.</td>
+						</tr>
+						<tr>
+							<td><code>watch-deploy</code></td>
+							<td>Runs node on <code>dist/server.js</code> which is the app&#39;s entry point, with auto reload.</td>
+						</tr>
+						<tr>
+							<td><code>server</code></td>
+							<td>Transpiles TypeScript codes to JavaScript then run node on <code>dist/server.js</code> with auto reload.</td>
+						</tr>
+						<tr>
+							<td><code>start</code></td>
+							<td>Transpiles TypeScript codes to JavaScript then run node on <code>dist/server.js</code>.</td>
+						</tr>
+				</tbody></table>
+				<p>Since we&#39;re developing with TypeScript, it is important for the codes to be transpiled first to JavaScript before running the node server. It is best to deploy the app using: <code>npm run server</code> or <code>npm run start</code> command.</p>
+				<a href="#vscode-extensions" id="vscode-extensions" style="color: inherit; text-decoration: none;">
+					<h3>VSCode Extensions</h3>
+				</a>
+				<p>To enhance your development experience while working in VSCode, I provided you with a list of suggested extensions while working on this project:</p>
+				<ul>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a></li>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens">Version Lens</a></li>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier - Code formatter</a></li>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer">Bracket Pair Colorizer</a></li>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow">index-rainbow</a></li>
+					<li><a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material Icon Theme</a></li>
+				</ul>
+				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
+					<h1>Dependencies</h1>
+				</a>
+				<p>Dependencies are managed through <code>package.json</code>.
+				In that file you&#39;ll find two sections:</p>
+				<a href="#dependencies-1" id="dependencies-1" style="color: inherit; text-decoration: none;">
+					<h2><code>dependencies</code></h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Package</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>bcryptjs</td>
+							<td>Library for hashing and salting user passwords.</td>
+						</tr>
+						<tr>
+							<td>config</td>
+							<td>Universal configurations for your app.</td>
+						</tr>
+						<tr>
+							<td>express</td>
+							<td>Node.js web framework.</td>
+						</tr>
+						<tr>
+							<td>express-validator</td>
+							<td>Easy form validation for Express.</td>
+						</tr>
+						<tr>
+							<td>gravatar</td>
+							<td>Generate Gravatar URLs based on gravatar specs.</td>
+						</tr>
+						<tr>
+							<td>http-status-codes</td>
+							<td>HTTP status codes constants.</td>
+						</tr>
+						<tr>
+							<td>jsonwebtoken</td>
+							<td>JsonWebToken implementation for Node.js.</td>
+						</tr>
+						<tr>
+							<td>mongoose</td>
+							<td>MongoDB modeling tool in an async environment.</td>
+						</tr>
+						<tr>
+							<td>request</td>
+							<td>Simplified HTTP client for Node.js.</td>
+						</tr>
+						<tr>
+							<td>typescript</td>
+							<td>Typed superset of JavaScript.</td>
+						</tr>
+				</tbody></table>
+				<a href="#devdependencies" id="devdependencies" style="color: inherit; text-decoration: none;">
+					<h2><code>devDependencies</code></h2>
+				</a>
+				<p>Since TypeScript is used, dependencies should be accompanied with their corresponding DefinitelyTyped @types package.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Package</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>@types/bcryptjs</td>
+							<td>DefinitelyTyped for bcryptjs</td>
+						</tr>
+						<tr>
+							<td>@types/config</td>
+							<td>DefinitelyTyped for config</td>
+						</tr>
+						<tr>
+							<td>@types/express</td>
+							<td>DefinitelyTyped for express</td>
+						</tr>
+						<tr>
+							<td>@types/gravatar</td>
+							<td>DefinitelyTyped for gravatar</td>
+						</tr>
+						<tr>
+							<td>@types/jsonwebtoken</td>
+							<td>DefinitelyTyped for jsonwebtoken</td>
+						</tr>
+						<tr>
+							<td>@types/mongoose</td>
+							<td>DefinitelyTyped for mongoose</td>
+						</tr>
+						<tr>
+							<td>concurrently</td>
+							<td>Run multiple commands concurrently</td>
+						</tr>
+						<tr>
+							<td>nodemon</td>
+							<td>Reload node application on code changes</td>
+						</tr>
+				</tbody></table>
+				<p>To install or update these dependencies you can use <code>npm install</code> or <code>npm update</code>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_auth.html">controllers/auth</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_auth_controller.html">controllers/auth.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_auth_authenticate.html">controllers/auth/authenticate</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_auth_login.html">controllers/auth/login</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day.html">controllers/day</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_controller.html">controllers/day.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_add.html">controllers/day/add</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_edit.html">controllers/day/edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_editrecipe.html">controllers/day/edit<wbr>Recipe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_get.html">controllers/day/get</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_getall.html">controllers/day/get<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_getmenudays.html">controllers/day/get<wbr>Menu<wbr>Days</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_day_remove.html">controllers/day/remove</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense.html">controllers/expense</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_controller.html">controllers/expense.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_add.html">controllers/expense/add</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_edit.html">controllers/expense/edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_get.html">controllers/expense/get</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_getall.html">controllers/expense/get<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_getuser.html">controllers/expense/get<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_expense_remove.html">controllers/expense/remove</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient.html">controllers/ingredient</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_controller.html">controllers/ingredient.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_add.html">controllers/ingredient/add</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_edit.html">controllers/ingredient/edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_get.html">controllers/ingredient/get</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_getall.html">controllers/ingredient/get<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_getfilter.html">controllers/ingredient/get<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_ingredient_remove.html">controllers/ingredient/remove</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu.html">controllers/menu</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_controller.html">controllers/menu.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_add.html">controllers/menu/add</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_edit.html">controllers/menu/edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_get.html">controllers/menu/get</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_getall.html">controllers/menu/get<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_getalluser.html">controllers/menu/get<wbr>All<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_menu_remove.html">controllers/menu/remove</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_recipe_controller.html">controllers/recipe.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/controllers_user_controller.html">controllers/user.controller</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/middleware_auth.html">middleware/auth</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/middleware_image.html">middleware/image</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_day.html">models/<wbr>Day</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_expense.html">models/<wbr>Expense</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_ingredient.html">models/<wbr>Ingredient</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_menu.html">models/<wbr>Menu</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_recipe.html">models/<wbr>Recipe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/models_user.html">models/<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_auth_routes.html">routes/api/auth.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_day_routes.html">routes/api/day.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_expense_routes.html">routes/api/expense.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_ingredient_routes.html">routes/api/ingredient.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_menu_routes.html">routes/api/menu.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_recipe_routes.html">routes/api/recipe.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_api_user_routes.html">routes/api/user.routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/routes_routes.html">routes/routes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/server.html">server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types.html">types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_diet.html">types/<wbr>Diet</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_meal.html">types/<wbr>Meal</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_mealtime.html">types/<wbr>Mealtime</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_payload.html">types/<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_recipeingredient.html">types/<wbr>Recipe<wbr>Ingredient</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_request.html">types/<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_weekdays.html">types/<wbr>Week<wbr>Days</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
