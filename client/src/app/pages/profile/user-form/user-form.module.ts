@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { UserFormComponent } from './user-form.component';
 import { SignInFormComponent } from '../sign-in-form/sign-in-form.component';
-import { UserFormRoutingModule } from './user-form.routing';
+import { UserFormRoutingModule } from '../../../router/user-form.routing';
 import { PlannerFormComponent } from '../../planner/planner-form/planner-form.component';
 import { UserFormService } from './user-form.service';
 import { ApiService } from 'src/app/core/service/api.service';

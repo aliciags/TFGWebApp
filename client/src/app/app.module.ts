@@ -19,9 +19,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ApiService } from './core/service/api.service';
-import { UserModule } from './components/user/user.module';
-import { UserFormModule } from './components/user/user-form/user-form.module';
-import { PlannerModule } from './components/planner/planner.module';
+import { UserModule } from './pages/profile/user/user.module';
+import { UserFormModule } from './pages/profile/user-form/user-form.module';
+import { PlannerModule } from './pages/planner/planner/planner.module';
 import { RecipeModule } from './pages/recipe/recipe/recipe.module';
 import { ExpenseModule } from './pages/expenses/expenses-tracker/expense-tacker.module';
 import { GroceriesListModule } from './pages/groceries-list/groceries-list.module';
@@ -35,7 +35,6 @@ import { DatePipe } from '@angular/common';
 import { DisplayRecipesComponent } from './components/display-recipes/display-recipes.component';
 import { MyRecipesComponent } from './pages/my-recipes/my-recipes.component';
 import { FilterPipe } from './core/filter/filter.pipe';
-
 
 @NgModule({
   declarations: [
