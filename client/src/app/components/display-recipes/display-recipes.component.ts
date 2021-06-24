@@ -1,7 +1,7 @@
 import { Output } from '@angular/core';
 import { Component, Input, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Recipe } from 'src/app/model/recipe';
+import { Recipe } from 'src/app/core/model/recipe';
 
 @Component({
   selector: 'app-display-recipes',

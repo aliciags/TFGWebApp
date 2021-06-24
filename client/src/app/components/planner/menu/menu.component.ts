@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuCard } from 'src/app/model/menu-card';
-import { Menu } from 'src/app/model/menu';
-import { ApiService } from 'src/app/service/api.service';
-import { Day } from 'src/app/model/day';
+import { MenuCard } from 'src/app/core/model/menu-card';
+import { Menu } from 'src/app/core/model/menu';
+import { ApiService } from 'src/app/core/service/api.service';
+import { Day } from 'src/app/core/model/day';
 import { OnChanges } from '@angular/core';
-import { Recipe } from 'src/app/model/recipe';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
-import { Mealtime } from 'src/app/model/mealtime';
+import { Recipe } from 'src/app/core/model/recipe';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
+import { Mealtime } from 'src/app/core/model/mealtime';
 
 @Component({
   selector: 'app-menu',

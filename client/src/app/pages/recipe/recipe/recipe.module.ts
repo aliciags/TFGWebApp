@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-
 import { RecipeComponent } from './recipe.component';
-import { RecipeFormComponent } from './recipe-form/recipe-form.component';
-import { RecipeRoutingModule } from './recipe.routing';
+import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
+import { RecipeRoutingModule } from '../../../router/recipe.routing';
 
 
 @NgModule({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/service/api.service';
-import { Recipe } from 'src/app/model/recipe';
+import { ApiService } from 'src/app/core/service/api.service';
+import { Recipe } from 'src/app/core/model/recipe';
 import { FormControl } from '@angular/forms';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 import { HttpHeaders } from '@angular/common/http';
 
 @Component({

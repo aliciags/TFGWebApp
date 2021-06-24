@@ -1,9 +1,9 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user';
-import { ApiService } from 'src/app/service/api.service';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { User } from 'src/app/core/model/user';
+import { ApiService } from 'src/app/core/service/api.service';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 
 @Component({
   selector: 'app-user',

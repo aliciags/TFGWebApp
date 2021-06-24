@@ -17,16 +17,6 @@ input[type=text] {
     margin-bottom: 10px;
 }
 
-/*.row {
-    width: 100%;
-}
-
-.col {
-    text-align: center;
-    height: 100%;
-    width: 100%;
-}*/
-
 .badge-dark {
     padding-left: 5%;
     padding-right: 5%;
@@ -146,18 +136,3 @@ input[type=text] {
 .content {
     margin-top: 10px;
 }
-
-/*#useless 
-.card {
-    text-align: left;
-    
-}
-
-.container-fluid {
-
-    display: grid;
-    margin-bottom: 5%;
-    grid-template-columns: max-content;
-    grid-template-rows: max-content;
-
-}*/

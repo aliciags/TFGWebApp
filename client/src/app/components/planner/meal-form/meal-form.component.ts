@@ -2,9 +2,9 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Recipe } from 'src/app/model/recipe';
-import { ApiService } from 'src/app/service/api.service';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { Recipe } from 'src/app/core/model/recipe';
+import { ApiService } from 'src/app/core/service/api.service';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 
 @Component({
   selector: 'app-meal-form',

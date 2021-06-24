@@ -1,10 +1,10 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/service/api.service';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { ApiService } from 'src/app/core/service/api.service';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Ingredient } from 'src/app/model/ingredient';
+import { Ingredient } from 'src/app/core/model/ingredient';
 
 @Component({
   selector: 'app-groceries-list',

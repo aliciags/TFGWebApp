@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/service/local-storage.service';
-import { ApiService } from 'src/app/service/api.service';
+import { LocalStorageService } from 'src/app/core/service/local-storage.service';
+import { ApiService } from 'src/app/core/service/api.service';
 import { HttpHeaders } from '@angular/common/http';
-import { Menu } from 'src/app/model/menu';
+import { Menu } from 'src/app/core/model/menu';
 
 @Component({
   selector: 'app-planner',

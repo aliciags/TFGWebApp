@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ExpensesTrackerComponent } from './expenses-tracker.component';
-import { ExpenseFormComponent } from './expense-form/expense-form.component';
+import { ExpensesTrackerComponent } from '../pages/expenses/expenses-tracker/expenses-tracker.component';
+import { ExpenseFormComponent } from '../pages/expenses/expense-form/expense-form.component';
 
 const expensesRoutes: Routes = [
     {path: 'expenses', component: ExpensesTrackerComponent},

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/service/api.service';
+import { ApiService } from 'src/app/core/service/api.service';
 import { SignInService } from './sign-in-form.service';
 
 @Component({

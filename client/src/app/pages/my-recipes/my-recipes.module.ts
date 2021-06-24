@@ -2,22 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-
-import { ExpensesRoutingModule } from './expense-tracker.routing';
-
-import { ExpensesTrackerComponent } from './expenses-tracker.component';
-import { ExpenseFormComponent } from './expense-form/expense-form.component';
-
+import { MyRecipesComponent } from './my-recipes.component';
+import { MyRecipesRoutingModule } from 'src/app/router/my-recipes.routing';
 
 @NgModule({
     declarations: [
-        ExpensesTrackerComponent,
-        ExpenseFormComponent
+        MyRecipesComponent
     ],
     exports: [],
     imports: [
         CommonModule,
-        ExpensesRoutingModule,
+        MyRecipesRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         MatCardModule
@@ -25,4 +20,4 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     providers: [ ]
 })
 
-export class ExpenseModule { }
+export class MyRecipesModule { }
