@@ -13,7 +13,6 @@ import menu from './routes/api/menu.routes';
 import day from './routes/api/day.routes'; */
 
 const cors = require('cors');
-
 const app = express();
 
 app.use(cors());
@@ -27,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   express.static(
-    './dist/client'
+    '../../client/dist/client'
   )
 );
 
@@ -40,10 +39,10 @@ app.use(
 // @access  Public
 app.get('/', (_req, res) => {
   res.send(
-    './dist/client'
+      './dist/client'
     );
   });
-// 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
+  // 'C:/Users/aliga/Desktop/Me/uni/4/4B/TFG/TFGWebApp/client/dist/client'
 
 app.use('/api', routes);
 

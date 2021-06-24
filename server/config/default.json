@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://alice_01:zMDf9BkNa50dmdat@cluster0.wilj6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://alice_01:zMDf9BkNa50dmdat@cluster0.wilj6.mongodb.net/FoodieDB?retryWrites=true&w=majority",
   "jwtSecret": "jwtSecretToken",
   "jwtExpiration": 3600
 }

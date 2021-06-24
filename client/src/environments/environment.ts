@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUri: 'https://foodietfg.azurewebsites.net/api'
+  baseUri: 'http://localhost:5000/api'
 };
 
 
-//  baseUri: 'http:localhost:5000/api'
+//  baseUri: 'https://foodietfg.azurewebsites.net/api'
