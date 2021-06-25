@@ -1,8 +1,32 @@
 @import '../../app.component.css';
-@media (max-width: 768px){
+@media (min-width: 768px){
 
   .input-group, .custom-select {
-    flex-basis: 45%;
+    flex-basis: 20%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+
+  .input-ingredient{
+    flex-basis: 20%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 768px){
+
+  .input-ingredient{
+    flex-basis: 77%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+
+  .input-group, .custom-select {
+    flex-basis: 30%;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -21,13 +45,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.input-group, .custom-select {
-  flex-basis: 20%;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
 }
 
 .ingredient-filter {

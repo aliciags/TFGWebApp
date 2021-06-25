@@ -1,41 +1,44 @@
-<div class="container">
+<div class="grid-container">
     <h1>Profile</h1>
-    <div class="data">
+    <br>
+
+    <mat-card class="profile">
         <div class="data-pair">
-            <div class="label">Name:</div>
+            <div class="label">NAME</div>
             <div class="input">{{ user.firstname }}</div>
         </div>
-        <div clas="data-pair">
-            <div class="label">Lastname:</div>
+        <div class="data-pair">
+            <div class="label">LASTNAME</div>
             <div class="input">{{ user.lastname }}</div>
         </div>
         <div class="data-pair">
-            <div class="label">Email:</div>
+            <div class="label">EMAIL</div>
             <div class="input">{{ user.email }}</div>
         </div>
         <div class="data-pair">
-            <div class="label">Birth year:</div>
+            <div class="label">BIRTH YEAR</div>
             <div class="input">{{ user.birthyear }}</div>
         </div>
         <div class="data-pair">
-            <div class="label">Diet:</div>
+            <div class="label">DIET</div>
             <div class="input" *ngIf="user.diet == 'Omnivorous'">
-                <i class="fas fa-drumstick-bite"><br>Omnivorous</i>
+                <i class="fas fa-drumstick-bite"></i> Omnivorous
             </div>
             <div class="input" *ngIf="user.diet == 'Vegetarian'">
-                <i class="fas fa-egg"><br>Vegetarian</i>
+                <i class="fas fa-egg"></i> Vegetarian
             </div>
             <div class="input" *ngIf="user.diet == 'Vegan'">
-                <i class="fas fa-seedling"><br>Vegan</i>
+                <i class="fas fa-seedling"></i> Vegan
             </div>
         </div>
         <div class="data-pair">
-            <div class="label">Meals:</div> 
+            <div class="label">MEALS</div> 
             <div class="meal" *ngFor="let m of user.meals">
                 {{m}}
             </div> 
         </div>
-    </div>
+    </mat-card> 
 
+    <br>
     <button class="btn btn-warning" (click)="onEdit(user.email)">Edit</button>
 </div>

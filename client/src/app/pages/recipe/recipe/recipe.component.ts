@@ -15,6 +15,7 @@ export class RecipeComponent implements OnInit {
 
   public recipe: Recipe;
   public loggedIn: boolean;
+  public editable: boolean;
   public modalText: string;
   public showModal: boolean;
   public httpOptions = {
@@ -26,26 +27,31 @@ export class RecipeComponent implements OnInit {
   constructor(private router: Router,
               private localStorage: LocalStorageService,
               private apiService: ApiService) {
-      this.loggedIn = false;
-      this.modalText = '';
-      this.showModal = false;
-      this.recipe = {
-        _id: '',
-        name: '',
-        timing: 1,
-        guest: 1,
-        meal: [],
-        diet: '',
-        ingredients: [],
-        steps: [],
-        image: ''
-      };
+    this.loggedIn = false;
+    this.editable = false;
+    this.showModal = false;
+    this.modalText = '';
+    this.recipe = {
+      _id: '',
+      name: '',
+      timing: 1,
+      guest: 1,
+      meal: [],
+      diet: '',
+      ingredients: [],
+      steps: [],
+      image: '',
+      creator: ''
+    };
   }
 
   ngOnInit(): void {
-    this.apiService.get('/recipe/' + history.state.id)
+    this.apiService.get('/recipe/' + '60d5e1cd5940a11a20014af1' /*history.state.id*/)
     .subscribe(response => {
       this.recipe = response;
+      if (this.localStorage.get('email') === this.recipe.creator ) {
+        this.editable = true;
+      }
     },
     error => {
       if (error.message === 'recipe not found'){
@@ -54,9 +60,9 @@ export class RecipeComponent implements OnInit {
         console.log('Internal server error');
       }
     });
-    if (this.localStorage.get('token') != null){
-    this.loggedIn = true;
-    this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
+    if (this.localStorage.get('token') != null) {
+      this.loggedIn = true;
+      this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
     }
   }
 

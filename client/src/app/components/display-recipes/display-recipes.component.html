@@ -1,23 +1,22 @@
-<div class="container">
+<div class="grid-container">
     <mat-card *ngFor="let r of recipes" class="container-box">
         <mat-card-header>
             <mat-card-title>
+
                 <div class="header">
                 <h5 class="badge badge-primary">{{r.diet}}</h5>
                 <h5 *ngFor="let m of r.meal" class="badge badge-warning">{{m}}</h5>
                 </div>
-                <!--<i *ngIf="environment != ''" mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                    <mat-icon>more_vert</mat-icon>
-                </i>-->
-                <!--<mat-menu  #menu="matMenu" xPosition="before">-->
-                    <button *ngIf="environment === 'home'" class="btn btn-outline-info"  (click)="onSave(r._id)"><i class="far fa-bookmark"></i></button>
-                    <button *ngIf="environment === 'myrecipes'" class="btn btn-outline-danger" (click)="onDelete(r._id)"><i class="far fa-trash-alt"></i></button>
-                <!--</mat-menu>-->
+               
+                <button *ngIf="environment === 'home'" class="btn btn-outline-info"  (click)="onSave(r._id)"><i class="far fa-bookmark"></i></button>
+                <button *ngIf="environment === 'myrecipes'" class="btn btn-outline-danger" (click)="onDelete(r._id)"><i class="far fa-trash-alt"></i></button>
+                
             </mat-card-title>
         </mat-card-header> 
         <mat-card-content class="dashboard-card-content">
             <br> 
             <h2 (click)="expandRecipe(r._id)">{{r.name}}</h2>
+            <img src="{{ r.image }}" >
         </mat-card-content>
     </mat-card>
 </div>

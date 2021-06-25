@@ -7,6 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
+          "styleext":"scss",
           "strict": true
         }
       },
@@ -29,7 +30,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from '../../../router/user.routing';
@@ -21,6 +22,7 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        MatCardModule,
         UserRoutingModule
     ],
     providers: [ SignInService, ApiService, LocalStorageService ]

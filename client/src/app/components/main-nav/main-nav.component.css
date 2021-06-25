@@ -10,11 +10,13 @@
   background: inherit;
 }
 
+
 .mat-toolbar.mat-primary {
   background-color: #56cc9d;
   position: sticky;
   top: 0;
   z-index: 1;
+  font-family: "Convergence", sans-serif;
 }
 
 .spacer {
@@ -27,4 +29,8 @@
 
 mat-sidenav-content {
   background-color: #fff;
+}
+
+a, mat-toolbar {
+  font-family: "Convergence", sans-serif;
 }

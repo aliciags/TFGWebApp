@@ -1,50 +1,54 @@
-<div class="container">
+<div class="grid-container">
     <h1>{{ recipe.name }}</h1>
-    <div class="row">
-        <div class="col-6">
-            <img src="{{ recipe.image }}" >
-        </div>
-        <div class="col">
-            <div class="label">Timing:</div>
-            <div class="input">{{ recipe.timing }}</div>
-            <div class="label">Guest:</div>
-            <div class="input">{{ recipe.guest }}</div>
-            <div class="label">Diet:</div>
-            <div class="row">
-                <div class="input" *ngIf="recipe.diet == 'Omnivorous'">
-                    <i class="fas fa-drumstick-bite"><br>Omnivorous</i>
-                </div>
-                <div class="input" *ngIf="recipe.diet == 'Vegetarian'">
-                    <i class="fas fa-egg"><br>Vegetarian</i>
-                </div>
-                <div class="input" *ngIf="recipe.diet == 'Vegan'">
-                    <i class="fas fa-seedling"><br>Vegan</i>
+    <br>
+
+    <div class="recipe">
+        <img src="{{ recipe.image }}" >
+        <mat-card class="details">
+            <div class="data-pair">
+                <div class="label-details">TIMING </div>
+                <div class="input-details">{{ recipe.timing }}</div>
+            </div>
+            <div class="data-pair">
+                <div class="label-details">SERVINGS </div>
+                <div class="input-details">{{ recipe.guest }}</div>
+            </div>
+            <div class="data-pair">
+                <div class="label-details">DIET </div>
+                <div class="row">
+                    <div class="input-details" *ngIf="recipe.diet == 'Omnivorous'">
+                        <i class="fas fa-drumstick-bite"></i> Omnivorous
+                    </div>
+                    <div class="input" *ngIf="recipe.diet == 'Vegetarian'">
+                        <i class="fas fa-egg"></i> Vegetarian
+                    </div>
+                    <div class="input" *ngIf="recipe.diet == 'Vegan'">
+                        <i class="fas fa-seedling"></i> Vegan
+                    </div>
                 </div>
             </div>
-            <div class="label">Meal:</div>
-            <div class="input" *ngFor="let m of recipe.meal">
+            <div class="data-pair">
+                <div class="label-details">MEAL </div>
+                <div class="meal" *ngFor="let m of recipe.meal">
                     {{m}}
                 </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <div *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="label">Video Recipe</div>
-            <a   *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="input" href="{{recipe.videoRecipe}}">{{recipe.videoRecipe}}</a>
-            <div class="label">Ingredients:</div> 
-                <div class="ingredient" *ngFor="let ing of recipe.ingredients">
-                    <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing.ingredient)"></i>
-                    {{ing.quantity}} {{ing.unit}} {{ing.ingredient}}
-                </div>
-            <br>
-            <div class="label">Recipe steps:</div>
-            <div class="input" *ngFor="let step of recipe.steps">
-                {{ step }}
             </div>
+        </mat-card>
+        <div *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="label">Video Recipe</div>
+        <a   *ngIf="recipe.videoRecipe != '' && recipe.videoRecipe != null" class="input" href="{{recipe.videoRecipe}}">{{recipe.videoRecipe}}</a>
+        <div class="label">INGREDIENTS </div> 
+            <div class="ingredient" *ngFor="let ing of recipe.ingredients">
+                <i data-bs-toggle="modal" data-bs-target="#modal" *ngIf="loggedIn == true" class="fas fa-plus-circle" (click)="onAdd(ing.ingredient)"></i>
+                {{ing.quantity}} {{ing.unit}} {{ing.ingredient}}
+            </div>
+        <div class="label">STEPS TO FOLLOW</div>
+        <div class="input" *ngFor="let step of recipe.steps">
+            {{ step }}
         </div>
     </div>
+
     <br>
-    <button *ngIf="loggedIn == true" class="btn btn-warning" (click)="onEdit(recipe._id)" ><i class="fas fa-pen"></i></button> 
+    <button *ngIf="editable == true" class="btn btn-warning" (click)="onEdit(recipe._id)" ><i class="fas fa-pen"></i></button> 
     <router-outlet></router-outlet>
     
     <div id="modal" class="modal fade" role="dialog" [ngClass]="{'show': showModal}">

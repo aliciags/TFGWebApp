@@ -4,9 +4,8 @@
   
   <div class="filter-input">
     <div class="input-group">
-      <input #name type="search" class="form-control" [formControl]="searchControl" placeholder="Search recipe" aria-label="recipe" aria-describedby="basic-addon1">
+      <input #name type="search" class="form-control input-one" [formControl]="searchControl" placeholder="Search recipe" aria-label="recipe" aria-describedby="basic-addon1">
     </div>
-
     
     <select #diet class="custom-select" id="diet">
       <option selected>Diet...</option>
@@ -23,10 +22,10 @@
       <option value="Dinner">Dinner</option>
     </select>
     
-    <div class="input-group">
-      <input class="form-control"type="text" #ingredient placeholder="Introduce an ingredient"> 
+    <div class="input-ingredient">
+      <input class="form-control" type="text" #ingredient placeholder="Introduce an ingredient"> 
     </div>
-      <button type="button" class="btn btn-primary btn-circle" (click)="onAddIngredient(ingredient.value)">
+      <button type="button" class="btn btn-primary btn-circle input-three" (click)="onAddIngredient(ingredient.value)">
         <i class="fas fa-plus"></i>
     </button>
 

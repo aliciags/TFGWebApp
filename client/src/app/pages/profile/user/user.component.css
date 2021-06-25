@@ -1,25 +1,44 @@
-h1 {
-    text-align: center;
-    font-size: xx-large;
+@import '../../../app.component.css';
+@media(min-width: 768px){
+
+    .profile {
+        width: 60%;
+        margin: auto;
+    }
+    
+    .btn-warning {
+        margin-left: 20%;
+    }
 }
 
-.data {
+.profile > div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .data-pair {
-    flex-basis: 50%;
-    margin-bottom: 2%;
-} 
+    border-bottom: .7px solid aliceblue;
+}
 
 .label {
-    font-size: x-large;
+    font-family: "Convergence", sans-serif;
+    flex-basis: 25%;
+    font-size: small;
+    color:slategrey;
 }
 
 .input {
-    color:slategrey;
-    margin-left: 5%;
+    font-family: "Convergence", sans-serif;
+    flex-basis: 70%;
+    font-size: large;
+}
+
+.meal {
+    text-align: center;
+    font-family: "Convergence", sans-serif;
+    flex-basis: 24%;
     font-size: large;
 }

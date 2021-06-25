@@ -1,29 +1,62 @@
-h1 {
-    text-align: center;
-    font-size: xx-large;
-}
+@import '../../../app.component.css';
 
 img {
     margin-left: 2%;
     margin-top: 2%;
-    height: 90%;
-    width: 90%;
+    height: 50%;
+    width: 50%;
     align-content: center; 
 }
 
-.row {
-    margin-top: 2%;
-    
+
+.recipe {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.details {
+    flex-basis: 40%;
+
+}
+
+.data-pair {
+    display: flex;
+    flex-direction: row;
+}
+
+.label-details {
+    font-family: "Convergence", sans-serif;
+    flex-basis: 25%;
+    font-size: small;
+    color:slategrey;
+}
+
+.input-details {
+    font-family: "Convergence", sans-serif;
+    flex-basis: 70%;
+    font-size: medium;
+}
+
+.meal {
+    font-family: "Convergence", sans-serif;
+    flex-basis: 35%;
+    font-size: medium;
 }
 
 .label {
-    margin-left: 1%;
+    font-family: "Convergence", sans-serif;
+    flex-basis: 100%;
     font-size: x-large;
+    color:slategrey;
+    margin-top: 2%;
 }
 
 .input {
-    color:slategrey;
-    margin-left: 5%;
+    font-family: "Convergence", sans-serif;
+    flex-basis: 100%;
     font-size: large;
 }
 
