@@ -1,7 +1,4 @@
-h1 {
-    text-align: center;
-    font-size: xx-large;
-}
+@import '../../../app.component.css';
 
 .grid-container {
     height: 100%;

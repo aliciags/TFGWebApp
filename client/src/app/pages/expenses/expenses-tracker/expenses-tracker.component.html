@@ -1,8 +1,13 @@
-<div class="container">
-    <button class="btn btn-primary" (click)="onEdit(null)"><i class="fas fa-plus"></i>
-        Add Expense
-    </button>
+<div class="grid-container">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/expenses/expense-form">
+                <i class="fas fa-plus-circle"></i> Add expense</a>
+        </li>
+    </ul>
+    
     <h1>Expenses tracker</h1>
+    <br>
 
     <div class="expenses">
         <div class="header">

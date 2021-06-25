@@ -24,3 +24,7 @@
 .content {
   padding: 2%;
 }
+
+mat-sidenav-content {
+  background-color: #fff;
+}

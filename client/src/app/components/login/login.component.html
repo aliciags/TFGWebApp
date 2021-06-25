@@ -5,7 +5,7 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSumbit()"> 
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email" class="form-label">Email</label>
             <input id="email" type="text" class="form-control" formControlName="email">
             <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
                 <div *ngIf="loginForm.controls.email.errors.required" class="alert alert-danger">

@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MyRecipesComponent } from './my-recipes.component';
+import { DisplayRecipesComponent } from 'src/app/components/display-recipes/display-recipes.component';
 import { MyRecipesRoutingModule } from 'src/app/router/my-recipes.routing';
 
 @NgModule({
     declarations: [
-        MyRecipesComponent
+        MyRecipesComponent,
+        DisplayRecipesComponent
     ],
-    exports: [],
+    exports: [ DisplayRecipesComponent ],
     imports: [
         CommonModule,
         MyRecipesRoutingModule,

@@ -1,7 +1,4 @@
-h1 {
-    text-align: center;
-    font-size: xx-large;
-}
+@import '../../app.component.css';
 
 .filter-input {
     display: flex;
@@ -14,12 +11,7 @@ h1 {
     flex-basis: 20%;
     margin-left: 5px;
     margin-right: 5px;
-}
-  
-.check {
-    margin-left: 5px;
-}
-  
+} 
 
 .small {
     margin-left: 2px;
@@ -53,16 +45,5 @@ h1 {
     flex-basis: 20%;
 }
 
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 17px;
-    line-height: 1.02857;
-    margin-left: 5px;
-    margin-top: 3px;
-  }
   
   

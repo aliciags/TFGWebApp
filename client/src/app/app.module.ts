@@ -23,6 +23,7 @@ import { UserModule } from './pages/profile/user/user.module';
 import { UserFormModule } from './pages/profile/user-form/user-form.module';
 import { PlannerModule } from './pages/planner/planner/planner.module';
 import { RecipeModule } from './pages/recipe/recipe/recipe.module';
+import { MyRecipesModule } from './pages/my-recipes/my-recipes.module';
 import { ExpenseModule } from './pages/expenses/expenses-tracker/expense-tacker.module';
 import { GroceriesListModule } from './pages/groceries-list/groceries-list.module';
 import { WildcardRoutingModule } from './components/not-found/not-found.module';
@@ -32,8 +33,6 @@ import { LoginComponent } from './components/login/login.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { LocalStorageService } from './core/service/local-storage.service';
 import { DatePipe } from '@angular/common';
-import { DisplayRecipesComponent } from './components/display-recipes/display-recipes.component';
-import { MyRecipesComponent } from './pages/my-recipes/my-recipes.component';
 import { FilterPipe } from './core/filter/filter.pipe';
 
 @NgModule({
@@ -42,8 +41,6 @@ import { FilterPipe } from './core/filter/filter.pipe';
     HomeComponent,
     LoginComponent,
     MainNavComponent,
-    DisplayRecipesComponent,
-    MyRecipesComponent,
     FilterPipe
   ],
   imports: [
@@ -68,6 +65,7 @@ import { FilterPipe } from './core/filter/filter.pipe';
     UserModule,
     UserFormModule,
     RecipeModule,
+    MyRecipesModule,
     PlannerModule,
     ExpenseModule,
     GroceriesListModule,

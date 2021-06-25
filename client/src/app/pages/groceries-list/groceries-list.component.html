@@ -1,4 +1,4 @@
-<div class="container">
+<div class="grid-container">
     <h1>Groceries List</h1>
     <br>
     <form [formGroup]="ingredientForm" class="ingredient">
@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-primary btn-circle" (click)="onAdd(ingredient.value)">
                     <i class="fas fa-plus"></i>
                 </button>
-                <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-primary btn-circle" (click)="onShow()">
+                <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-outline-primary btn-circle" (click)="onShow()">
                     <i class="fas fa-check"></i>
                 </button>
             </div>
