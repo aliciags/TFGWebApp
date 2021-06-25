@@ -8,10 +8,17 @@
     }
 }
 
+img {
+    height: 50%;
+    width: 50%;
+    align-content: center; 
+}
+  
+
 .container-box {
     margin-top: 3%;
     flex-basis: 49%;
-    height: 250px;
+    height: max-content;
 }
 
 .more-button {

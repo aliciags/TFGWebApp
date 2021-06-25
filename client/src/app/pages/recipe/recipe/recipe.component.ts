@@ -46,7 +46,7 @@ export class RecipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.get('/recipe/' + '60d5e1cd5940a11a20014af1' /*history.state.id*/)
+    this.apiService.get('/recipe/' + history.state.id)
     .subscribe(response => {
       this.recipe = response;
       if (this.localStorage.get('email') === this.recipe.creator ) {
