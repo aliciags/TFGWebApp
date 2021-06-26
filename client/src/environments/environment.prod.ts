@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUri: 'http://localhost:5000/api'
+  baseUri: 'http://foodie.onthewifi.com:5000/api'
 };
