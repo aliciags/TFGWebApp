@@ -35,11 +35,11 @@ router.put('/user/ingredient/:uid&:iid', auth, UserController.editGroceries);
 router.delete('/user/:uid', auth, UserController.remove);
 
 // Recipe routes
-router.get('/recipe/:rid', RecipeController.get);
 router.get('/', RecipeController.getAll);
+router.get('/recipe/:rid', RecipeController.get);
 router.get('/recipe/book/:uid', auth, RecipeController.getUser);
 router.post('/filter', RecipeController.getFilter);
-router.post('/recipe/', auth, upload.single('image'), RecipeController.add);
+router.post('/recipe', auth, upload.single('image'), RecipeController.add);
 router.put('/recipe/:rid', auth, upload.single('image'), RecipeController.edit);
 router.put('/recipe/save/:rid&:uid', auth, RecipeController.save);
 router.delete('/recipe/:rid&:uid', auth, RecipeController.remove);
@@ -53,7 +53,7 @@ router.put('/ingredient/:iid', auth, IngredientController.edit);
 router.delete('/ingredient/:iid', auth, IngredientController.remove);
 
 // Menu routes
-router.get('/menu/', auth, MenuController.getAll);
+router.get('/menu', auth, MenuController.getAll);
 router.get('/menu/user/:uid', auth, MenuController.getAllUser);
 router.get('/menu/:mid', auth, MenuController.get);
 router.post('/menu/', auth, MenuController.add);
