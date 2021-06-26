@@ -3,42 +3,46 @@
     <div *ngIf="this.msg === 'Unauthorized'" class="alert alert-danger">
         Your session has expired, please log in
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSumbit()"> 
-        <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input id="email" type="text" class="form-control" formControlName="email">
-            <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
-                <div *ngIf="loginForm.controls.email.errors.required" class="alert alert-danger">
-                    Email is required
-                </div>
-                <div *ngIf="loginForm.controls.email.errors.pattern" class="alert alert-danger">
-                    Invalid email
-                </div>
+    <form  class="f__group" [formGroup]="loginForm" (ngSubmit)="onSumbit()"> 
+        <div>
+            <div class="f">
+                <input id="email" type="text" class="f__input" formControlName="email" placeholder=" " autocomplete="off">
+                <label for="email" class="f__label">Email</label>
             </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" type="password" class="form-control"
-                formControlName="password">
-            <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors">
-                <div *ngIf="loginForm.controls.password.errors.required" class="alert alert-danger">
-                    Password is required
-                </div>
-                <div *ngIf="loginForm.controls.password.errors.invalidLogin" class="alert alert-danger">
-                    Invalid user or password
-                </div>
+        <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
+            <div *ngIf="loginForm.controls.email.errors.required" class="alert alert-danger">
+                Email is required
+            </div>
+            <div *ngIf="loginForm.controls.email.errors.pattern" class="alert alert-danger">
+                Invalid email
+            </div>
+        </div>
+        <div>
+            <div class="f">
+                <input id="password" type="password" class="f__input" formControlName="password" placeholder=" ">
+                <label class="f__label" for="password">Password</label>
+            </div>
+        </div>
+        <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors">
+            <div *ngIf="loginForm.controls.password.errors.required" class="alert alert-danger">
+                Password is required
+            </div>
+            <div *ngIf="loginForm.controls.password.errors.invalidLogin" class="alert alert-danger">
+                Invalid user or password
             </div>
         </div>
         <br>
-        <button class="btn btn-primary" type="submit">Login</button>
-        <br>Not registred?    
+        <button class="btn btn-primary login" type="submit">Login</button>
+        <br>
+        <span class="signup">Not registred?</span>    
         <a routerLink="signin"> Sign Up</a>
         <router-outlet></router-outlet>
     </form>
 </div>
 <div *ngIf="loggedIn">
     <h1>Are you sure you want to leave?</h1>
-    <button class="btn btn-primary" (click)="logout()" routerLink="/"> 
+    <button class="btn btn-primary logout" (click)="logout()" routerLink="/"> 
         Log out
     </button>
     <router-outlet></router-outlet>

@@ -1,29 +1,32 @@
 <div class="container">
     <h1>Food habits</h1>
-    <form [formGroup]="plannerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="diet">Diet:</label>
-            
-            <select id="diet" type="diet" class="form-control" formControlName="diet">
-                <option *ngFor="let d of diets"
-                    [value]="d">{{d}}</option>
-            </select>
-            <div *ngIf="plannerForm.controls.diet.touched && !plannerForm.controls.diet.valid" class="alert alert-danger">
-                Please select an option
+    <form class="f__group" [formGroup]="plannerForm" (ngSubmit)="onSubmit()">
+        <div class="f">
+            <label class="f__label" for="diet">Diet</label>
+            <!--<input id="diet" type="button" class="f__input" formControlName="diet">-->
+            <div class="f__diet" *ngFor="let d of diets" formControlName="diet">
+                <app-selectable-button class="diet-button" [text]="d">
+                </app-selectable-button>
             </div>
         </div>
+        <div *ngIf="plannerForm.controls.diet.touched && !plannerForm.controls.diet.valid" class="alert alert-danger">
+            Please select an option
+        </div>
+
         <div class="form-group">
             <label for="meals">Meals</label>
             <select id="meal" type="meal" class="form-control" formControlName="meal" multiple>
-                <option *ngFor="let m of meals"
-                    [value]="m">{{m}}</option>
             </select>
+            <div *ngFor="let m of meals">
+                <app-selectable-button [text]="m">
+                </app-selectable-button>
+            </div>
             <div *ngIf="plannerForm.controls.meal.touched && !plannerForm.controls.meal.valid" class="alert alert-danger">
                 Please select an option
             </div>
         </div>
-        <br>
-        <button class="btn btn-primary"  type="submit" [disabled]="!plannerForm.valid">Sign in</button>
     </form>
+    <br>
+    <button class="btn btn-primary"  type="submit">Sign in</button>
 </div>
 

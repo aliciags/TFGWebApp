@@ -1,29 +1,32 @@
-<div class="container">
-    <div class="form-group">
-        <label for="firstname">Firstname</label>
-        <input [(ngModel)]="user.firstname" id="firstname" type="text" placeholder="Firstname">
+<h1>Edit profile</h1>
+
+<div class="f__group">
+    <div class="f">
+        <input class="f__input" [(ngModel)]="user.firstname" id="firstname" type="text" placeholder=" " autocomplete="off">
+        <label class="f__label" for="firstname">Firstname</label>
     </div>
-    <div class="form-group">
-        <label for="lastname">Lastname</label>
-        <input [(ngModel)]="user.lastname" id="lastname" type="text" placeholder="Lastname">
+    <div class="f">
+        <input class="f__input" [(ngModel)]="user.lastname" id="lastname" type="text" placeholder=" " autocomplete="off">
+        <label class="f__label" for="lastname">Lastname</label>
     </div>
-    <div class="form-group">
-        <label for="birthyear">Birth year</label>
-        <input [(ngModel)]="user.birthyear" id="birthyear" type="number">
+    <div class="f">
+        <input class="f__input" [(ngModel)]="user.birthyear" id="birthyear" type="number" placeholder=" ">
+        <label class="f__label" for="birthyear">Birth year</label>
     </div>
-    <div class="form-group">
-        <label for="meal">Meal</label>
-        <select [(ngModel)]="user.meals" id="meal" type="meal" multiple>
+    <div class="f">
+        <select class="f__input" [(ngModel)]="user.meals" id="meal" type="meal" multiple>
             <option *ngFor="let m of meals"
-                [value]="m">{{m}}</option>
+            [value]="m">{{m}}</option>
         </select>
+        <label class="f__label" for="meal">Meal</label>
     </div>
-    <div class="form-group">
-        <label for="diet">Diet</label>
-        <select [(ngModel)]="user.diet" id="diet" type="diet">
+    <div class="f">
+        <select class="f__input" [(ngModel)]="user.diet" id="diet" type="diet">
             <option *ngFor="let d of diets"
-                [value]="d">{{d}}</option>
+            [value]="d">{{d}}</option>
         </select>
+        <label class="f__label" for="diet">Diet</label>
     </div>
-    <button class="btn btn-primary" (click)="onSubmit()">Sumbit</button>
 </div>
+
+<button class="btn btn-primary" (click)="onSubmit()">Sumbit</button>

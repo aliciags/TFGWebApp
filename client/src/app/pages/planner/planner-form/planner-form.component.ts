@@ -8,6 +8,7 @@ import { LocalStorageService } from 'src/app/core/service/local-storage.service'
 @Component({
   selector: 'app-planner-form',
   templateUrl: './planner-form.component.html',
+  styleUrls: ['./planner-form.component.css'],
   providers: [ ApiService, LocalStorageService ]
 })
 export class PlannerFormComponent implements OnInit {

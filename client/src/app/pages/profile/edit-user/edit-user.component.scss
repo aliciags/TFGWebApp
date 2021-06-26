@@ -1,0 +1,12 @@
+@import '../../../app.component.css';
+
+.f__group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  margin-left: 24%;
+}

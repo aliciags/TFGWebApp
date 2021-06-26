@@ -70,10 +70,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /*onFilter(): void{
-    this.filters ? this.filters = false : this.filters = true;
-  }*/
-
   onSave(rid: string): void{
     this.apiService.put('/recipe/save/' + rid + '&' + this.localStorage.get('email'), {}, this.httpOptions)
       .subscribe(response => {

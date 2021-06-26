@@ -1,6 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/core/model/user';
 import { ApiService } from 'src/app/core/service/api.service';
@@ -9,11 +8,10 @@ import { LocalStorageService } from 'src/app/core/service/local-storage.service'
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
 
-  public editUserFrom: FormGroup;
   public userId: string;
   public user: User;
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
