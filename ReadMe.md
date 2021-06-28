@@ -52,6 +52,12 @@ cd client
 npm install
 ```
 
+- Styling
+
+add bootstrap.min.css && bootsrap.min.css.map
+in ./client/node_modules/bootstrap/dist/css/
+
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
