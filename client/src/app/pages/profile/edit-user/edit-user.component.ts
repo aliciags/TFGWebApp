@@ -13,6 +13,7 @@ import { LocalStorageService } from 'src/app/core/service/local-storage.service'
 export class EditUserComponent implements OnInit {
 
   public userId: string;
+  public meal: string[] = [];
   public user: User;
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
@@ -51,6 +52,18 @@ export class EditUserComponent implements OnInit {
         }
         console.log(error);
       });
+  }
+
+  onClick(str: string): void{
+
+    if ( this.meals.indexOf(str.trim(), 0) > -1) {
+      if ( this.meal.indexOf(str, 0) > -1 ) {
+        this.meal.splice(this.meal.indexOf(str, 0), 1);
+      } else {
+        this.meal.push(str);
+      }
+      console.log(this.meal);
+    }
   }
 
 }

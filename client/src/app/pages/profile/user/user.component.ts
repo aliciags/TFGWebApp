@@ -22,12 +22,7 @@ export class UserComponent implements OnInit {
 
   constructor( private apiService: ApiService,
                private router: Router,
-               private localStorage: LocalStorageService) {
-    this.user = {
-      firstname: '', lastname: '', email: '', birthyear: 1, diet: '',
-      numberMeals: 1, meals: [], recipes: [], groceries: []
-    };
-  }
+               private localStorage: LocalStorageService) {  }
 
   ngOnInit(): void {
     if (this.localStorage.get('token') == null){

@@ -1,20 +1,12 @@
-h1 {
-    text-align: center;
-    font-size: xx-large;
-}
-
-input[type=text] {
-    border: none;
-    border-bottom: 2px solid grey;
-}
+@import '../../../app.component.css';
 
 .grid-container {
     height: 100%;
     width: 100%;
 }
 
-.btn {
-    margin-bottom: 10px;
+h3 {
+    margin-left: 19px;
 }
 
 .badge-dark {
@@ -37,6 +29,13 @@ input[type=text] {
 .btn-info {
     position: absolute;
     top: 5px;
+    right: 1px;
+    border: 0px;
+}
+
+.btn-outline-info {
+    position: absolute;
+    top: 1px;
     right: 1px;
     border: 0px;
 }
@@ -84,28 +83,6 @@ input[type=text] {
 .dashboard-card-content {
     margin-top: 5px;
     text-align: center;
-}
-
-.btn-circle-md {
-    width: 40px;
-    height: 40px;
-    padding: 6px 0px;
-    border-radius: 25px;
-    text-align: center;
-    font-size: 25px;
-    line-height: 1.02857;
-    margin-left: 5px;
-}
-
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 17px;
-    line-height: 1.02857;
-    margin-left: 5px;
 }
 
 .modal.show {

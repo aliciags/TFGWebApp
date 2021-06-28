@@ -1,37 +1,11 @@
 <div class="container">
-    <!--<h1>{{ title }}</h1>
-    <form [formGroup]="mealForm">
-        <div class="form-group">
-            <label for="day">Week day</label>
-            <select id="day" type="day" class="form-control" formControlName="day">
-                <option *ngFor="let d of days"
-                    [value]="d">{{d}}</option>
-            </select>
-            <div *ngIf="mealForm.controls.day.touched && !mealForm.controls.day.valid" class="alert alert-danger">
-                Please select an option
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="meal">Meal</label>
-            <select id="meal" type="meal" class="form-control" formControlName="meal">
-                <option *ngFor="let m of meals"
-                    [value]="m">{{m}}</option>
-            </select>
-            <div *ngIf="mealForm.controls.meal.touched && !mealForm.controls.meal.valid" class="alert alert-danger">
-                Please select an option
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="recipe">Recipe</label>
-            <input id="recipe" type="text" class="form-control" formControlName="recipe" placeholder="Introduce a recipe">
-            <div *ngIf="mealForm.controls.recipe.touched && !mealForm.controls.recipe.valid" class="alert alert-danger">
-                Introduce the a recipe
-            </div>
-        </div>
-    </form>-->
+ 
     <h1>Introduce or delete a recipe</h1>
     <div class="flex-box">
-        <input #recipeName type="text" placeholder="Introduce a recipe">
+        <div class="f">
+            <input #recipeName class="f__input" type="text" placeholder=" ">
+            <label class="f__label" for="recipeName">Recipe</label>
+        </div>
         <button class="btn btn-primary btn-circle" (click)="addRecipe(recipeName.value)">
             <i class="fas fa-plus"></i>
         </button>

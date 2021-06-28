@@ -1,14 +1,50 @@
+@import '../../../app.component.css';
+@media (min-width: 768px){
+    .f__2 {
+        flex-basis: 48%;
+    } 
+
+    mat-card {
+        margin-top: 1.5rem;
+        flex-basis: 52%;
+        margin-bottom: 2%;
+    }
+    .check {
+        margin-left: 24%;
+    }
+}
+
+@media (max-width: 768px){
+
+    .f__2 {
+        flex-basis: 70%;
+    }   
+    
+    mat-card {
+        margin-top: 1.5rem;
+        flex-basis: 75%;
+        margin-bottom: 2%;
+    }  
+
+    .check {
+        margin-left: 12%;
+    }
+    
+}
+
+.f__2 {
+    position: relative;
+    width: 20rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}  
+
 .list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-}
-
-.add-ingredient {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 .ingredientList > div > div {
@@ -19,18 +55,6 @@
     margin-bottom: 1%;
 }
 
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 17px;
-    line-height: 1.02857;
-    margin-left: 5px;
-}
-
-mat-card {
-    flex-basis: 100%;
-    margin-bottom: 2%;
+.add {
+    margin-top: 1.5rem;
 }

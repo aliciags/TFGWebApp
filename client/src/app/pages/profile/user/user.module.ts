@@ -10,6 +10,7 @@ import { SignInService } from '../sign-in-form/sign-in-form.service';
 import { ApiService } from 'src/app/core/service/api.service';
 import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { UserFormModule } from '../user-form/user-form.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
         FormsModule,
         ReactiveFormsModule,
         MatCardModule,
-        UserRoutingModule
+        UserRoutingModule,
+        UserFormModule
     ],
     providers: [ SignInService, ApiService, LocalStorageService ]
 })

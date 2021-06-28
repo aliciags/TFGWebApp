@@ -24,6 +24,7 @@ export class RecipeFormComponent implements OnInit {
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
   public units: string[] = ['unit', 'g', 'kg', 'ml', 'cl', 'L', 'tsp', 'tbps'];
+  public meal: string [];
   public httpOptions = {
     headers: new HttpHeaders({
       'x-auth-token': 'token',
@@ -36,13 +37,13 @@ export class RecipeFormComponent implements OnInit {
                private apiService: ApiService ) {
     this.ingredients = [];
     this.steps = [];
+    this.meal  = [];
     this.selectedFile = null;
     this.recipeForm = this.fb.group({
       name: ['', [Validators.required]],
-      timing: ['', ],
-      dinnerGuest: ['', ],                      // number of portions, eaters
-      meal: ['', ],                             // breakfast, lunch, diner, snack
-      diet: ['', [Validators.required]],        // omnivor, vegetrian, vegan
+      timing: [''],
+      dinnerGuest: [''],
+      diet: ['', [Validators.required]],
       ingredients: this.fb.group({
         quantity: ['', [Validators.required]],
         unit: ['', [Validators.required]],
@@ -94,7 +95,7 @@ export class RecipeFormComponent implements OnInit {
           name: this.recipeForm.value['name'],
           timing: this.recipeForm.value['timing'],
           guest: this.recipeForm.value['dinnerGuest'],
-          meal: this.recipeForm.value['meal'],
+          meal: this.meal,
           diet: this.recipeForm.value['diet'],
           ingredients: this.ingredients,
           steps: this.steps,
@@ -191,6 +192,18 @@ export class RecipeFormComponent implements OnInit {
       this.steps.splice(index, 1);
     } else {
       console.log('No such ingredient in the list');
+    }
+  }
+
+  onClick(str: string): void{
+
+    if ( this.meals.indexOf(str.trim(), 0) > -1) {
+      if ( this.meal.indexOf(str, 0) > -1 ) {
+        this.meal.splice(this.meal.indexOf(str, 0), 1);
+      } else {
+        this.meal.push(str);
+      }
+      console.log(this.meal);
     }
   }
 }

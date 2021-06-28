@@ -1,14 +1,53 @@
+@media (min-width: 768px){
+
+    .f {
+        position: relative;
+        width: 20rem;
+        height: 3rem;
+        flex-basis:52%;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+
+    
+    .alert-danger {
+        flex-basis: 52%;
+        background-color: white;
+        border: white;
+        padding: 0 0 0.5rem;
+        left: 1.3rem;
+        color: #ff7851
+    }
+}
+
+@media (max-width: 768px){
+
+    .f {
+        position: relative;
+        width: 20rem;
+        height: 3rem;
+        flex-basis:75%;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }    
+    
+    .alert-danger {
+        flex-basis: 75%;
+        background-color: white;
+        border: white;
+        padding: 0 0 0.5rem;
+        left: 1.3rem;
+        color: #ff7851
+    }
+}
+
 h1 {
     text-align: center;
     font-size: xx-large;
     font-family: "Convergence", sans-serif;
 }
 
-h2 {
-    font-family: "Convergence", sans-serif;
-}
-
-h3 {
+h2, h3, h4, h5 {
     font-family: "Convergence", sans-serif;
 }
 
@@ -39,19 +78,11 @@ h3 {
 }
 
 .f__group > div{
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.f {
-  position: relative;
-  width: 20rem;
-  height: 3rem;
-  flex-basis: 52%;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
 }
 
 .f__input {
@@ -97,13 +128,4 @@ h3 {
   top: -0.5rem;
   font-size: 0.8rem;
   left: 0.8rem;
-}
-
-.alert-danger {
-  flex-basis: 52%;
-  background-color: white;
-  border: white;
-  padding: 0 0 0.5rem;
-  left: 1.3rem;
-  color: #ff7851
 }

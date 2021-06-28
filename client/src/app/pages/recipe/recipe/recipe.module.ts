@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { RecipeComponent } from './recipe.component';
 import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 import { RecipeRoutingModule } from '../../../router/recipe.routing';
-
+import { UserFormModule } from '../../profile/user-form/user-form.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +20,7 @@ import { RecipeRoutingModule } from '../../../router/recipe.routing';
         ReactiveFormsModule,
         MatIconModule,
         MatCardModule,
+        UserFormModule,
         RecipeRoutingModule
     ],
     providers: []

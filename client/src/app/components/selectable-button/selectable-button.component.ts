@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class SelectableButtonComponent implements OnInit {
 
   @Input() text: string;
-  @Input() icon: string;
   @Output() selected = new EventEmitter();
   public select: boolean;
 
@@ -26,5 +25,4 @@ export class SelectableButtonComponent implements OnInit {
     this.select ? this.select = false : this.select = true;
     this.selected.emit(this.text);
   }
-
 }

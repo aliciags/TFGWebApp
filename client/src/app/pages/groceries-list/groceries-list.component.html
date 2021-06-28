@@ -1,17 +1,18 @@
 <div class="grid-container">
     <h1>Groceries List</h1>
     <br>
-    <form [formGroup]="ingredientForm" class="ingredient">
+    <form [formGroup]="ingredientForm" class="f__group">
         <div>
-            <div>
-                <input type="text" #ingredient class="form-control" formControlName="ingredient" placeholder="Introduce an ingredient"> 
-                <button type="button" class="btn btn-primary btn-circle" (click)="onAdd(ingredient.value)">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-outline-primary btn-circle" (click)="onShow()">
-                    <i class="fas fa-check"></i>
-                </button>
+            <div class="f">
+                <input type="text" #ingredient class="f__input" formControlName="ingredient" placeholder=" "> 
+                <label class="f__label" for="ingredient">Ingredient</label>
             </div>
+            <button type="button" class="btn btn-primary btn-circle input" (click)="onAdd(ingredient.value)">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button type="sumbmit" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-outline-primary btn-circle input" (click)="onShow()">
+                <i class="fas fa-check"></i>
+            </button>
             
             <div>
                 <div *ngIf="ingredientForm.controls.ingredient.touched && ingredientForm.controls.ingredient.errors">

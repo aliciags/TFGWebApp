@@ -13,20 +13,34 @@
         <input class="f__input" [(ngModel)]="user.birthyear" id="birthyear" type="number" placeholder=" ">
         <label class="f__label" for="birthyear">Birth year</label>
     </div>
+
     <div class="f">
-        <select class="f__input" [(ngModel)]="user.meals" id="meal" type="meal" multiple>
-            <option *ngFor="let m of meals"
-            [value]="m">{{m}}</option>
-        </select>
-        <label class="f__label" for="meal">Meal</label>
-    </div>
-    <div class="f">
-        <select class="f__input" [(ngModel)]="user.diet" id="diet" type="diet">
+        <label for="diet">Diet</label>
+        <select class="form-control" id="diet" type="diet" formControlName="diet">
+            <option selected>Diet...</option>
             <option *ngFor="let d of diets"
             [value]="d">{{d}}</option>
         </select>
-        <label class="f__label" for="diet">Diet</label>
     </div>
-</div>
+    
 
+    <div class="f">
+        <label for="meals">Meals</label>
+        <h4>Please introduce at least three meals</h4>
+        
+        <app-selectable-button [text]="meals[0]"
+                               (selected)="onClick($event)">
+        </app-selectable-button>
+        <app-selectable-button [text]="meals[1]"
+                               (selected)="onClick($event)">
+        </app-selectable-button>
+        <app-selectable-button [text]="meals[2]"
+                               (selected)="onClick($event)">
+        </app-selectable-button>
+        <app-selectable-button [text]="meals[3]"
+                               (selected)="onClick($event)">
+        </app-selectable-button>
+    </div>-->
+
+</div>
 <button class="btn btn-primary" (click)="onSubmit()">Sumbit</button>

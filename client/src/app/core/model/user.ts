@@ -7,7 +7,6 @@ export interface User {
      * @param firstname: string
      * @param lastname: string
      * @param birthyear: number
-     * @param numberMeals: number
      * @param meals: string[]
      * @param diet: string
      * @param recipes: ref => Recipe._id[]
@@ -20,7 +19,6 @@ export interface User {
     password?: string;
     meals: string[];
     diet: string;
-    numberMeals: number;
     birthyear: number;
     recipes?: [];
     groceries?: [];

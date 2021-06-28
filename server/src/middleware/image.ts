@@ -24,12 +24,12 @@ const storage = multer.diskStorage({
 /**
  * multer object that enables uploading files throught form data.
  * @param storage object that defines destination and filename
- * @param limits limits the size of a file, 25MB
+ * @param limits limits the size of a file, 5MB
  */
 const upload: Multer = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 25
+        fileSize: 1024 * 1024 * 5
     }
 });
 

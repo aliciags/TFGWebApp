@@ -16,6 +16,7 @@ export class PlannerFormComponent implements OnInit {
   public plannerForm: FormGroup;
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public diets: string[] = ['Omnivorous', 'Vegetarian', 'Vegan'];
+  public meal: string[];
 
   constructor( private fb: FormBuilder,
                private router: Router,
@@ -23,12 +24,24 @@ export class PlannerFormComponent implements OnInit {
                private localStorage: LocalStorageService
   ) {
     this.plannerForm = this.fb.group({
-      meal: ['', [Validators.required]],
-      diet: ['', [Validators.required]]
+      diet: ['', Validators.required]
     });
+    this.meal = [];
   }
 
   ngOnInit(): void {  }
+
+  onClick(str: string): void{
+
+    if ( this.meals.indexOf(str.trim(), 0) > -1) {
+      if ( this.meal.indexOf(str, 0) > -1 ) {
+        this.meal.splice(this.meal.indexOf(str, 0), 1);
+      } else {
+        this.meal.push(str);
+      }
+      console.log(this.meal);
+    }
+  }
 
   onSubmit(): void{
     if (this.plannerForm.valid){
@@ -38,8 +51,7 @@ export class PlannerFormComponent implements OnInit {
         firstname: history.state.user.firstname,
         lastname: history.state.user.lastname,
         birthyear: history.state.user.birthyear,
-        numberMeals: 0,
-        meals: this.plannerForm.value['meal'],
+        meals: this.meal,
         diet: this.plannerForm.value['diet'],
         recipes: [],
         groceries: []

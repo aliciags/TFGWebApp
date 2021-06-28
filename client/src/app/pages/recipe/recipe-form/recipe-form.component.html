@@ -1,73 +1,87 @@
 <div class="container">
     <h1 *ngIf="recipe._id !== ''">Edit recipe</h1>
     <h1 *ngIf="recipe._id === ''">Add recipe</h1>
-    <form [formGroup]="recipeForm">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Name your recipe">
+    <form class="f__group" [formGroup]="recipeForm">
+        <div>
+            <div class="f">
+                <input id="name" type="text" class="f__input" formControlName="name" placeholder=" ">
+                <label class="f__label" for="name">Name</label>
+            </div>
+        </div>
+        <div>
             <div *ngIf="recipeForm.controls.name.touched && !recipeForm.controls.name.valid" class="alert alert-danger">
                 Name is required
             </div>
         </div>
-        <div class="form-group">
-            <label for="timing">Timing</label>
-            <input id="timing" type="number" class="form-control" formControlName="timing" placeholder="How long does the recipe takes">
-            <div *ngIf="recipeForm.controls.timing.touched && !recipeForm.controls.timing.valid" class="alert alert-danger">
-                Timing is required
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="dinnerGuest">Dinner</label>
-            <input id="dinnerGuest" type="number" class="form-control" formControlName="dinnerGuest" placeholder="Number of dinner guest">
-            <div *ngIf="recipeForm.controls.dinnerGuest.touched && !recipeForm.controls.dinnerGuest.valid" class="alert alert-danger">
-                Introduce the number of guests
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="videoRecipe">Video Recipe</label>
-            <input id="videoRecipe" type="string" class="form-control" formControlName="videoRecipe" placeholder="Introduce a link to your recipe's video">
-        </div>
-        <div class="form-group">
-            <label for="meal">Meal</label>
-            <select id="meal" type="meal" class="form-control" formControlName="meal" multiple>
-                <option *ngFor="let m of meals"
-                    [value]="m">{{m}}</option>
-            </select>
-            <div *ngIf="recipeForm.controls.meal.touched && !recipeForm.controls.meal.valid" class="alert alert-danger">
-                Please select an option
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="diet">Diet</label>
-            <select id="diet" type="diet" class="form-control" formControlName="diet">
-                <option *ngFor="let d of diets"
-                    [value]="d">{{d}}</option>
-            </select>
-            <div *ngIf="recipeForm.controls.diet.touched && !recipeForm.controls.diet.valid" class="alert alert-danger">
-                Please select an option
+        <div>
+            <div class="f">
+                <input id="timing" type="number" class="f__input" formControlName="timing" placeholder=" ">
+                <label class="f__label" for="timing">Timing minutes</label>
             </div>
         </div>
         <div>
-            <input type="file" (change)="onFileSelected($event)">
+            <div class="f">
+                <input id="dinnerGuest" type="number" class="f__input" formControlName="dinnerGuest" placeholder=" ">
+                <label class="f__label" for="dinnerGuest">Number of servings</label>
+            </div>
+        </div>
+        <div>
+            <div class="f">
+                <input id="videoRecipe" type="string" class="f__input" formControlName="videoRecipe" placeholder=" ">
+                <label class="f__label" for="videoRecipe">Video Recipe link</label>
+            </div>
+        </div>
+
+        <div>
+            <div class="f">
+                <label for="diet">Diet</label>
+                <select class="form-control" id="diet" type="diet" formControlName="diet">
+                    <option selected>Diet...</option>
+                    <option *ngFor="let d of diets"
+                    [value]="d">{{d}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="file">
+            <div class="f">
+                <input type="file" (change)="onFileSelected($event)">
+            </div>
         </div>
         <div formGroupName="ingredients">
-            <div class="form-group">
+            <div class="f">
                 <label for="ingredients">Ingredients</label>
                 <div class="add">
-                    <input #quantity id="quantity" type="number" class="form-control" formControlName="quantity">
-                    <select #unit id="unit" type="unit" class="form-control" formControlName="unit">
-                        <option *ngFor="let u of units"
+                    <div class="f">
+                        <input #quantity id="quantity" type="number" class="f__input" formControlName="quantity" placeholder=" ">
+                        <label class="f__label" for="quantity">Quantity</label>
+                    </div>
+                    <div class="f">
+                        <select #unit class="form-control" id="unit" type="text" formControlName="unit">
+                            <option selected>Unit...</option>
+                            <option *ngFor="let u of units"
                             [value]="u">{{u}}</option>
-                    </select>
-                    <input #ingredient id="ingredient" type="text" class="form-control" formControlName="ingredient" placeholder="Introduce the different ingredients">
-                    <button class="btn btn-primary btn-circle" (click)="onAddIngredient(quantity.value, unit.value, ingredient.value)"><i class="fas fa-plus"></i></button>
+                        </select>
+                    </div>
+                    <!--<div class="f">
+                        <select #unit id="unit" type="unit" class="f__input" formControlName="unit">
+                            <option *ngFor="let u of units"
+                                [value]="u">{{u}}</option>
+                        </select>
+                        <label class="f__label" for="unit" >Unit</label>
+                    </div>-->
+                    <div class="f">
+                        <input #ingredient id="ingredient" type="text" class="f__input" formControlName="ingredient" placeholder=" ">
+                        <label class="f__label" for="ingredient">Ingredient</label>
+                    </div>
+                    <button class="btn btn-primary btn-circle btn-add" (click)="onAddIngredient(quantity.value, unit.value, ingredient.value)"><i class="fas fa-plus"></i></button>
                 </div>    
                 <div *ngIf="recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.errors">
                     <div *ngIf="recipeForm.controls.ingredients.errors.required" class="alert alert-danger">
                         Please fill the three 
                     </div>
                     <div *ngIf="recipeForm.controls.ingredients.errors.alreadyInList" class="alert alert-danger">
-                        Ingredients already in the recipe
+                        Ingredient already in the recipe
                     </div>
                     <div *ngIf="recipeForm.controls.ingredients.errors.notExists" class="alert alert-danger">
                         Ingedient does not exist
@@ -75,6 +89,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="list">
             <mat-card>
                 <h3 class="card-title">Ingredients</h3>
@@ -90,16 +105,22 @@
                 </div>
             </mat-card> 
         </div>
-        <div class="form-group">
-            <label for="steps">Steps</label>
-            <div class="add">
-                <input #step id="steps" type="steps" class="form-control" formControlName="steps" placeholder="Introduce the steps to follow">
-                <button class="btn btn-primary btn-circle" (click)="onAddStep(step.value)"><i class="fas fa-plus"></i></button>
+        
+       
+        <div class="add">
+            <div class="f f__step">
+                <input #step id="steps" type="steps" class="f__input" formControlName="steps" placeholder=" ">
+                <label class="f__label" for="steps">Steps</label>
             </div>
+            <button class="btn btn-primary btn-circle btn-add" (click)="onAddStep(step.value)"><i class="fas fa-plus"></i></button>
+        </div>
+           
+        <div>
             <div *ngIf="recipeForm.controls.steps.touched && !recipeForm.controls.steps.valid" class="alert alert-danger">
                 Please introduce at least one step
             </div>
         </div>
+
         <div class="list">
             <mat-card>
                 <h3 class="card-title">Steps</h3>
@@ -115,8 +136,30 @@
                 </div>
             </mat-card> 
         </div>
+
+        <div>
+            <div class="f">
+                <label for="meals">Meals</label>
+                <h4>Select the meals</h4>
+                
+                <app-selectable-button [text]="meals[0]"
+                                        (selected)="onClick($event)">
+                </app-selectable-button>
+                <app-selectable-button [text]="meals[1]"
+                                        (selected)="onClick($event)">
+                </app-selectable-button>
+                <app-selectable-button [text]="meals[2]"
+                                        (selected)="onClick($event)">
+                </app-selectable-button>
+                <app-selectable-button [text]="meals[3]"
+                                        (selected)="onClick($event)">
+                </app-selectable-button>
+                
+            </div>
+        </div>
+        
         <br>
-        <button class="btn btn-primary" (click)="onSubmit()">Done!</button>
+        <button class="btn btn-primary check" (click)="onSubmit()">Submit</button>
     </form>
 </div>
 

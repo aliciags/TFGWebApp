@@ -1,13 +1,7 @@
-<button *ngIf="!select" class="btn btn-primary" (click)="onClick()">
-    <i *ngIf="text === 'Omnivorous'" class="fas fa-drumstick-bite"></i>
-    <i *ngIf="text === 'Vegetarian'" class="fas fa-egg"></i>
-    <i *ngIf="text === 'Vegan'" class="fas fa-seedling"></i>
+<button *ngIf="!select" class="btn btn-warning" (click)="onClick()">
     {{text}}
 </button>
 
-<button *ngIf="select" class="btn btn-primary active" (click)="onClick()">
-    <i *ngIf="text === 'Omnivorous'" class="fas fa-drumstick-bite"></i>
-    <i *ngIf="text === 'Vegetarian'" class="fas fa-egg"></i>
-    <i *ngIf="text === 'Vegan'" class="fas fa-seedling"></i>
+<button *ngIf="select" class="btn btn-warning active" (click)="onClick()">
     {{text}}
 </button>

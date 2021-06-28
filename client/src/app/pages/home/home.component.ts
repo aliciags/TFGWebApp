@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  async ngOnInit(): Promise<void>{
+  ngOnInit(): void{
 
     // this.recipes = await this.recipeService.init();
     if (this.localStorage.get('token') != null) {

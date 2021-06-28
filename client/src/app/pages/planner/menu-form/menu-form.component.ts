@@ -14,6 +14,7 @@ import { LocalStorageService } from 'src/app/core/service/local-storage.service'
 export class MenuFormComponent implements OnInit {
 
   public menuForm: FormGroup;
+  public meal: string[];
   public meals: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   public httpOptions = {
     headers: new HttpHeaders({
@@ -27,6 +28,7 @@ export class MenuFormComponent implements OnInit {
     private apiService: ApiService,
     private localStorage: LocalStorageService
   ) {
+    this.meal = [];
     this.menuForm = this.fb.group({
       title: ['', []],
       description: ['', []],
@@ -43,7 +45,7 @@ export class MenuFormComponent implements OnInit {
       _user: this.localStorage.get('email'),
       title: this.menuForm.value['title'],
       description: this.menuForm.value['description'],
-      meal: this.menuForm.value['meal']
+      meal: this.meal
     };
     this.httpOptions.headers = this.httpOptions.headers.set('x-auth-token', this.localStorage.get('token'));
     this.apiService.post('/menu', body, this.httpOptions)
@@ -52,6 +54,18 @@ export class MenuFormComponent implements OnInit {
       }, error => {
         console.log('no such user');
       });
+  }
+
+  onClick(str: string): void{
+
+    if ( this.meals.indexOf(str.trim(), 0) > -1) {
+      if ( this.meal.indexOf(str, 0) > -1 ) {
+        this.meal.splice(this.meal.indexOf(str, 0), 1);
+      } else {
+        this.meal.push(str);
+      }
+      console.log(this.meal);
+    }
   }
 
 }

@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LocalStorageService } from 'src/app/core/service/local-storage.service';
 import { MenuFormComponent } from '../menu-form/menu-form.component';
 import { MenuComponent } from '../menu/menu.component';
-
+import { UserFormModule } from '../../profile/user-form/user-form.module';
 
 @NgModule({
     declarations: [
@@ -32,7 +32,8 @@ import { MenuComponent } from '../menu/menu.component';
         MatListModule,
         MatGridListModule,
         MatMenuModule,
-        MatIconModule
+        MatIconModule,
+        UserFormModule
     ],
     providers: [ LocalStorageService ]
 })

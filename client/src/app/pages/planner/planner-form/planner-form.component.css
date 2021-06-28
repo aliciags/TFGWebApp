@@ -1,5 +1,37 @@
 @import '../../../app.component.css';
 
-.f__diet {
-    margin-left: 2rem;
+label, h4 {
+    flex-basis: 100%;
+}
+
+.f__group {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.meals {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.meal {
+  position: relative;
+  height: 2rem;
+  flex-basis: 20%;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.danger {
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    position: absolute;
+    top: 10rem;
+    left: 0;
 }
